@@ -1,0 +1,11 @@
+# Ignorer le dossier node_modules
+node_modules/
+
+# Ignorer les fichiers de configuration sensibles
+.env
+
+# Ignorer les fichiers de build
+dist/
+
+# Ignorer les fichiers de log
+*.log
