@@ -1,47 +1,61 @@
 import * as THREE from 'three';
-import { GLTFLoader, OrbitControls } from 'three/examples/jsm/Addons.js';
+import { Laptop } from './classes/Laptop.js';
 
+/***********************************Base******************************************/
 /**
  * Base renderer for the three.js app.
  */
 const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas') });
-// renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setAnimationLoop(animate);
 
+/**
+ * Main scene
+ */
 const scene = new THREE.Scene();
 scene.background = new THREE.Color('lightblue');
 
+/**
+ * Main camera
+ */
 const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight);
 camera.position.z = 5;
-camera.position.y = 5;
+camera.position.y = 1;
 
-new OrbitControls(camera, renderer.domElement);
+/***********************************Lights******************************************/
 
-// Loaders
-const gltfLoader = new GLTFLoader();
+const ambientLight = new THREE.AmbientLight(new THREE.Color('white'), 5);
+scene.add(ambientLight);
 
-// Laptop
-let laptop;
-const animationMixer = new THREE.AnimationMixer();
-gltfLoader.load('/meshes/laptop/laptop.gltf', function (data) {
-    laptop = data.scene;
-    laptop.rotateY(-Math.PI / 2)
+const directionalLight = new THREE.DirectionalLight(new THREE.Color('white'), 10);
+scene.add(directionalLight);
 
-    animationMixer.clipAction(data.animations[0], laptop).play();
-    scene.add(laptop);
-});
+const pointLight = new THREE.PointLight(new THREE.Color('white'), 1);
+pointLight.position.y = 1;
+scene.add(pointLight);
 
-scene.add(new THREE.AmbientLight(new THREE.Color('white'), 5))
-scene.add(new THREE.DirectionalLight(new THREE.Color('white'), 10))
-scene.add(new THREE.PointLight(new THREE.Color('white'), 1))
+/************************************3D Objects***************************************/
 
-// Helpers
-// const axesHelper = new THREE.AxesHelper(5);
-// scene.add(axesHelper);
+const laptop = new Laptop();
+scene.add(laptop);
+
+/************************************Main animation***************************************/
+
+let scrollY = 0;
+const animationSpeed = 0.01;
 
 function animate() {
-
-    animationMixer.update(1 / 60);
+    laptop.animate(scrollY);
     renderer.render(scene, camera);
 }
+
+/************************************Event listeners*************************************/
+
+document.addEventListener('wheel', function (ev) {
+    if (ev.wheelDelta > 0) {
+        scrollY -= animationSpeed;
+    } else {
+        scrollY += animationSpeed;
+    }
+});
