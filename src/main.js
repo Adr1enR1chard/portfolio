@@ -42,20 +42,26 @@ scene.add(laptop);
 
 /************************************Main animation***************************************/
 
-let scrollY = 0;
-const animationSpeed = 0.01;
+let animationTime = 0;
+let wheelDelta = 0;
+let previousWheelDelta = 0;
+const animationSpeed = 0.03;
+const smoothFactor = 0.9; // Between 1 and 0
+
+const clock = new THREE.Clock(true);
 
 function animate() {
-    laptop.animate(scrollY);
+    wheelDelta = THREE.MathUtils.lerp(wheelDelta, previousWheelDelta, smoothFactor);
+    animationTime = Math.max(animationTime - wheelDelta * animationSpeed * clock.getDelta(), 0);
+    previousWheelDelta = wheelDelta;
+    wheelDelta = 0;
+
+    laptop.animate(clock.getDelta(), animationTime);
     renderer.render(scene, camera);
 }
 
 /************************************Event listeners*************************************/
 
 document.addEventListener('wheel', function (ev) {
-    if (ev.wheelDelta > 0) {
-        scrollY -= animationSpeed;
-    } else {
-        scrollY += animationSpeed;
-    }
+    wheelDelta = ev.wheelDelta;
 });
