@@ -1,33 +1,32 @@
 import * as THREE from 'three';
+import { SecondWorld } from '../worlds/SecondWorld.ts';
+import { MainWorld } from '../worlds/MainWorld.ts';
 
-export abstract class AbstractWorld {
+export abstract class World {
     static rendererSize = [window.innerWidth, window.innerHeight]
-    static activeRenderer: AbstractWorld;
+    static activeRenderer: World;
 
     private wheelDelta = 0;
     private previousWheelDelta = 0;
 
     scene: THREE.Scene;
     camera: THREE.PerspectiveCamera;
-    renderer: THREE.WebGLRenderer;
     clock: THREE.Clock;
 
     animationTime: number;
     animationSpeed: number;
     animationSmoothFactor: number;
 
-    constructor(active: boolean) {
-        this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(70, AbstractWorld.rendererSize[0] / AbstractWorld.rendererSize[1]);
-        this.renderer = new THREE.WebGLRenderer({ canvas: <HTMLCanvasElement>document.getElementById('three-canvas') });
+    static setActive(world: World) {
+        World.activeRenderer = world;
+    }
 
-        // Renderer settings
-        this.renderer.setSize(AbstractWorld.rendererSize[0], AbstractWorld.rendererSize[1]);
-        this.renderer.setAnimationLoop(this.animate.bind(this));
-        this.renderer.setPixelRatio(window.devicePixelRatio);
+    constructor(active: boolean, aspect: number | undefined) {
+        this.scene = new THREE.Scene();
+        this.camera = new THREE.PerspectiveCamera(70, aspect);
 
         if (active) {
-            AbstractWorld.activeRenderer = this;
+            World.setActive(this);
         }
 
         // World relatives
@@ -38,6 +37,8 @@ export abstract class AbstractWorld {
 
         // Starting the scene
         this.start();
+
+        this.animate();
     }
 
     protected start() {
@@ -46,13 +47,7 @@ export abstract class AbstractWorld {
 
     protected animate() {
         this.computeAnimationTime();
-        this.render();
-    }
-
-    protected render() {
-        if (AbstractWorld.activeRenderer == this) {
-            this.renderer.render(this.scene, this.camera);
-        }
+        requestAnimationFrame(this.animate.bind(this));
     }
 
     private computeAnimationTime() {

@@ -221,9 +221,7 @@
 					"index":2
 				},
 				"metallicFactor":0,
-				"metallicRoughnessTexture":{
-					"index":3
-				}
+				"roughnessFactor":0.136363685131073
 			}
 		}
 	],
@@ -296,11 +294,7 @@
 		},
 		{
 			"sampler":0,
-			"source":0
-		},
-		{
-			"sampler":0,
-			"source":1
+			"source":2
 		}
 	],
 	"images":[
@@ -313,6 +307,11 @@
 			"mimeType":"image/png",
 			"name":"Ecran-roughness",
 			"uri":"textures/Ecran-roughness.png"
+		},
+		{
+			"mimeType":"image/png",
+			"name":"Ecran-stretched",
+			"uri":"textures/Ecran-stretched.png"
 		}
 	],
 	"accessors":[

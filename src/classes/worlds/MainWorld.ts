@@ -1,36 +1,39 @@
 import * as THREE from 'three';
-import { AbstractWorld } from '../abstracts/World.ts'
+import { World } from '../abstracts/World.ts'
 import { Laptop } from '../objects/Laptop.ts';
+import { Render } from '../Render.ts';
 
-export class MainWorld extends AbstractWorld {
+export class MainWorld extends World {
     private laptop: Laptop;
-
-    constructor(active: boolean) {
-        super(active);
-        this.scene.background = new THREE.Color('lightblue');
-    }
 
     protected override start() {
         super.start();
         this.camera.position.z = 5;
         this.camera.position.y = 1;
+        this.scene.background = new THREE.Color(0x02011d);
 
         // Lights
-        const ambientLight = new THREE.AmbientLight(new THREE.Color('white'), 5);
+        const ambientLight = new THREE.AmbientLight(new THREE.Color('white'), 0.1);
         this.scene.add(ambientLight);
 
-        const directionalLight = new THREE.DirectionalLight(new THREE.Color('white'), 10);
+        const directionalLight = new THREE.DirectionalLight(new THREE.Color('white'), 1);
         this.scene.add(directionalLight);
 
-        // Laptop 
-        this.laptop = new Laptop();
-        this.scene.add(this.laptop);
+        const pointLight = new THREE.PointLight(new THREE.Color('white'), 5, 0, 1);
+        pointLight.position.z = 2;
+        pointLight.position.y = 3;
+        pointLight.position.x = -1;
+        this.scene.add(pointLight);
 
-        console.log('everything started');
+        // Laptop 
+        // this.scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2.1, 1.8), new THREE.MeshBasicMaterial({ map: Render.renderTarget.texture })));
+        this.laptop = new Laptop(Render.renderTarget.texture);
+        this.scene.add(this.laptop);
     }
 
     protected override animate() {
         super.animate();
         this.laptop.animate(this.animationTime);
+        // this.camera.position.y = 2 - this.animationTime;
     }
 }
