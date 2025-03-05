@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import { GLTF, GLTFLoader } from 'three/examples/jsm/Addons.js';
 import { App } from '../App';
-import { World } from '../abstracts/World';
 
 export class Laptop extends THREE.Object3D {
     isActive = false;
@@ -42,7 +41,7 @@ export class Laptop extends THREE.Object3D {
             this.screen.material = new THREE.ShaderMaterial({
                 uniforms: {
                     uTexture: { value: App.renderTarget.texture },
-                    winResolution: { value: new THREE.Vector2(World.rendererSize[0], World.rendererSize[1]).multiplyScalar(App.renderer.getPixelRatio()) },
+                    winResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight).multiplyScalar(App.renderer.getPixelRatio()) },
                 },
                 vertexShader: `
                             void main() {

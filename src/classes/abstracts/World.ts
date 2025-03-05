@@ -1,9 +1,6 @@
 import * as THREE from 'three';
-import { SecondWorld } from '../worlds/SecondWorld.ts';
-import { MainWorld } from '../worlds/MainWorld.ts';
 
 export abstract class World {
-    static rendererSize = [window.innerWidth, window.innerHeight]
     static activeRenderer: World;
 
     private wheelDelta = 0;

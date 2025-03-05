@@ -1,12 +1,12 @@
 import * as THREE from 'three';
-import { World } from './abstracts/World';
 import { MainWorld } from './worlds/MainWorld';
 import { SecondWorld } from './worlds/SecondWorld';
 
 
 export class App {
     static renderer = new THREE.WebGLRenderer({ canvas: <HTMLCanvasElement>document.getElementById('three-canvas') });
-    static renderTarget = new THREE.WebGLRenderTarget(World.rendererSize[0], World.rendererSize[1]);
+    static renderTarget = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight);
+    static renderSize = new THREE.Vector2(window.innerWidth, window.innerHeight)
 
     private _mainWorld: MainWorld;
     public get mainWorld(): MainWorld {
@@ -26,8 +26,8 @@ export class App {
     private activeWorld = 0;
 
     constructor() {
-        App.renderer.setSize(World.rendererSize[0], World.rendererSize[1]);
-        App.renderer.setPixelRatio(World.rendererSize[0] / World.rendererSize[1]);
+        App.renderer.setSize(window.innerWidth, window.innerHeight);
+        App.renderer.setPixelRatio(window.innerWidth / window.innerHeight);
     }
 
     public render() {
@@ -49,4 +49,7 @@ export class App {
         this.activeWorld = (this.activeWorld + 1) % 2
     }
 
+    public getRenderSize() {
+        return
+    }
 }
