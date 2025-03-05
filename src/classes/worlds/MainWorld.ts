@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { World } from '../abstracts/World.ts'
 import { Laptop } from '../objects/Laptop.ts';
-import { Render } from '../Render.ts';
+import { App } from '../App.ts';
 
 export class MainWorld extends World {
     private laptop: Laptop;
@@ -25,9 +25,7 @@ export class MainWorld extends World {
         pointLight.position.x = -1;
         this.scene.add(pointLight);
 
-        // Laptop 
-        // this.scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2.1, 1.8), new THREE.MeshBasicMaterial({ map: Render.renderTarget.texture })));
-        this.laptop = new Laptop(Render.renderTarget.texture);
+        this.laptop = new Laptop(App.renderTarget.texture);
         this.scene.add(this.laptop);
     }
 
@@ -35,5 +33,9 @@ export class MainWorld extends World {
         super.animate();
         this.laptop.animate(this.animationTime);
         // this.camera.position.y = 2 - this.animationTime;
+    }
+
+    public getLaptop() {
+        return this.laptop;
     }
 }
