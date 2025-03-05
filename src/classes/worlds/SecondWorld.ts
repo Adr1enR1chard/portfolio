@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import { World } from '../abstracts/World.ts'
+import { SkyBox } from '../objects/Skybox.ts';
+import { App } from '../App.ts';
 
 export class SecondWorld extends World {
     protected override start() {
@@ -20,11 +22,18 @@ export class SecondWorld extends World {
         sphere.position.z = -5;
         this.scene.add(sphere);
 
-        const helper = new THREE.GridHelper(100, 100);
-        this.scene.add(helper);
+        // Skybox
+        const skybox = new SkyBox();
+        this.scene.add(skybox);
     }
 
     protected override animate() {
+        this.camera.rotation.y = Math.min(App.instance.animationTime - Math.PI / 4, 0);
+
+        if (App.instance.activeWorld == 1) {
+            this.camera.rotation.y = (App.instance.animationTime - 1.13) * 3;
+        }
+
         super.animate();
     }
 }

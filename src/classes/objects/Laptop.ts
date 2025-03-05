@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { GLTF, GLTFLoader } from 'three/examples/jsm/Addons.js';
-import { App } from '../App';
+import { App } from '../App.ts';
 
 export class Laptop extends THREE.Object3D {
     isActive = false;
@@ -8,13 +8,10 @@ export class Laptop extends THREE.Object3D {
     animationsDuration: number;
     animationMixer: THREE.AnimationMixer;
     screen: THREE.Mesh;
-    screenTexture: THREE.Texture;
 
-    constructor(screenTexture: THREE.Texture) {
+    constructor() {
         super();
         this.animationMixer = new THREE.AnimationMixer(this);
-        this.screenTexture = screenTexture;
-        // this.screenTexture.rotation = Math.PI / 4;
         this.loadModel();
     }
 
@@ -40,8 +37,8 @@ export class Laptop extends THREE.Object3D {
             this.screen = <THREE.Mesh>screenObject;
             this.screen.material = new THREE.ShaderMaterial({
                 uniforms: {
-                    uTexture: { value: App.renderTarget.texture },
-                    winResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight).multiplyScalar(App.renderer.getPixelRatio()) },
+                    uTexture: { value: App.instance.renderTarget.texture },
+                    winResolution: { value: new THREE.Vector2(App.instance.renderSize.x, App.instance.renderSize.y).multiplyScalar(App.instance.renderer.getPixelRatio()) },
                 },
                 vertexShader: `
                             void main() {
@@ -69,8 +66,9 @@ export class Laptop extends THREE.Object3D {
         this.isActive = true;
     }
 
-    public animate(animationTime: number) {
+    public animate() {
         if (this.isActive) {
+            const animationTime = App.instance.animationTime;
             this.animationMixer.setTime(Math.min(animationTime, this.animationsDuration - 0.1));
             this.animationMixer.update(1 / 60);
 

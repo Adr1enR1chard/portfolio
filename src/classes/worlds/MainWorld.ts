@@ -25,14 +25,14 @@ export class MainWorld extends World {
         pointLight.position.x = -1;
         this.scene.add(pointLight);
 
-        this.laptop = new Laptop(App.renderTarget.texture);
+        this.laptop = new Laptop();
         this.scene.add(this.laptop);
     }
 
     protected override animate() {
+        this.laptop.animate();
+        this.camera.position.z = 5 - 5 * App.instance.animationTime;
         super.animate();
-        this.laptop.animate(this.animationTime);
-        // this.camera.position.y = 2 - this.animationTime;
     }
 
     public getLaptop() {
