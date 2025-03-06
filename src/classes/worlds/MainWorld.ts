@@ -3,7 +3,6 @@ import { World } from '../abstracts/World.ts'
 import { Laptop } from '../objects/Laptop.ts';
 import { App } from '../App.ts';
 import { LoadedObject } from '../abstracts/LoadedObject.ts';
-import { OrbitControls } from 'three/examples/jsm/Addons.js';
 import { lerp } from 'three/src/math/MathUtils.js';
 
 export class MainWorld extends World {

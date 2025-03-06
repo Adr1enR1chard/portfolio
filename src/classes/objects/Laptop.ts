@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { GLTF, GLTFLoader } from 'three/examples/jsm/Addons.js';
+import { GLTF } from 'three/examples/jsm/Addons.js';
 import { App } from '../App.ts';
 import { LoadedObject } from '../abstracts/LoadedObject.ts';
 
