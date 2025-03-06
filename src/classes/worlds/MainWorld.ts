@@ -39,10 +39,6 @@ export class MainWorld extends World {
         this.scene.add(spotLight.target);
 
         const pointLight = new THREE.PointLight(new THREE.Color('white'), 0.1, 0, 0.1);
-        pointLight.castShadow = true;
-        pointLight.shadow.bias = -0.0002;
-        pointLight.shadow.mapSize = new THREE.Vector2(2048, 2048);
-
         pointLight.position.z = 14;
         pointLight.position.y = 2;
         pointLight.position.x = 8;
@@ -65,6 +61,13 @@ export class MainWorld extends World {
         this.laptop.animate();
         this.camera.position.lerpVectors(this.cameraOrigin, new THREE.Vector3(0, 1, 0).add(this.laptop.position), App.instance.animationTime / this.laptop.animationsDuration);
         this.camera.rotation.y = lerp(0.74, Math.PI / 2, App.instance.animationTime / this.laptop.animationsDuration);
+
+        if (App.instance.animationTime == 0) {
+            this.camera.position.x += Math.cos(App.instance.clock.getElapsedTime()) * 0.1;
+            this.camera.position.y += Math.cos(App.instance.clock.getElapsedTime()) * 0.1;
+            this.camera.position.z += Math.cos(App.instance.clock.getElapsedTime()) * 0.1;
+        }
+
         super.animate();
     }
 
