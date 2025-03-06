@@ -130,6 +130,9 @@ export class App {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         // Setting the pixel ratio
         this.renderer.setPixelRatio(window.innerWidth / window.innerHeight);
+        // Activate shadows
+        this.renderer.shadowMap.enabled = true;
+        this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
         // Make render size accesible to app depencies 
         this.renderSize = new THREE.Vector2(window.innerWidth, window.innerHeight);
 
@@ -198,7 +201,7 @@ export class App {
 
     private switchWorld() {
         // The switch time seems to be here...
-        if (this.animationTime >= 1.13) {
+        if (this.animationTime >= 0.86) {
             this.activeWorld = 1;
         } else {
             this.activeWorld = 0;

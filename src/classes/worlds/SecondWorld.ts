@@ -28,10 +28,13 @@ export class SecondWorld extends World {
     }
 
     protected override animate() {
-        this.camera.rotation.y = Math.min(App.instance.animationTime - Math.PI / 4, 0);
+        const mainWorldCameraPos = App.instance.mainWorld.camera.position;
+        // const mainWorldCameraRot = App.instance.mainWorld.camera.rotation;
+        this.camera.position.set(0, 1, -mainWorldCameraPos.z * 2 + 5);
+        // this.camera.rotation.set(mainWorldCameraRot.x, mainWorldCameraRot.y, mainWorldCameraRot.z);
 
         if (App.instance.activeWorld == 1) {
-            this.camera.rotation.y = (App.instance.animationTime - 1.13) * 3;
+            // this.camera.rotation.y = (App.instance.animationTime - 1.13) * 3;
         }
 
         super.animate();

@@ -5,10 +5,12 @@ export abstract class World {
 
     scene: THREE.Scene;
     camera: THREE.PerspectiveCamera;
+    root: THREE.Object3D;
 
     constructor(active: boolean, aspect: number | undefined) {
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(70, aspect);
+        this.root = new THREE.Object3D();
 
         this.isActive = active;
 
@@ -19,7 +21,7 @@ export abstract class World {
     }
 
     protected start() {
-
+        this.scene.add(this.root);
     }
 
     /**
