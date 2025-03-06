@@ -12,19 +12,19 @@ export class SecondWorld extends World {
 
         // Lights
         const ambientLight = new THREE.AmbientLight(new THREE.Color('white'), 5);
-        this.scene.add(ambientLight);
+        this.root.add(ambientLight);
 
         const directionalLight = new THREE.DirectionalLight(new THREE.Color('white'), 10);
-        this.scene.add(directionalLight);
+        this.root.add(directionalLight);
 
         // Meshes
         const sphere = new THREE.Mesh(new THREE.SphereGeometry(), new THREE.MeshStandardMaterial({ color: new THREE.Color('white') }));
         sphere.position.z = -5;
-        this.scene.add(sphere);
+        this.root.add(sphere);
 
         // Skybox
         const skybox = new SkyBox();
-        this.scene.add(skybox);
+        this.root.add(skybox);
     }
 
     protected override animate() {
