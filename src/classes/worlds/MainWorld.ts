@@ -12,7 +12,7 @@ export class MainWorld extends World {
 
     protected override start() {
         super.start();
-        this.cameraOrigin = new THREE.Vector3(19.6, 9.16, -5.89);
+        this.cameraOrigin = new THREE.Vector3(19.6, 7.16, -5.89);
         this.camera.position.set(this.cameraOrigin.x, this.cameraOrigin.y, this.cameraOrigin.z);
         this.camera.rotation.set(-2.52, 0.74, 2.69);
         this.scene.background = new THREE.Color(0x02011d);
