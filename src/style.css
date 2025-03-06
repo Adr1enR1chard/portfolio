@@ -22,13 +22,13 @@ h1 {
     color: aliceblue;
     font-size: 800%;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    text-shadow: rgb(0, 0, 0) 0px 0px 80px;
+    text-shadow: rgb(0 0 0) 0 0 80px;
 }
 
 h3 {
     margin-top: -80px;
-    color: rgb(120, 125, 129);
+    color: rgb(120 125 129);
     font-size: 200%;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    text-shadow: rgb(255, 255, 255) 0px 0px 80px;
+    text-shadow: rgb(255 255 255) 0 0 80px;
 }
