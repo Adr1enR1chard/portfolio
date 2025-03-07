@@ -4,7 +4,7 @@ import { Laptop } from '../objects/Laptop.ts';
 import { App } from '../App.ts';
 import { LoadedObject } from '../abstracts/LoadedObject.ts';
 import { lerp } from 'three/src/math/MathUtils.js';
-import { SkyBox } from '../objects/Skybox.ts';
+import { RenderPass } from 'three/examples/jsm/Addons.js';
 
 export class MainWorld extends World {
     private laptop: Laptop;
@@ -16,7 +16,8 @@ export class MainWorld extends World {
         this.cameraOrigin = new THREE.Vector3(19.6, 7.16, -5.89);
         this.camera.position.set(this.cameraOrigin.x, this.cameraOrigin.y, this.cameraOrigin.z);
         this.camera.rotation.set(-2.52, 0.74, 2.69);
-        this.scene.background = new THREE.Color(new THREE.Color('black'));
+        this.scene.background = new THREE.Color(new THREE.Color(0x000007));
+        this.passes = [new RenderPass(this.scene, this.camera)];
 
         // const orbitControls = new OrbitControls(this.camera, App.instance.renderer.domElement);
 
@@ -57,10 +58,10 @@ export class MainWorld extends World {
         bedroom.scale.multiplyScalar(2.5);
         this.root.add(bedroom);
 
-        this.root.add(new SkyBox());
+        // this.root.add(new SkyBox());
     }
 
-    protected override animate() {
+    public override animate() {
         this.laptop.animate();
         this.camera.position.lerpVectors(this.cameraOrigin, new THREE.Vector3(0, 1, 0).add(this.laptop.position), App.instance.animationTime / this.laptop.animationsDuration);
         this.camera.rotation.y = lerp(0.74, Math.PI / 2, App.instance.animationTime / this.laptop.animationsDuration);

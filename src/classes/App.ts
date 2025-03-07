@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { MainWorld } from './worlds/MainWorld';
 import { SecondWorld } from './worlds/SecondWorld';
+import { EffectComposer } from 'three/examples/jsm/Addons.js';
 
 
 export class App {
@@ -39,6 +40,14 @@ export class App {
     }
     public set renderSize(value: THREE.Vector2) {
         this._renderSize = value;
+    }
+
+    private _composer: EffectComposer;
+    public get composer(): EffectComposer {
+        return this._composer;
+    }
+    public set composer(value: EffectComposer) {
+        this._composer = value;
     }
 
     /*
@@ -122,6 +131,17 @@ export class App {
         this._previousWheelDelta = value;
     }
 
+    private _pointer: THREE.Vector2;
+    public get pointer(): THREE.Vector2 {
+        if (!this._pointer) {
+            this._pointer = new THREE.Vector2();
+        }
+        return this._pointer;
+    }
+    public set pointer(value: THREE.Vector2) {
+        this._pointer = value;
+    }
+
 
     private constructor() {
         // Main renderer of the app
@@ -138,6 +158,9 @@ export class App {
 
         // Render target used to render different scene
         this.renderTarget = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight);
+
+        // The main composer, useful to render effects passes.
+        this.composer = new EffectComposer(this.renderer, this.renderTarget);
 
         // The world the main renderer is currently rendering
         this.activeWorld = 0;
@@ -165,6 +188,10 @@ export class App {
         // Then check in wich world we are
         this.switchWorld();
 
+        this.mainWorld.animate();
+
+        this.secondWorld.animate();
+
         // And render
         this.render();
         requestAnimationFrame(this.loop.bind(this));
@@ -186,6 +213,7 @@ export class App {
             // In case we are in the secondary world
             this.renderer.setRenderTarget(null);
             this.renderer.render(this.secondWorld.scene, this.secondWorld.camera);
+            this.composer.passes = this.secondWorld.passes;
 
         } else {
             // In case we are still in the primary world
@@ -194,9 +222,9 @@ export class App {
             this.renderer.render(this.secondWorld.scene, this.secondWorld.camera);
 
             // And we render the main world in front of it
-            this.renderer.setRenderTarget(null);
-            this.renderer.render(this.mainWorld.scene, this.mainWorld.camera);
+            this.composer.passes = this.mainWorld.passes;
         }
+        this.composer.render(this.clock.getDelta());
     }
 
     private switchWorld() {
@@ -205,6 +233,16 @@ export class App {
             this.activeWorld = 1;
         } else {
             this.activeWorld = 0;
+        }
+    }
+
+    public onMouseMove(event: MouseEvent) {
+        this.pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+        this.pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
+    }
+    public onMouseClick() {
+        if (this.secondWorld) {
+            this.secondWorld.onMouseClick();
         }
     }
 }

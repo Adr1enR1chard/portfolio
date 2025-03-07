@@ -15,3 +15,7 @@ document.addEventListener('wheel', function (ev) {
     App.instance.wheelDelta = ev.wheelDelta;
 });
 
+document.addEventListener('mousemove', App.instance.onMouseMove.bind(App.instance), false);
+
+document.addEventListener('click', App.instance.onMouseClick.bind(App.instance), false);
+
