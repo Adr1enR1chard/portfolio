@@ -71,9 +71,10 @@ export class MainWorld extends World {
         this.camera.rotation.y = lerp(0.74, Math.PI / 2, App.instance.animationTime / this.laptop.animationsDuration);
 
         if (App.instance.animationTime == 0) {
-            this.camera.position.x += Math.cos(App.instance.clock.elapsedTime) * 0.1;
-            this.camera.position.y += Math.cos(App.instance.clock.elapsedTime) * 0.1;
-            this.camera.position.z += Math.cos(App.instance.clock.elapsedTime) * 0.1;
+            this.camera.position.x += Math.cos(App.instance.clock.elapsedTime * 0.1) * 0.3;
+            this.camera.position.y += Math.cos(App.instance.clock.elapsedTime * 0.3) * 0.3;
+            this.camera.position.z += Math.cos(App.instance.clock.elapsedTime * 0.5) * 0.3;
+
         }
 
         super.animate();

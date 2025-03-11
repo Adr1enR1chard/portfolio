@@ -3,6 +3,7 @@ body {
     overflow: hidden;
     font-family: "M PLUS Code Latin", monospace;
     color: rgb(5, 224, 5);
+    background-color: 0x000007;
 }
 
 main {
