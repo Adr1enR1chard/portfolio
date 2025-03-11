@@ -10,6 +10,7 @@ App.instance.secondWorld = secondWorld;
 
 App.instance.loop();
 
+
 /************************** Event listeners *************************************/
 document.addEventListener('wheel', function (ev) {
     App.instance.wheelDelta = ev.wheelDelta;

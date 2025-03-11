@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { MainWorld } from './worlds/MainWorld';
 import { SecondWorld } from './worlds/SecondWorld';
-import { EffectComposer } from 'three/examples/jsm/Addons.js';
+import { CSS3DRenderer, EffectComposer } from 'three/examples/jsm/Addons.js';
 
 
 export class App {
@@ -24,6 +24,14 @@ export class App {
     }
     public set renderer(value: THREE.WebGLRenderer) {
         this._renderer = value;
+    }
+
+    private _cssRenderer: CSS3DRenderer;
+    public get cssRenderer(): CSS3DRenderer {
+        return this._cssRenderer;
+    }
+    public set cssRenderer(value: CSS3DRenderer) {
+        this._cssRenderer = value;
     }
 
     private _renderTarget: THREE.WebGLRenderTarget<THREE.Texture>;
@@ -162,6 +170,10 @@ export class App {
         // The main composer, useful to render effects passes.
         this.composer = new EffectComposer(this.renderer, this.renderTarget);
 
+        this.cssRenderer = new CSS3DRenderer();
+        this.cssRenderer.setSize(this.renderSize.x, this.renderSize.y);
+        document.body.appendChild(this.cssRenderer.domElement);
+
         // The world the main renderer is currently rendering
         this.activeWorld = 0;
 
@@ -210,9 +222,9 @@ export class App {
 
     private render() {
         if (this.activeWorld == 1) {
+
             // In case we are in the secondary world
             this.renderer.setRenderTarget(null);
-            this.renderer.render(this.secondWorld.scene, this.secondWorld.camera);
             this.composer.passes = this.secondWorld.passes;
 
         } else {
@@ -225,11 +237,13 @@ export class App {
             this.composer.passes = this.mainWorld.passes;
         }
         this.composer.render(this.clock.getDelta());
+
+        this.cssRenderer.render(this.secondWorld.cssScene, this.secondWorld.camera);
     }
 
     private switchWorld() {
         // The switch time seems to be here...
-        if (this.animationTime >= 0.86) {
+        if (this.animationTime >= 0.85) {
             this.activeWorld = 1;
         } else {
             this.activeWorld = 0;
@@ -242,7 +256,7 @@ export class App {
     }
     public onMouseClick() {
         if (this.secondWorld) {
-            this.secondWorld.onMouseClick();
+            // this.secondWorld.onMouseClick();
         }
     }
 }
