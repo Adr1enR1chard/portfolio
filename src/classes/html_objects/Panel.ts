@@ -25,7 +25,7 @@ export class Panel extends CSS3DObject {
         element.innerHTML += "<h2>" + subtitle + "</h2>";
 
         const imageContainer = document.createElement('div');
-        imageContainer.className = "image_container";
+        imageContainer.className = "image-container";
 
         images.forEach(image => {
             imageContainer.appendChild(image.element);

@@ -9,10 +9,10 @@ export class Description extends CSS3DObject {
         element.className = "description"
 
         const leftPanel = document.createElement('div');
-        leftPanel.className = "description_left"
+        leftPanel.className = "description-left"
 
         const rightPanel = document.createElement('div');
-        rightPanel.className = "description_right"
+        rightPanel.className = "description-right"
 
         const title = document.createElement('h1');
         title.innerText = panel.title;

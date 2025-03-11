@@ -6,7 +6,7 @@ export class PanelArray extends CSS3DObject {
 
     constructor(panels: Panel[]) {
         const element = document.createElement('div');
-        element.className = "panel_array";
+        element.className = "panel-array";
         panels.forEach(panel => {
             element.innerHTML += panel.element.outerHTML;
         });
