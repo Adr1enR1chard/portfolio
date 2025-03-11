@@ -1,4 +1,3 @@
-import * as THREE from 'three';
 import { CSS3DObject } from 'three/examples/jsm/Addons.js';
 import { Image } from './Image';
 export class Panel extends CSS3DObject {
@@ -21,9 +20,6 @@ export class Panel extends CSS3DObject {
 
     constructor(title: string, subtitle: string, images: Image[] = []) {
         const element = document.createElement('div');
-        element.onclick = function () {
-            console.log("ok");
-        };
         element.className = "panel";
         element.innerHTML += "<h1>" + title + "</h1>";
         element.innerHTML += "<h2>" + subtitle + "</h2>";
@@ -42,5 +38,6 @@ export class Panel extends CSS3DObject {
         this.subtitle = subtitle;
         this.images = images;
         this.element.style.position = "relative";
+        this.element.setAttribute("onpointerdown", "module.switchProjectView()");
     }
 }

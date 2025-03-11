@@ -19,13 +19,11 @@ export class MainWorld extends World {
         this.scene.background = new THREE.Color(new THREE.Color(0x000007));
         this.passes = [new RenderPass(this.scene, this.camera)];
 
-        // const orbitControls = new OrbitControls(this.camera, App.instance.renderer.domElement);
-
         // Lights
-        const ambientLight = new THREE.AmbientLight(new THREE.Color('white'), 0.2);
+        const ambientLight = new THREE.AmbientLight(new THREE.Color('green'), 0.2);
         this.root.add(ambientLight);
 
-        const spotLight = new THREE.SpotLight(new THREE.Color(0xfff5b6), 100, 0, Math.PI / 4, 1, 1.5);
+        const spotLight = new THREE.SpotLight(new THREE.Color(new THREE.Color('blue')), 100, 0, Math.PI / 4, 1, 1.5);
         spotLight.castShadow = true;
         spotLight.shadow.bias = -0.0002;
         spotLight.shadow.mapSize = new THREE.Vector2(2048, 2048);
@@ -40,7 +38,7 @@ export class MainWorld extends World {
         this.scene.add(spotLight);
         this.scene.add(spotLight.target);
 
-        const pointLight = new THREE.PointLight(new THREE.Color('white'), 0.1, 0, 0.1);
+        const pointLight = new THREE.PointLight(new THREE.Color('red'), 0.1, 0, 0.1);
         pointLight.position.z = 14;
         pointLight.position.y = 2;
         pointLight.position.x = 8;
@@ -51,7 +49,13 @@ export class MainWorld extends World {
         this.laptop.position.y = 0.1;
         this.root.add(this.laptop);
 
-        const bedroom = new LoadedObject('./meshes/bedroom/bedroom.gltf');
+        const bedroom = new LoadedObject('/meshes/bedroom/bedroom.gltf', () => {
+            const windowObj = <THREE.Mesh>bedroom.getObjectByName("Window")?.children[1];
+
+            if (windowObj) {
+                windowObj.material = new THREE.MeshBasicMaterial({ color: new THREE.Color('black') });
+            }
+        });
         bedroom.translateY(-3.6);
         bedroom.translateZ(4);
         bedroom.translateX(8);

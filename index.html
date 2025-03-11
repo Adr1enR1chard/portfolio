@@ -11,6 +11,7 @@
 </head>
 
 <body>
+
     <main>
         <div id="title">
             <ul>
@@ -36,8 +37,13 @@
         </div>
     </main>
     <canvas id="three-canvas"></canvas>
-
-    <script type="module" src="src/main.js"></script>
+    <script type="text/javascript">
+        const module = {};
+    </script>
+    <script type="module">
+        import { switchProjectView } from "./src/main.js";
+        module.switchProjectView = switchProjectView;
+    </script>
 </body>
 
 </html>

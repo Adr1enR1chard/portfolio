@@ -17,6 +17,8 @@ export class SecondWorld extends World {
     orbitControls: OrbitControls;
     description: Description;
 
+    private currentView = 0;
+
     protected override start() {
         super.start();
         this.scene.background = new THREE.Color('black');
@@ -29,9 +31,9 @@ export class SecondWorld extends World {
             "Slade",
             "Android arcade game",
             [
-                new Image("./public/images/unity.png"),
-                new Image("./public/images/csharp.png", 1.5),
-                new Image("./public/images/playstore.png")
+                new Image("unity.png"),
+                new Image("csharp.png", 1.5),
+                new Image("playstore.png")
             ]);
 
         this.panelArray = new PanelArray([panel]);
@@ -41,6 +43,10 @@ export class SecondWorld extends World {
         this.orbitControls = new OrbitControls(this.camera, App.instance.cssRenderer.domElement);
         this.orbitControls.enableZoom = false;
         this.orbitControls.enablePan = false;
+        this.orbitControls.maxAzimuthAngle = Math.PI / 4;
+        this.orbitControls.minAzimuthAngle = -Math.PI / 4;
+        this.orbitControls.maxPolarAngle = 3 * Math.PI / 4;
+        this.orbitControls.minPolarAngle = Math.PI / 4;
 
         this.description = new Description(panel);
         this.description.scale.setScalar(0);
@@ -51,10 +57,24 @@ export class SecondWorld extends World {
         App.instance.animationTime = Math.min(App.instance.animationTime, 1);
 
         const scale = Math.max(0, 0 + (App.instance.animationTime - 0.85) / 0.15)
-        // this.panelArray.scale.setScalar(scale);
+        if (this.currentView == 0) {
+            this.panelArray.scale.setScalar(scale);
+            this.description.scale.setScalar(0);
 
-        this.description.scale.setScalar(scale);
+        } else {
+            this.panelArray.scale.setScalar(0);
+            this.description.scale.setScalar(scale);
+        }
+
+        this.orbitControls.target.set(0, 0, 0);
+        this.camera.position.lerp(new THREE.Vector3(0, 0, 800), 0.01);
+
+        this.orbitControls.update(App.instance.clock.getDelta());
 
         super.animate();
+    }
+
+    public switchView() {
+        this.currentView = (this.currentView + 1) % 2;
     }
 }

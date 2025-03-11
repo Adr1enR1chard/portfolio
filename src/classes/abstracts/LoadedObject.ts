@@ -30,11 +30,13 @@ export class LoadedObject extends THREE.Object3D {
     }
 
     private path: string;
+    private onLoad: (() => void) | undefined;
 
-    constructor(path: string) {
+    constructor(path: string, onLoad?: () => void) {
         super();
         this.animationMixer = new THREE.AnimationMixer(this);
         this.path = path
+        this.onLoad = onLoad;
         this.loadModel();
     }
 
@@ -58,6 +60,10 @@ export class LoadedObject extends THREE.Object3D {
             });
         }
         this.isActive = true;
+
+        if (this.onLoad) {
+            this.onLoad();
+        }
     }
 
     public animate() {

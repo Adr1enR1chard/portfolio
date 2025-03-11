@@ -1,4 +1,3 @@
-import * as THREE from 'three';
 import { CSS3DObject } from 'three/examples/jsm/Addons.js';
 import { Panel } from './Panel';
 export class Description extends CSS3DObject {

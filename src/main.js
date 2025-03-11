@@ -20,3 +20,6 @@ document.addEventListener('mousemove', App.instance.onMouseMove.bind(App.instanc
 
 document.addEventListener('click', App.instance.onMouseClick.bind(App.instance), false);
 
+export function switchProjectView() {
+    App.instance.secondWorld.switchView();
+}
