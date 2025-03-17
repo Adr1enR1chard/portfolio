@@ -382,7 +382,6 @@ canvas {
 }
 
 @keyframes blink {
-
     0%,
     100% {
         border-color: transparent
