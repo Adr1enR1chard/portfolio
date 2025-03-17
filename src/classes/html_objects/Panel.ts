@@ -18,29 +18,43 @@ export class Panel extends CSS3DObject {
     public set subtitle(value: string) {
         this._subtitle = value;
     }
-    private images: Image[];
+    private logos: Image[];
 
-    constructor(title: string, subtitle: string, images: Image[] = []) {
+    private image: Image | undefined;
+
+    constructor(title: string, subtitle: string, logos: Image[] = [], image?: Image) {
         const element = document.createElement('div');
         element.className = "panel";
-        element.innerHTML += "<h1>" + title + "</h1>";
-        element.innerHTML += "<h2>" + subtitle + "</h2>";
 
-        const imageContainer = document.createElement('div');
-        imageContainer.className = "image-container";
+        const header = document.createElement('div');
+        header.className = 'panel-header';
+        header.innerHTML += "<h1>" + title + "</h1>";
+        header.innerHTML += "<h2>" + subtitle + "</h2>";
 
-        images.forEach(image => {
-            imageContainer.appendChild(image.element);
+        const logosContainer = document.createElement('div');
+        logosContainer.className = "logos-container";
+
+        logos.forEach(image => {
+            logosContainer.appendChild(image.element);
         })
+        header.appendChild(logosContainer);
+        element.appendChild(header);
 
-        element.appendChild(imageContainer);
+        if (image) {
+            const imageContainer = document.createElement('div');
+            imageContainer.className = "image-container";
+            imageContainer.appendChild(image.element);
+
+            element.appendChild(imageContainer);
+        }
 
         super(element);
         this.title = title;
         this.subtitle = subtitle;
-        this.images = images;
+        this.logos = logos;
         this.element.style.position = "relative";
         this.element.setAttribute("onpointerdown", `module.switchProjectView(${Panel.panelCount})`);
+        this.image = image;
 
         Panel.panelCount++;
     }

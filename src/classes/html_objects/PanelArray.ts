@@ -11,7 +11,7 @@ export class PanelArray extends CSS3DObject {
             element.innerHTML += panel.element.outerHTML;
         });
         element.addEventListener('wheel', (e) => {
-            if (element.scrollTop != 0) {
+            if (element.scrollTop != 0 && e.deltaY < 0) {
                 e.stopPropagation();
             }
         });

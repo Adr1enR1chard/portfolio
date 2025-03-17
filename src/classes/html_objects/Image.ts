@@ -8,7 +8,7 @@ export class Image extends CSS3DObject {
         element.className = "panel-img";
         element.src = "/images/" + path;
         element.width = 50 * scale;
-        element.height = 50 * scale;
+        element.style.height = 'auto';
 
         super(element);
         this.path = path;

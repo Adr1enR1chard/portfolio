@@ -6,13 +6,20 @@ export const Descriptions = [
         "Android arcade game",
         `
             <p>Slade est un jeu d'arcade captivant qui met à l'épreuve votre concentration et vos réflexes. Le but est d'éviter tous les projectiles et les ennemis pour obtenir le meilleur score possible et débloquer des skins uniques. Vous devez vous déplacer dans un espace restreint en glissant votre doigt sur l'écran, utiliser votre énergie pour ralentir le temps et ainsi maximiser vos chances de survie. Ce jeu combine fun et défi, vous garantissant des heures de divertissement . </p>
-            <p>Développé avec Unity en C#, Slade est le premier projet que j'ai pu voir distribuer au grand public. Ce projet réalisé en 2020 alors que j'étais encore au lycée à été pour moi un projet très enrichissant.</p>
+            <p>Développé avec Unity en C#, Slade est le premier projet que j'ai pu distribuer au grand public sur le Google Play Store. Ce projet réalisé en 2020 alors que j'étais encore au lycée à été pour moi un projet très enrichissant. Cependant, par manque de temps suit à mes études, j'ai laissé Slade à l'abandon. Il s'est donc vu être retiré du Google Play Store</p>
         `,
         [
             'images/slade.webp',
             'images/slade2.webp',
             'images/slade3.webp'
-        ]),
+        ],
+        `<a href="https://apkpure.com/fr/slade/com.AjGames.Slade" class="description-link" target="_blank">Voir sur APK Pure</a>`),
+    new Description(
+        "Project: Paranoïa",
+        "Horror game concept",
+        `
+                
+                `),
     new Description(
         "UE5 Combat System",
         "Unreal Engine 5 combat system",
@@ -54,5 +61,6 @@ export const Descriptions = [
             `,
         [
             'images/footprint.png'
-        ])
+        ],
+        `<p>Vous pourrez retrouver le projet sur <a href="https://github.com/Adr1enR1chard/footprint-trail" target="_blank">mon GitHub</a></p>`)
 ]

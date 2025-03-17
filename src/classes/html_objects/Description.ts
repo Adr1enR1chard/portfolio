@@ -17,7 +17,7 @@ export class Description extends CSS3DObject {
     }
     private images: string[];
 
-    constructor(titleContent: string, subtitleContent: string, leftPannelHTML: string = "", images: string[] = []) {
+    constructor(titleContent: string, subtitleContent: string, leftPannelHTML: string = "", images: string[] = [], rightPannelHTML: string = "") {
         const element = document.createElement('div');
         element.className = "description"
 
@@ -45,7 +45,7 @@ export class Description extends CSS3DObject {
         backButton.innerText = 'Back';
         backButton.setAttribute("onpointerdown", "module.switchProjectView()");
         element.addEventListener('wheel', (e) => {
-            if (element.scrollTop != 0) {
+            if (element.scrollTop != 0 && e.deltaY < 0) {
                 e.stopPropagation();
             }
         });
@@ -97,12 +97,9 @@ export class Description extends CSS3DObject {
 
             rightPanel.appendChild(carouselContainer);
         }
-        rightPanel.innerHTML += `
-            <a href="https://apkpure.com/fr/slade/com.AjGames.Slade" class="description-link" target="_blank">Voir sur APK Pure</a>
-        `;
 
         element.appendChild(leftPanel);
-
+        rightPanel.innerHTML += rightPannelHTML;
         element.appendChild(rightPanel);
         super(element);
         this.element.style.position = "relative";
