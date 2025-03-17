@@ -13,27 +13,21 @@
 <body>
 
     <main>
-        <div id="title">
+        <div id="console">
             <ul>
-                <li>
-                    <p>Loading interactive portfolio...</p>
-                </li>
-                <li>
-                    <p>Done</p>
-                </li>
-                <li>
-                    <p>-----PORTFOLIO----</p>
-                </li>
-                <li>
-                    <p>| Adr1en R1chard |</p>
-                </li>
-                <li>
-                    <p>------------------</p>
-                </li>
-                <li>
-                    <p>Scroll down to continue...</p>
-                </li>
             </ul>
+        </div>
+
+        <div class="about">
+            <div class="about-content">
+                <h3>Adrien RICHARD</h3>
+                <div class="about-links">
+                    <a href="https://github.com/Adr1enR1chard" target="_blank">GitHub</a>
+                    <a href="pdf/cv.pdf" target="_blank">CV</a>
+                    <a href="mailto:adrien.richard.contact@gmail.com" target="_blank">Contact</a>
+                    <a href="https://linkedin.com/in/adr1en-r1chard" target="_blank">LinkedIn</a>
+                </div>
+            </div>
         </div>
     </main>
     <canvas id="three-canvas"></canvas>
@@ -41,8 +35,10 @@
         const module = {};
     </script>
     <script type="module">
-        import { switchProjectView } from "./src/main.js";
+        import { switchProjectView, nextSlide, prevSlide } from "./src/main.js";
         module.switchProjectView = switchProjectView;
+        module.prevSlide = prevSlide;
+        module.nextSlide = nextSlide;
     </script>
 </body>
 

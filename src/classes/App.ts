@@ -2,6 +2,8 @@ import * as THREE from 'three';
 import { MainWorld } from './worlds/MainWorld';
 import { SecondWorld } from './worlds/SecondWorld';
 import { CSS3DRenderer, EffectComposer } from 'three/examples/jsm/Addons.js';
+import { TypeWriter } from './TypeWriter';
+import { TypeMessage } from './TypeMessage';
 
 
 export class App {
@@ -153,7 +155,7 @@ export class App {
 
     private constructor() {
         // Main renderer of the app
-        this.renderer = new THREE.WebGLRenderer({ canvas: <HTMLCanvasElement>document.getElementById('three-canvas') });
+        this.renderer = new THREE.WebGLRenderer({ canvas: <HTMLCanvasElement>document.getElementById('three-canvas'), antialias: true, alpha: true });
         // Setting the renderer to the window size
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         // Setting the pixel ratio
@@ -163,7 +165,7 @@ export class App {
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
         // Make render size accesible to app depencies 
         this.renderSize = new THREE.Vector2(window.innerWidth, window.innerHeight);
-
+        this.renderer.setClearColor(0x000000, 0);
         // Render target used to render different scene
         this.renderTarget = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight);
 
@@ -225,28 +227,32 @@ export class App {
 
             // In case we are in the secondary world
             this.renderer.setRenderTarget(null);
-            this.composer.passes = this.secondWorld.passes;
-
+            this.renderer.render(this.secondWorld.scene, this.secondWorld.camera);
         } else {
             // In case we are still in the primary world
             // we render trough the target the second world
             this.renderer.setRenderTarget(this.renderTarget);
             this.renderer.render(this.secondWorld.scene, this.secondWorld.camera);
+            this.renderer.setRenderTarget(null);
 
-            // And we render the main world in front of it
-            this.composer.passes = this.mainWorld.passes;
+            this.renderer.render(this.mainWorld.scene, this.mainWorld.camera);
         }
-        this.composer.render(this.clock.getDelta());
-
         this.cssRenderer.render(this.secondWorld.cssScene, this.secondWorld.camera);
     }
 
     private switchWorld() {
         // The switch time seems to be here...
-        if (this.animationTime >= 0.85) {
+        if (this.animationTime >= 0.85 && this.activeWorld != 1) {
             this.activeWorld = 1;
-        } else {
+            // Write a message telling we enter the computer
+            TypeWriter.instance.pushNewMessage(new TypeMessage("Entering the computer...", 100, 20));
+            if (this.secondWorld.currentView == 0) {
+                TypeWriter.instance.pushNewMessage(new TypeMessage("Please select a project", 100, 20));
+            }
+        } else if (this.animationTime < 0.85 && this.activeWorld != 0) {
             this.activeWorld = 0;
+            TypeWriter.instance.pushNewMessage(new TypeMessage("Going back to the real world...", 1000, 20));
+
         }
     }
 

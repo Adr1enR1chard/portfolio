@@ -4,8 +4,11 @@ import { OrbitControls, OutlinePass, OutputPass, RenderPass } from 'three/exampl
 import { Panel } from '../html_objects/Panel.ts';
 import { App } from '../App.ts';
 import { PanelArray } from '../html_objects/PanelArray.ts';
-import { Image } from '../html_objects/Image.ts';
 import { Description } from '../html_objects/Description.ts';
+import { TypeWriter } from '../TypeWriter.ts';
+import { TypeMessage } from '../TypeMessage.ts';
+import { Panels } from '../html_objects/Panels.ts';
+import { Descriptions } from '../html_objects/Descriptions.ts';
 
 export class SecondWorld extends World {
     private circleRadius = 5;
@@ -16,44 +19,36 @@ export class SecondWorld extends World {
     private panel: Panel;
     orbitControls: OrbitControls;
     description: Description;
-
-    private currentView = 0;
+    public currentView = 0;
 
     protected override start() {
         super.start();
-        this.scene.background = new THREE.Color('black');
+        this.scene.background = null;
         this.camera.position.z = 800;
 
         const renderPass = new RenderPass(this.scene, this.camera);
         this.passes = [renderPass, new OutputPass()];
 
-        const panel = new Panel(
-            "Slade",
-            "Android arcade game",
-            [
-                new Image("unity.png"),
-                new Image("csharp.png", 1.5),
-                new Image("playstore.png")
-            ]);
 
-        this.panelArray = new PanelArray([panel]);
+        this.panelArray = new PanelArray(Panels);
         this.panelArray.scale.setScalar(0);
         this.cssScene.add(this.panelArray);
 
-        this.orbitControls = new OrbitControls(this.camera, App.instance.cssRenderer.domElement);
-        this.orbitControls.enableZoom = false;
-        this.orbitControls.enablePan = false;
-        this.orbitControls.maxAzimuthAngle = Math.PI / 4;
-        this.orbitControls.minAzimuthAngle = -Math.PI / 4;
-        this.orbitControls.maxPolarAngle = 3 * Math.PI / 4;
-        this.orbitControls.minPolarAngle = Math.PI / 4;
+        // this.orbitControls = new OrbitControls(this.camera, App.instance.cssRenderer.domElement);
+        // this.orbitControls.enableZoom = false;
+        // this.orbitControls.enablePan = false;
+        // this.orbitControls.maxAzimuthAngle = Math.PI / 4;
+        // this.orbitControls.minAzimuthAngle = -Math.PI / 4;
+        // this.orbitControls.maxPolarAngle = 3 * Math.PI / 4;
+        // this.orbitControls.minPolarAngle = Math.PI / 4;
 
-        this.description = new Description(panel);
-        this.description.scale.setScalar(0);
+
+        this.description = Descriptions[0];
         this.cssScene.add(this.description);
     }
 
     public override animate() {
+
         App.instance.animationTime = Math.min(App.instance.animationTime, 1);
 
         const scale = Math.max(0, 0 + (App.instance.animationTime - 0.85) / 0.15)
@@ -66,15 +61,32 @@ export class SecondWorld extends World {
             this.description.scale.setScalar(scale);
         }
 
-        this.orbitControls.target.set(0, 0, 0);
+        // this.orbitControls.target.set(0, 0, 0);
         this.camera.position.lerp(new THREE.Vector3(0, 0, 800), 0.01);
 
-        this.orbitControls.update(App.instance.clock.getDelta());
+        // this.orbitControls.update(App.instance.clock.getDelta());
 
         super.animate();
     }
 
-    public switchView() {
+    public switchView(id: number) {
         this.currentView = (this.currentView + 1) % 2;
+        if (this.currentView == 0) {
+            TypeWriter.instance.pushNewMessage(new TypeMessage("Please select a project", 100, 20));
+        } else {
+            this.description.scale.setScalar(0);
+            this.cssScene.remove(this.description);
+            this.description = Descriptions[id];
+            this.cssScene.add(this.description);
+            TypeWriter.instance.pushNewMessage(new TypeMessage("Opening " + this.description.title + "...", 100, 20));
+        }
+    }
+
+    public nextSlide() {
+        this.description.nextSlide();
+    }
+
+    public prevSlide() {
+        this.description.prevSlide();
     }
 }

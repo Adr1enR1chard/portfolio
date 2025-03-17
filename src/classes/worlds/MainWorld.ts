@@ -4,71 +4,127 @@ import { Laptop } from '../objects/Laptop.ts';
 import { App } from '../App.ts';
 import { LoadedObject } from '../abstracts/LoadedObject.ts';
 import { lerp } from 'three/src/math/MathUtils.js';
-import { RenderPass } from 'three/examples/jsm/Addons.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass.js';
 
 export class MainWorld extends World {
     private laptop: Laptop;
 
-    private cameraOrigin: THREE.Vector3;
+    private _cameraOrigin: THREE.Vector3;
+    public get cameraOrigin(): THREE.Vector3 {
+        return this._cameraOrigin;
+    }
+    public set cameraOrigin(value: THREE.Vector3) {
+        this._cameraOrigin = value;
+    }
+    private _computerPosition: THREE.Vector3;
+    public get computerPosition(): THREE.Vector3 {
+        return this._computerPosition;
+    }
+    public set computerPosition(value: THREE.Vector3) {
+        this._computerPosition = value;
+    }
 
     protected override start() {
         super.start();
-        this.cameraOrigin = new THREE.Vector3(19.6, 7.16, -5.89);
+        this.cameraOrigin = new THREE.Vector3(15.6, 3.16, 1);
         this.camera.position.set(this.cameraOrigin.x, this.cameraOrigin.y, this.cameraOrigin.z);
-        this.camera.rotation.set(-2.52, 0.74, 2.69);
-        this.scene.background = new THREE.Color(new THREE.Color(0x000007));
-        this.passes = [new RenderPass(this.scene, this.camera)];
+        this.camera.rotation.set(-2.58, 0.74, 2.69);
+        this.scene.background = null; // Supprimer le fond noir
+        // this.scene.add(backgroundSphere);
 
-        // Lights
-        const ambientLight = new THREE.AmbientLight(new THREE.Color('green'), 0.2);
+        const outlinePass = new OutlinePass(App.instance.renderSize, this.scene, this.camera);
+        outlinePass.renderToScreen = true;
+        this.passes = [new RenderPass(this.scene, this.camera)];
+        App.instance.composer.passes = this.passes;
+
+        // Ambient base light
+        const ambientLight = new THREE.AmbientLight(new THREE.Color('white'), 0.5);
         this.root.add(ambientLight);
 
-        const spotLight = new THREE.SpotLight(new THREE.Color(new THREE.Color('blue')), 100, 0, Math.PI / 4, 1, 1.5);
-        spotLight.castShadow = true;
-        spotLight.shadow.bias = -0.0002;
-        spotLight.shadow.mapSize = new THREE.Vector2(2048, 2048);
-        spotLight.position.z = 5;
-        spotLight.position.y = 20;
-        spotLight.position.x = 8;
-        spotLight.rotation.z = Math.PI;
-        spotLight.rotation.x = Math.PI;
-        spotLight.target.position.z = 5;
-        spotLight.target.position.y = 0;
-        spotLight.target.position.x = 8;
-        this.scene.add(spotLight);
-        this.scene.add(spotLight.target);
+        // Main light
+        // const mainLight = new THREE.DirectionalLight(new THREE.Color('white'), 0);
+        // mainLight.position.set(40, 40, 20);
+        // mainLight.castShadow = true;
+        // mainLight.shadow.bias = -0.005;
+        // mainLight.shadow.mapSize.set(2048, 2048);
+        // this.scene.add(mainLight);
+        // this.scene.add(mainLight.target);
+        // this.scene.add(new THREE.DirectionalLightHelper(mainLight));
 
-        const pointLight = new THREE.PointLight(new THREE.Color('red'), 0.1, 0, 0.1);
-        pointLight.position.z = 14;
-        pointLight.position.y = 2;
-        pointLight.position.x = 8;
-        this.root.add(pointLight);
+        // RGB accent lights with increased intensity and range
+        // Create and add light helpers
+        const createLightWithHelper = (color: string, intensity: number, distance: number, position: THREE.Vector3) => {
+            const light = new THREE.PointLight(new THREE.Color(color), intensity, distance);
+            light.position.copy(position);
+            this.root.add(light);
 
+            // const helper = new THREE.PointLightHelper(light);
+            // this.root.add(helper);
 
-        this.laptop = new Laptop();
-        this.laptop.position.y = 0.1;
-        this.root.add(this.laptop);
+            return light;
+        };
 
-        const bedroom = new LoadedObject('/meshes/bedroom/bedroom.gltf', () => {
-            const windowObj = <THREE.Mesh>bedroom.getObjectByName("Window")?.children[1];
+        // Adjusted positions closer to the desk
+        createLightWithHelper('#0066ff', 2, 30, new THREE.Vector3(3, 1, 8));
+        createLightWithHelper('#ff0066', 2, 30, new THREE.Vector3(3, 1, 6));
+        createLightWithHelper('#9933ff', 1.5, 25, new THREE.Vector3(3, 1, 4));
+        createLightWithHelper('#00ffff', 1, 20, new THREE.Vector3(3, 1, 2));
+        createLightWithHelper('#ff00ff', 1, 20, new THREE.Vector3(3, 1, 0));
+        createLightWithHelper("#ffffff", 2, 30, new THREE.Vector3(3, 2, -2));
 
-            if (windowObj) {
-                windowObj.material = new THREE.MeshBasicMaterial({ color: new THREE.Color('black') });
+        // this.laptop = new Laptop();
+        // this.laptop.position.y = 0.1;
+        // this.root.add(this.laptop);
+
+        const bedroom = new LoadedObject('/meshes/desk/desk.glb', () => {
+            const monitorObj = <THREE.Mesh>bedroom.getObjectByName("monitor")?.children[0];
+            console.log(monitorObj);
+            this.computerPosition = monitorObj.getWorldPosition(new THREE.Vector3());
+
+            if (monitorObj) {
+                monitorObj.material = new THREE.ShaderMaterial({
+                    uniforms: {
+                        uTexture: { value: App.instance.renderTarget.texture },
+                        winResolution: { value: new THREE.Vector2(App.instance.renderSize.x, App.instance.renderSize.y).multiplyScalar(App.instance.renderer.getPixelRatio()) },
+                    },
+                    vertexShader: `
+                        varying vec2 vUv;
+                        void main() {
+                            vUv = uv;
+                            gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
+                        }
+                    `,
+                    fragmentShader: `
+                        uniform sampler2D uTexture;
+                        varying vec2 vUv;
+                        void main() {
+                            vec4 color = texture2D(uTexture, vUv);
+                            gl_FragColor = color;
+                            #include <tonemapping_fragment>
+                            #include <colorspace_fragment>
+                        }
+                    `
+
+                });
             }
         });
         bedroom.translateY(-3.6);
         bedroom.translateZ(4);
         bedroom.translateX(8);
+        bedroom.rotateY(Math.PI / 2)
         bedroom.scale.multiplyScalar(2.5);
         this.root.add(bedroom);
 
-        // this.root.add(new SkyBox());
+
     }
 
     public override animate() {
-        this.laptop.animate();
-        this.camera.position.lerpVectors(this.cameraOrigin, new THREE.Vector3(0, 1, 0).add(this.laptop.position), App.instance.animationTime / this.laptop.animationsDuration);
-        this.camera.rotation.y = lerp(0.74, Math.PI / 2, App.instance.animationTime / this.laptop.animationsDuration);
+        // this.laptop.animate();
+        if (this.computerPosition) {
+            this.camera.position.lerpVectors(this.cameraOrigin, new THREE.Vector3(0, 2, 0).add(this.computerPosition), App.instance.animationTime / 1);
+        }
+        this.camera.rotation.y = lerp(0.74, Math.PI / 2, App.instance.animationTime / 1);
 
         if (App.instance.animationTime == 0) {
             this.camera.position.x += Math.cos(App.instance.clock.elapsedTime * 0.1) * 0.3;

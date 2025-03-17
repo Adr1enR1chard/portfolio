@@ -2,6 +2,8 @@ import { CSS3DObject } from 'three/examples/jsm/Addons.js';
 import { Image } from './Image';
 export class Panel extends CSS3DObject {
 
+    private static panelCount = 0;
+
     private _title: string;
     public get title(): string {
         return this._title;
@@ -38,6 +40,8 @@ export class Panel extends CSS3DObject {
         this.subtitle = subtitle;
         this.images = images;
         this.element.style.position = "relative";
-        this.element.setAttribute("onpointerdown", "module.switchProjectView()");
+        this.element.setAttribute("onpointerdown", `module.switchProjectView(${Panel.panelCount})`);
+
+        Panel.panelCount++;
     }
 }

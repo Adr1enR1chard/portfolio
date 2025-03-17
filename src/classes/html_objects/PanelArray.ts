@@ -10,6 +10,11 @@ export class PanelArray extends CSS3DObject {
         panels.forEach(panel => {
             element.innerHTML += panel.element.outerHTML;
         });
+        element.addEventListener('wheel', (e) => {
+            if (element.scrollTop != 0) {
+                e.stopPropagation();
+            }
+        });
 
         super(element);
         this.panels = panels;
