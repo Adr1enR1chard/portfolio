@@ -6,6 +6,7 @@ import { LoadedObject } from '../abstracts/LoadedObject.ts';
 import { lerp } from 'three/src/math/MathUtils.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass.js';
+import { BackgroundShader } from '../../shaders/BackgroundShader.ts';
 
 export class MainWorld extends World {
     private laptop: Laptop;
@@ -25,6 +26,8 @@ export class MainWorld extends World {
         this._computerPosition = value;
     }
 
+    private backgroundCube: THREE.Mesh;
+
     protected override start() {
         super.start();
         this.cameraOrigin = new THREE.Vector3(15.6, 3.16, 1);
@@ -42,15 +45,9 @@ export class MainWorld extends World {
         const ambientLight = new THREE.AmbientLight(new THREE.Color('white'), 0.5);
         this.root.add(ambientLight);
 
-        // Main light
-        // const mainLight = new THREE.DirectionalLight(new THREE.Color('white'), 0);
-        // mainLight.position.set(40, 40, 20);
-        // mainLight.castShadow = true;
-        // mainLight.shadow.bias = -0.005;
-        // mainLight.shadow.mapSize.set(2048, 2048);
-        // this.scene.add(mainLight);
-        // this.scene.add(mainLight.target);
-        // this.scene.add(new THREE.DirectionalLightHelper(mainLight));
+        const directionalLight = new THREE.DirectionalLight(new THREE.Color('white'), 0.5);
+        directionalLight.position.set(5, 2, 0);
+        this.root.add(directionalLight);
 
         // RGB accent lights with increased intensity and range
         // Create and add light helpers
@@ -73,9 +70,6 @@ export class MainWorld extends World {
         createLightWithHelper('#ff00ff', 1, 20, new THREE.Vector3(3, 1, 0));
         createLightWithHelper("#ffffff", 2, 30, new THREE.Vector3(3, 2, -2));
 
-        // this.laptop = new Laptop();
-        // this.laptop.position.y = 0.1;
-        // this.root.add(this.laptop);
 
         const bedroom = new LoadedObject('/meshes/desk/desk.glb', () => {
             const monitorObj = <THREE.Mesh>bedroom.getObjectByName("monitor")?.children[0];
@@ -84,28 +78,10 @@ export class MainWorld extends World {
 
             if (monitorObj) {
                 monitorObj.material = new THREE.ShaderMaterial({
-                    uniforms: {
-                        uTexture: { value: App.instance.renderTarget.texture },
-                        winResolution: { value: new THREE.Vector2(App.instance.renderSize.x, App.instance.renderSize.y).multiplyScalar(App.instance.renderer.getPixelRatio()) },
-                    },
-                    vertexShader: `
-                        varying vec2 vUv;
-                        void main() {
-                            vUv = uv;
-                            gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
-                        }
-                    `,
-                    fragmentShader: `
-                        uniform sampler2D uTexture;
-                        varying vec2 vUv;
-                        void main() {
-                            vec4 color = texture2D(uTexture, vUv);
-                            gl_FragColor = color;
-                            #include <tonemapping_fragment>
-                            #include <colorspace_fragment>
-                        }
-                    `
-
+                    uniforms: BackgroundShader.uniforms,
+                    vertexShader: BackgroundShader.vertexShader,
+                    fragmentShader: BackgroundShader.fragmentShader,
+                    side: THREE.DoubleSide
                 });
             }
         });
@@ -115,6 +91,20 @@ export class MainWorld extends World {
         bedroom.rotateY(Math.PI / 2)
         bedroom.scale.multiplyScalar(2.5);
         this.root.add(bedroom);
+
+        // Rajoute un background cube
+        const backgroundUniforms = structuredClone(BackgroundShader.uniforms);
+        backgroundUniforms.top_color.value = new THREE.Color('black');
+        backgroundUniforms.bottom_color.value = new THREE.Color('green');
+        this.backgroundCube = new THREE.Mesh(
+            new THREE.BoxGeometry(1000, 1000, 1000),
+            new THREE.ShaderMaterial({
+                uniforms: backgroundUniforms,
+                vertexShader: BackgroundShader.vertexShader,
+                fragmentShader: BackgroundShader.fragmentShader,
+                side: THREE.BackSide
+            }));
+        this.scene.add(this.backgroundCube);
 
 
     }
@@ -132,6 +122,8 @@ export class MainWorld extends World {
             this.camera.position.z += Math.cos(App.instance.clock.elapsedTime * 0.5) * 0.3;
 
         }
+
+        (this.backgroundCube.material as THREE.ShaderMaterial).uniforms.time.value = App.instance.clock.elapsedTime;
 
         super.animate();
     }

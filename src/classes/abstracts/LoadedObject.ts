@@ -49,7 +49,7 @@ export class LoadedObject extends THREE.Object3D {
         // Adding the laptop as child
         this.add(gltf.scene);
 
-        this.enableShadows(this);
+        // this.enableShadows(this);
 
         // Animation loading
         this.animations = gltf.animations;

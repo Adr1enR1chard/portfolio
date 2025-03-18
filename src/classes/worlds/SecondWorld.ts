@@ -9,6 +9,7 @@ import { TypeWriter } from '../TypeWriter.ts';
 import { TypeMessage } from '../TypeMessage.ts';
 import { Panels } from '../html_objects/Panels.ts';
 import { Descriptions } from '../html_objects/Descriptions.ts';
+import { BackgroundShader } from '../../shaders/BackgroundShader.ts';
 
 export class SecondWorld extends World {
     private circleRadius = 5;
@@ -21,6 +22,8 @@ export class SecondWorld extends World {
     description: Description;
     public currentView = 0;
 
+    private backgroundCube: THREE.Mesh;
+
     protected override start() {
         super.start();
         this.scene.background = null;
@@ -28,6 +31,16 @@ export class SecondWorld extends World {
 
         const renderPass = new RenderPass(this.scene, this.camera);
         this.passes = [renderPass, new OutputPass()];
+
+        this.backgroundCube = new THREE.Mesh(
+            new THREE.BoxGeometry(1000, 1000, 1000),
+            new THREE.ShaderMaterial({
+                uniforms: BackgroundShader.uniforms,
+                vertexShader: BackgroundShader.vertexShader,
+                fragmentShader: BackgroundShader.fragmentShader,
+                side: THREE.BackSide
+            }));
+        this.scene.add(this.backgroundCube);
 
 
         this.panelArray = new PanelArray(Panels);
@@ -65,6 +78,8 @@ export class SecondWorld extends World {
         this.camera.position.lerp(new THREE.Vector3(0, 0, 800), 0.01);
 
         // this.orbitControls.update(App.instance.clock.getDelta());
+
+        (this.backgroundCube.material as THREE.ShaderMaterial).uniforms.time.value = App.instance.clock.getElapsedTime();
 
         super.animate();
     }

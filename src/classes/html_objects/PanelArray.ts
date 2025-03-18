@@ -6,15 +6,24 @@ export class PanelArray extends CSS3DObject {
 
     constructor(panels: Panel[]) {
         const element = document.createElement('div');
-        element.className = "panel-array";
+        element.className = "panel-array-container";
+
+        const category = document.createElement('h2');
+        category.className = "panel-category";
+        category.innerText = "Game Development";
+        element.appendChild(category);
+
+        const array = document.createElement('div');
+        array.className = "panel-array";
         panels.forEach(panel => {
-            element.innerHTML += panel.element.outerHTML;
+            array.innerHTML += panel.element.outerHTML;
         });
-        element.addEventListener('wheel', (e) => {
-            if (element.scrollTop != 0 && e.deltaY < 0) {
+        array.addEventListener('wheel', (e) => {
+            if (array.scrollTop != 0 && e.deltaY < 0) {
                 e.stopPropagation();
             }
         });
+        element.appendChild(array);
 
         super(element);
         this.panels = panels;
