@@ -36,6 +36,14 @@ export const Panels = [
             new Image("godot.png", 1.2)
         ],
         new Image("footprint.png")),
+    new Panel(
+        "Light and Darkness",
+        "2D Platformer",
+        [
+            new Image("unity.png", 1.2),
+            new Image("csharp.png", 1.2),
+        ],
+        new Image("light.png")),
 
 
 ]

@@ -5,7 +5,6 @@ export class Image extends CSS3DObject {
 
     constructor(path: string, scale: number = 1) {
         const element = document.createElement('img');
-        element.className = "panel-img";
         element.src = "/images/" + path;
         element.width = 50 * scale;
         element.style.height = 'auto';

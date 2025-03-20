@@ -35,6 +35,7 @@ export class Panel extends CSS3DObject {
         logosContainer.className = "logos-container";
 
         logos.forEach(image => {
+            image.element.className = "panel-img";
             logosContainer.appendChild(image.element);
         })
         header.appendChild(logosContainer);
