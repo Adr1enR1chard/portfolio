@@ -1,4 +1,4 @@
 export default {
     "base": "/portfolio/",
-    "publicDir": 'public'
+    "assetsDir": 'public'
 }
