@@ -54,7 +54,7 @@ export class Panel extends CSS3DObject {
         this.subtitle = subtitle;
         this.logos = logos;
         this.element.style.position = "relative";
-        this.element.setAttribute("onpointerdown", `module.switchProjectView(${Panel.panelCount})`);
+        this.element.setAttribute("onpointerdown", `window.switchProjectView(${Panel.panelCount})`);
         this.image = image;
 
         Panel.panelCount++;

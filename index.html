@@ -32,14 +32,11 @@
         </div>
     </main>
     <canvas id="three-canvas"></canvas>
-    <script type="text/javascript">
-        const module = {};
-    </script>
     <script type="module">
-        import { switchProjectView, nextSlide, prevSlide } from "portfolio/src/main.js";
-        module.switchProjectView = switchProjectView;
-        module.prevSlide = prevSlide;
-        module.nextSlide = nextSlide;
+        import { switchProjectView, nextSlide, prevSlide } from "./src/main.js";
+        window.switchProjectView = switchProjectView;
+        window.prevSlide = prevSlide;
+        window.nextSlide = nextSlide;
     </script>
 </body>
 

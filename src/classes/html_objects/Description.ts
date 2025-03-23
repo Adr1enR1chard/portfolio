@@ -43,7 +43,7 @@ export class Description extends CSS3DObject {
         const backButton = document.createElement('button');
         backButton.className = 'back-button';
         backButton.innerText = 'Back';
-        backButton.setAttribute("onpointerdown", "module.switchProjectView()");
+        backButton.setAttribute("onpointerdown", "window.switchProjectView()");
         element.addEventListener('wheel', (e) => {
             if (element.scrollTop != 0 && e.deltaY < 0) {
                 e.stopPropagation();
@@ -87,8 +87,8 @@ export class Description extends CSS3DObject {
             navNext.innerHTML = '&#10095;';
 
             // Add event listeners for navigation
-            navPrev.setAttribute('onpointerdown', 'module.prevSlide()');
-            navNext.setAttribute('onpointerdown', 'module.nextSlide()');
+            navPrev.setAttribute('onpointerdown', 'window.prevSlide()');
+            navNext.setAttribute('onpointerdown', 'window.nextSlide()');
 
             // Assemble carousel
             carouselContainer.appendChild(navPrev);
