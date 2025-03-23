@@ -71,7 +71,7 @@ export class MainWorld extends World {
         // createLightWithHelper("#ffffff", 2, 30, new THREE.Vector3(3, 2, -2));
 
 
-        const bedroom = new LoadedObject('/meshes/desk/desk.glb', () => {
+        const bedroom = new LoadedObject('/portfolio/meshes/desk/desk.glb', () => {
             const monitorObj = <THREE.Mesh>bedroom.getObjectByName("monitor")?.children[0];
             console.log(monitorObj);
             this.computerPosition = monitorObj.getWorldPosition(new THREE.Vector3());
