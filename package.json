@@ -2,6 +2,7 @@
   "dependencies": {
     "htmlhint": "^1.1.4",
     "three": "^0.173.0",
+    "url": "^0.11.4",
     "vite": "^6.2.0"
   },
   "devDependencies": {

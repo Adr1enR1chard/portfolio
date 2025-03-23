@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import { World } from '../abstracts/World.ts'
-import { Laptop } from '../objects/Laptop.ts';
 import { App } from '../App.ts';
 import { LoadedObject } from '../abstracts/LoadedObject.ts';
 import { lerp } from 'three/src/math/MathUtils.js';
@@ -9,8 +8,6 @@ import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass.js';
 import { BackgroundShader } from '../../shaders/BackgroundShader.ts';
 
 export class MainWorld extends World {
-    private laptop: Laptop;
-
     private _cameraOrigin: THREE.Vector3;
     public get cameraOrigin(): THREE.Vector3 {
         return this._cameraOrigin;
@@ -110,9 +107,5 @@ export class MainWorld extends World {
         }
 
         super.animate();
-    }
-
-    public getLaptop() {
-        return this.laptop;
     }
 }
