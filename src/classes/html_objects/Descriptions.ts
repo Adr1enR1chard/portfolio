@@ -30,11 +30,11 @@ export const Descriptions = [
             'images/paranoia.webp'
         ],
         `
-        <!--<p>Voici une courte présentation vidéo du projet : </p>
+        <p>Voici une courte présentation vidéo du projet : </p>
         <video controls>
-            <source src="/videos/paranoia.mp4" type="video/mp4" />
+            <source src="/portfolio/videos/paranoia.mp4" type="video/mp4" />
             Your browser does not support the video tag.
-        </video>-->
+        </video>
     `),
 
     new Description(
@@ -64,11 +64,11 @@ export const Descriptions = [
             'images/uecombat.webp'
         ],
         `
-        <!--<p>Voici une courte présentation vidéo du projet : </p>
+        <p>Voici une courte présentation vidéo du projet : </p>
         <video controls>
-            <source src="/videos/ue5combat.mp4" type="video/mp4" />
+            <source src="/portfolio/videos/ue5combat.mp4" type="video/mp4" />
             Your browser does not support the video tag.
-        </video>-->
+        </video>
     `),
     new Description(
         "Footprint Trail",
