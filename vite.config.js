@@ -6,7 +6,7 @@ export default {
         external: [
             fileURLToPath(
                 new URL(
-                    'src/main.js',
+                    '/portfolio/src/main.js',
                     import.meta.url
                 )
             )
