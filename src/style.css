@@ -326,6 +326,10 @@ canvas {
     line-height: 1.6;
 }
 
+.description video {
+    width: 100%;
+}
+
 /* Image styles */
 .description img {
     max-width: 100%;

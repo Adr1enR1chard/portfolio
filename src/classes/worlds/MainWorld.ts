@@ -51,24 +51,24 @@ export class MainWorld extends World {
 
         // RGB accent lights with increased intensity and range
         // Create and add light helpers
-        const createLightWithHelper = (color: string, intensity: number, distance: number, position: THREE.Vector3) => {
-            const light = new THREE.PointLight(new THREE.Color(color), intensity, distance);
-            light.position.copy(position);
-            this.root.add(light);
+        // const createLightWithHelper = (color: string, intensity: number, distance: number, position: THREE.Vector3) => {
+        //     const light = new THREE.PointLight(new THREE.Color(color), intensity, distance);
+        //     light.position.copy(position);
+        //     this.root.add(light);
 
-            // const helper = new THREE.PointLightHelper(light);
-            // this.root.add(helper);
+        //     // const helper = new THREE.PointLightHelper(light);
+        //     // this.root.add(helper);
 
-            return light;
-        };
+        //     return light;
+        // };
 
         // Adjusted positions closer to the desk
-        createLightWithHelper('#0066ff', 2, 30, new THREE.Vector3(3, 1, 8));
-        createLightWithHelper('#ff0066', 2, 30, new THREE.Vector3(3, 1, 6));
-        createLightWithHelper('#9933ff', 1.5, 25, new THREE.Vector3(3, 1, 4));
-        createLightWithHelper('#00ffff', 1, 20, new THREE.Vector3(3, 1, 2));
-        createLightWithHelper('#ff00ff', 1, 20, new THREE.Vector3(3, 1, 0));
-        createLightWithHelper("#ffffff", 2, 30, new THREE.Vector3(3, 2, -2));
+        // createLightWithHelper('#0066ff', 2, 30, new THREE.Vector3(3, 1, 8));
+        // createLightWithHelper('#ff0066', 2, 30, new THREE.Vector3(3, 1, 6));
+        // createLightWithHelper('#9933ff', 1.5, 25, new THREE.Vector3(3, 1, 4));
+        // createLightWithHelper('#00ffff', 1, 20, new THREE.Vector3(3, 1, 2));
+        // createLightWithHelper('#ff00ff', 1, 20, new THREE.Vector3(3, 1, 0));
+        // createLightWithHelper("#ffffff", 2, 30, new THREE.Vector3(3, 2, -2));
 
 
         const bedroom = new LoadedObject('/meshes/desk/desk.glb', () => {
@@ -92,20 +92,6 @@ export class MainWorld extends World {
         bedroom.scale.multiplyScalar(2.5);
         this.root.add(bedroom);
 
-        // Rajoute un background cube
-        const backgroundUniforms = structuredClone(BackgroundShader.uniforms);
-        backgroundUniforms.top_color.value = new THREE.Color('black');
-        backgroundUniforms.bottom_color.value = new THREE.Color('green');
-        this.backgroundCube = new THREE.Mesh(
-            new THREE.BoxGeometry(1000, 1000, 1000),
-            new THREE.ShaderMaterial({
-                uniforms: backgroundUniforms,
-                vertexShader: BackgroundShader.vertexShader,
-                fragmentShader: BackgroundShader.fragmentShader,
-                side: THREE.BackSide
-            }));
-        this.scene.add(this.backgroundCube);
-
 
     }
 
@@ -122,8 +108,6 @@ export class MainWorld extends World {
             this.camera.position.z += Math.cos(App.instance.clock.elapsedTime * 0.5) * 0.3;
 
         }
-
-        (this.backgroundCube.material as THREE.ShaderMaterial).uniforms.time.value = App.instance.clock.elapsedTime;
 
         super.animate();
     }

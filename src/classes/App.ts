@@ -17,6 +17,14 @@ export class App {
         return App.#instance;
     }
 
+    private _loadingManager: THREE.LoadingManager;
+    public get loadingManager(): THREE.LoadingManager {
+        return this._loadingManager;
+    }
+    public set loadingManager(value: THREE.LoadingManager) {
+        this._loadingManager = value;
+    }
+
     /*
         RENDER
     */

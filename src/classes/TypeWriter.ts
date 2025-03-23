@@ -13,9 +13,7 @@ export class TypeWriter {
 
 
     private messages: TypeMessage[] = [
-        new TypeMessage("Loading interactive portfolio...", 1000),
-        new TypeMessage("Done", 100, 10),
-        new TypeMessage("Scroll down to continue...", 50, 10)
+        new TypeMessage("Loading interactive portfolio...", 100, 10),
     ];
     private currentMessageIndex: number = 0;
     private currentCharIndex: number = 0;
@@ -82,5 +80,16 @@ export class TypeWriter {
 
     private wait(ms: number): Promise<void> {
         return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    private async onLoad() {
+        this.startTyping();
+    }
+
+    private async onLoadComplete() {
+        this.pushNewMessage(
+            new TypeMessage("Portfolio loaded !", 100, 10))
+        this.pushNewMessage(
+            new TypeMessage("Scroll down to continue...", 50, 10))
     }
 }

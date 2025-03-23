@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTF, GLTFLoader } from 'three/examples/jsm/Addons.js';
+import { App } from '../App';
 
 export class LoadedObject extends THREE.Object3D {
     private _isActive = false;
@@ -41,7 +42,7 @@ export class LoadedObject extends THREE.Object3D {
     }
 
     private loadModel() {
-        const gltfLoader = new GLTFLoader();
+        const gltfLoader = new GLTFLoader(App.instance.loadingManager);
         gltfLoader.load(this.path, (gltf) => this.initiate(gltf));
     }
 

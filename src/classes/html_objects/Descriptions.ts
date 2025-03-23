@@ -27,7 +27,28 @@ export const Descriptions = [
 <p>Le gameplay repose sur l'exploration, la résolution d'énigmes et la gestion des ressources, avec des moments de tension et de surprise qui maintiennent le joueur en alerte. L'objectif est de créer une expérience captivante et mémorable, où chaque découverte et chaque progrès sont récompensés par une meilleure compréhension de l'intrigue et des mécanismes du jeu.</p>
                 `,
         [
-            'images/paranoia.png'
+            'images/paranoia.webp'
+        ],
+        `
+        <p>Voici une courte présentation vidéo du projet : </p>
+        <video controls>
+            <source src="/videos/paranoia.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+    `),
+
+    new Description(
+        "Light and Darkness",
+        "2D Platformer",
+        `
+            <p>Ce jeu 2D est un platformer innovant où le joueur a la possibilité de répandre sa lumière dans un monde plongé dans les ténèbres afin de découvrir des chemins alternatifs. J'ai eu l'opportunité de collaborer avec un graphiste 2D. De mon côté, je me suis occupé de l'intégralité du gameplay, en mettant en place des mécaniques uniques et engageantes.</p>
+
+<p>L'une des caractéristiques les plus marquantes du jeu est la dualité du monde : les éléments interactifs ne sont pas toujours visibles ou accessibles. En répandant la lumière, le joueur peut révéler des plateformes cachées, des objets secrets et des passages dissimulés, créant ainsi une sorte de double monde. Cette mécanique ajoute une dimension stratégique et exploratoire au gameplay, incitant les joueurs à expérimenter et à découvrir les mystères cachés dans l'obscurité.</p>
+                `,
+        [
+            'images/light.gif',
+            'images/light2.png',
+            'images/light3.png'
         ]),
     new Description(
         "UE5 Combat System",
@@ -40,8 +61,15 @@ export const Descriptions = [
 <p>Les Behaviour Trees ont été utilisés pour développer des comportements d'IA pour les ennemis, leur permettant de réagir de manière réaliste aux actions du joueur. J'ai implémenté des arbres de décision qui permettent aux ennemis de choisir entre différentes actions en fonction de la situation, comme attaquer ou se déplacer pour se mettre en position avantageuse.</p>
             `,
         [
-            'images/uecombat.png'
-        ]),
+            'images/uecombat.webp'
+        ],
+        `
+        <p>Voici une courte présentation vidéo du projet : </p>
+        <video controls>
+            <source src="/videos/ue5combat.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+    `),
     new Description(
         "Footprint Trail",
         "Godot Plugin",
@@ -75,18 +103,7 @@ export const Descriptions = [
 
             `,
         [
-            'images/footprint.png'
+            'images/footprint.webp'
         ],
         `<p>Vous pourrez retrouver le projet sur <a href="https://github.com/Adr1enR1chard/footprint-trail" target="_blank">mon GitHub</a></p>`),
-    new Description(
-        "Light and Darkness",
-        "2D Platformer",
-        `
-            <p>Ce jeu 2D est un platformer innovant où le joueur a la possibilité de répandre sa lumière dans un monde plongé dans les ténèbres afin de découvrir des chemins alternatifs. J'ai eu l'opportunité de collaborer avec un graphiste 2D. De mon côté, je me suis occupé de l'intégralité du gameplay, en mettant en place des mécaniques uniques et engageantes.</p>
-
-<p>L'une des caractéristiques les plus marquantes du jeu est la dualité du monde : les éléments interactifs ne sont pas toujours visibles ou accessibles. En répandant la lumière, le joueur peut révéler des plateformes cachées, des objets secrets et des passages dissimulés, créant ainsi une sorte de double monde. Cette mécanique ajoute une dimension stratégique et exploratoire au gameplay, incitant les joueurs à expérimenter et à découvrir les mystères cachés dans l'obscurité.</p>
-                `,
-        [
-            'images/light.png'
-        ])
 ]
