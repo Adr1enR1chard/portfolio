@@ -43,35 +43,28 @@ export class SecondWorld extends World {
         this.scene.add(this.backgroundCube);
 
 
-        this.panelArray = new PanelArray(Panels);
-        this.panelArray.scale.setScalar(0);
-        this.cssScene.add(this.panelArray);
+        const main = document.querySelector('.main-body');
 
-        // this.orbitControls = new OrbitControls(this.camera, App.instance.cssRenderer.domElement);
-        // this.orbitControls.enableZoom = false;
-        // this.orbitControls.enablePan = false;
-        // this.orbitControls.maxAzimuthAngle = Math.PI / 4;
-        // this.orbitControls.minAzimuthAngle = -Math.PI / 4;
-        // this.orbitControls.maxPolarAngle = 3 * Math.PI / 4;
-        // this.orbitControls.minPolarAngle = Math.PI / 4;
+        this.panelArray = new PanelArray(Panels);
+        main?.appendChild(this.panelArray.element);
 
 
         this.description = Descriptions[0];
-        this.cssScene.add(this.description);
+        main?.appendChild(this.description.element);
     }
 
     public override animate() {
 
         App.instance.animationTime = Math.min(App.instance.animationTime, 1);
 
-        const scale = Math.max(0, 0 + (App.instance.animationTime - 0.85) / 0.15)
+        const scale = Math.max(0, (App.instance.animationTime - 0.85) / 0.15) * 100
         if (this.currentView == 0) {
-            this.panelArray.scale.setScalar(scale);
-            this.description.scale.setScalar(0);
+            this.panelArray.element.style.scale = scale.toString() + "%";
+            this.description.element.style.scale = "0";
 
         } else {
-            this.panelArray.scale.setScalar(0);
-            this.description.scale.setScalar(scale);
+            this.panelArray.element.style.scale = "0";
+            this.description.element.style.scale = scale.toString() + "%";
         }
 
         // this.orbitControls.target.set(0, 0, 0);
@@ -89,10 +82,11 @@ export class SecondWorld extends World {
         if (this.currentView == 0) {
             TypeWriter.instance.pushNewMessage(new TypeMessage("Please select a project", 100, 20));
         } else {
-            this.description.scale.setScalar(0);
-            this.cssScene.remove(this.description);
+            const main = document.querySelector('.main-body');
+            this.description.element.style.scale = "0";
+            main?.removeChild(this.description.element);
             this.description = Descriptions[id];
-            this.cssScene.add(this.description);
+            main?.appendChild(this.description.element);
             TypeWriter.instance.pushNewMessage(new TypeMessage("Opening " + this.description.title + "...", 100, 20));
         }
     }

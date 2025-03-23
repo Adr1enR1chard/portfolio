@@ -6,7 +6,7 @@ export abstract class World {
 
     scene: THREE.Scene;
     cssScene: THREE.Scene;
-    camera: THREE.PerspectiveCamera;
+    camera: THREE.PerspectiveCamera | THREE.OrthographicCamera;
     root: THREE.Object3D;
     passes: Pass[];
 

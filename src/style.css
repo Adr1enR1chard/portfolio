@@ -9,12 +9,26 @@ body {
 
 main {
     position: absolute;
+    width: 100vw;
+    height: 100vh;
+
+    /* margin-left: 10vw; */
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.header {
+    margin-left: 5vw;
+    width: 30vw;
+}
+
+.main-body {
     display: flex;
     flex-direction: column;
-    width: 30%;
-    height: 100vh;
-    margin-left: 100px;
-    user-select: none;
+    align-items: center;
+    justify-content: center;
+    width: 60vw;
 }
 
 /* Link styles */
@@ -32,7 +46,7 @@ main {
     text-decoration: none;
     border: 1px solid rgb(5 224 5);
     border-radius: 3px;
-    padding: 5px 10px;
+    padding: 0.5vh 0.5vw;
     transition: all 0.3s ease;
 }
 
@@ -52,26 +66,25 @@ main {
 
     /* Center vertically */
     background: rgb(0 20 0 / 20%);
-    padding: 15px;
+    padding: 1vw;
     border: 2px solid rgb(5 224 5);
     border-radius: 5px;
     z-index: 10;
-    font-size: 0.9rem;
+    font-size: 0.8vw;
     box-shadow: 0 0 10px rgb(5 224 5 / 10%);
-    max-width: 300px;
 }
 
 .about-content h3 {
     color: rgb(5 224 5);
     margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 1.2rem;
+    margin-bottom: 1vh;
+    font-size: 1vw;
 }
 
 .about-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 1vh 0.5vw;
 }
 
 .about-links a:hover {
@@ -80,18 +93,18 @@ main {
     transform: translateY(-2px);
 }
 
-main #console {
+.header #console {
     display: flex;
     flex-direction: column;
-    line-height: 1.5rem;
-    font-size: 25px;
+    line-height: 1.3vh;
+    font-size: 1.2vw;
     height: 50vh;
     justify-content: flex-end;
 
     /* Change pour aligner en bas */
 }
 
-main #console ul {
+.header #console ul {
     display: flex;
     flex-direction: column;
     padding: 0;
@@ -100,49 +113,41 @@ main #console ul {
     /* Ajoute une transition douce */
 }
 
-main #console li {
-    /* margin-bottom: 5px; */
-    transform: translateY(0);
-
-    /* Position initiale */
-    margin-bottom: -10px;
-}
-
 /* Faire remonter progressivement les anciens messages */
-main #console li:nth-last-child(n+2) {
-    transform: translateY(10px);
+.header #console li:nth-last-child(n+2) {
+    transform: translateY(1vh);
 }
 
 /* Modifier les opacités pour garder plus de messages visibles */
-main #console li:nth-last-child(2) {
+.header #console li:nth-last-child(2) {
     opacity: 0.9;
 }
 
-main #console li:nth-last-child(3) {
+.header #console li:nth-last-child(3) {
     opacity: 0.8;
 }
 
-main #console li:nth-last-child(4) {
+.header #console li:nth-last-child(4) {
     opacity: 0.7;
 }
 
-main #console li:nth-last-child(5) {
+.header #console li:nth-last-child(5) {
     opacity: 0.6;
 }
 
-main #console li:nth-last-child(6) {
+.header #console li:nth-last-child(6) {
     opacity: 0.5;
 }
 
-main #console li:nth-last-child(7) {
+.header #console li:nth-last-child(7) {
     opacity: 0.4;
 }
 
-main #console li:nth-last-child(8) {
+.header #console li:nth-last-child(8) {
     opacity: 0.3;
 }
 
-main #console li:nth-last-child(n+9) {
+.header #console li:nth-last-child(n+9) {
     opacity: 0.2;
 }
 
@@ -158,43 +163,52 @@ canvas {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1;
+    z-index: -2;
 }
 
 .panel {
     display: flex;
     align-items: center;
-    padding: 20px;
+
+    /* padding: 2vh 2vw 2vh 2vw; */
     border: 2px solid rgb(5 224 5);
-    margin: 15px;
+    margin: 1vh 1vw;
     border-radius: 5px;
     transition: all 0.3s ease;
     cursor: pointer;
     box-shadow: 0 0 10px rgb(5 224 5 / 10%);
-    padding-left: 50px;
-    max-height: 200px;
+    padding-left: 3vw;
+    height: 23vh;
     text-shadow: 0 0 10px rgb(0 0 0 / 100%), 0 0 20px rgb(0 0 0 / 100%);
 }
 
 .panel:hover {
     box-shadow: 0 0 20px rgb(5 224 5 / 20%);
-    transform: translateY(-15px);
+    transform: translateY(-2vh);
 }
 
 .panel h2 {
     color: rgb(5 224 5);
     font-family: "M PLUS Code Latin", monospace;
-    margin-bottom: 15px;
+    font-size: 2vh;
+    margin-bottom: 2vh;
+}
+
+.panel h1 {
+    color: rgb(5 224 5);
+    font-size: 3.3vh;
+    margin-bottom: 1vh;
 }
 
 .logos-container {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 1vh;
 }
 
 .panel-img {
-    margin-right: 15px;
+    width: 2.6vw;
+    margin-right: 1vw;
 }
 
 
@@ -203,7 +217,16 @@ canvas {
     /* max-height: 180px;
         width: auto;
         display: block; */
+    object-fit: cover;
+    min-height: 100%;
+    height: 100%;
     width: 100%;
+
+    /* transform: translate(-50%, -50%); */
+
+    /* transform: scale(1, 100%); */
+
+    /* transform-origin: 50% 50%; */
     transition: all 0.5s ease;
     border: 1px solid rgb(5 224 5 / 50%);
     box-shadow: inset 0 0 10px rgb(5 224 5 / 20%);
@@ -211,37 +234,35 @@ canvas {
 }
 
 .panel-array-container {
+    margin-top: 10vh;
+    height: 80vh;
     display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    gap: 20px;
-
-    /* margin: 20px 0; */
-    width: 100%;
-    margin-left: 10%;
+    margin-right: 15vw;
+    margin-left: 10vw;
 }
 
 .panel-category {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 2vh 2vw;
     border: 2px solid rgb(5 224 5);
     background: rgb(0 20 0 / 20%);
     border-radius: 5px;
     transition: all 0.3s ease;
     box-shadow: 0 0 10px rgb(5 224 5 / 10%);
-    width: 30%;
-    margin: 0 10px;
+    width: 30vw;
+    margin: 0 1vw;
 }
 
 .panel-array {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-    grid-gap: 10px;
+    grid-gap: 1vw;
     justify-content: center;
-    overflow-y: auto;
+    overflow-y: hidden;
 
     /* flex-direction: column; */
     height: 75vh;
@@ -252,71 +273,42 @@ canvas {
     padding-top: 10vh;
 }
 
-.panel-array::-webkit-scrollbar {
-    width: 8px;
-}
-
-.panel-array::-webkit-scrollbar-track {
-    background: rgb(0 20 0 / 20%);
-    border-radius: 4px;
-}
-
-.panel-array::-webkit-scrollbar-thumb {
-    background-color: rgb(5 224 5);
-    border-radius: 4px;
-    border: 2px solid rgb(0 20 0 / 20%);
-}
-
 .description {
     display: flex;
-    width: 70%;
-    height: auto;
-    margin: 50px auto;
-    padding: 30px;
-    margin-bottom: auto;
-    margin-top: auto;
+    height: 80vh;
+    padding: 3vh 3vw;
     background: rgb(0 20 0 / 20%);
     border: 2px solid rgb(5 224 5);
     border-radius: 5px;
     text-align: justify;
     overflow-y: scroll;
-    max-height: 95vh;
     scrollbar-width: thin;
     scrollbar-color: rgb(5 224 5) rgb(0 20 0 / 20%);
     scroll-behavior: smooth;
-    font-size: 1.2rem;
-}
-
-.description::-webkit-scrollbar {
-    width: 8px;
-}
-
-.description::-webkit-scrollbar-track {
-    background: rgb(0 20 0 / 20%);
-    border-radius: 4px;
-}
-
-.description::-webkit-scrollbar-thumb {
-    background-color: rgb(5 224 5);
-    border-radius: 4px;
-    border: 2px solid rgb(0 20 0 / 20%);
+    font-size: 1vw;
 }
 
 .description-left {
     flex: 1;
-    padding-right: 30px;
+    padding-right: 3vw;
     border-right: 1px solid rgb(5 224 5 / 30%);
 }
 
 .description-left h1 {
-    font-size: 2.5rem;
+    font-size: 2.5vh;
     color: rgb(5 224 5);
-    margin-bottom: 20px;
+    margin-bottom: 2vh;
+}
+
+.description-left h2 {
+    font-size: 1.6vh;
+    color: rgb(5 224 5);
+    margin-bottom: 1.5vh;
 }
 
 .description-right {
     flex: 1;
-    padding-left: 30px;
+    padding-left: 3vw;
     line-height: 1.6;
 }
 
@@ -329,7 +321,7 @@ canvas {
     max-width: 100%;
     border: 1px solid rgb(5 224 5);
     border-radius: 4px;
-    margin: 15px 0;
+    margin: 1vw 0;
     transition: all 0.3s ease;
 }
 
@@ -382,7 +374,7 @@ canvas {
 }
 
 .back-button {
-    padding: 10px 20px;
+    padding: 1vh 1vw;
     margin-left: auto;
     margin-right: auto;
     width: fit-content;
@@ -395,7 +387,7 @@ canvas {
     transition: all 0.3s ease;
     font-family: "M PLUS Code Latin", monospace;
     vertical-align: middle;
-    font-size: 1rem;
+    font-size: 0.7vw;
 }
 
 .back-button:hover {
@@ -493,8 +485,10 @@ canvas {
 }
 
 .image-container {
-    width: 100%;
+    /* height: 100%; */
     height: 100%;
+    width: 100%;
+    background-color: aliceblue;
     position: absolute;
     z-index: -1;
     top: 0;

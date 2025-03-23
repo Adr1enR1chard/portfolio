@@ -234,18 +234,11 @@ export class App {
         if (this.activeWorld == 1) {
 
             // In case we are in the secondary world
-            this.renderer.setRenderTarget(null);
             this.renderer.render(this.secondWorld.scene, this.secondWorld.camera);
         } else {
-            // In case we are still in the primary world
-            // we render trough the target the second world
-            this.renderer.setRenderTarget(this.renderTarget);
-            this.renderer.render(this.secondWorld.scene, this.secondWorld.camera);
-            this.renderer.setRenderTarget(null);
-
             this.renderer.render(this.mainWorld.scene, this.mainWorld.camera);
         }
-        this.cssRenderer.render(this.secondWorld.cssScene, this.secondWorld.camera);
+        // this.cssRenderer.render(this.secondWorld.cssScene, this.secondWorld.camera);
     }
 
     private switchWorld() {
