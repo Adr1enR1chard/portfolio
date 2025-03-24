@@ -38,4 +38,11 @@ export abstract class World {
     public setActive(active: boolean) {
         this.isActive = active;
     }
+
+    public resize() {
+        if (this.camera instanceof THREE.PerspectiveCamera) {
+            this.camera.aspect = window.innerWidth / window.innerHeight;
+            this.camera.updateProjectionMatrix();
+        }
+    }
 }

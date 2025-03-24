@@ -30,13 +30,12 @@ export class MainWorld extends World {
         this.cameraOrigin = new THREE.Vector3(15.6, 3.16, 1);
         this.camera.position.set(this.cameraOrigin.x, this.cameraOrigin.y, this.cameraOrigin.z);
         this.camera.rotation.set(-2.58, 0.74, 2.69);
-        this.scene.background = null; // Supprimer le fond noir
-        // this.scene.add(backgroundSphere);
+        this.scene.background = new THREE.Color(0); // Supprimer le fond noir
 
         const outlinePass = new OutlinePass(App.instance.renderSize, this.scene, this.camera);
         outlinePass.renderToScreen = true;
         this.passes = [new RenderPass(this.scene, this.camera)];
-        App.instance.composer.passes = this.passes;
+        // App.instance.composer.passes = this.passes;
 
         // Ambient base light
         const ambientLight = new THREE.AmbientLight(new THREE.Color('white'), 0.5);
@@ -46,30 +45,8 @@ export class MainWorld extends World {
         directionalLight.position.set(5, 2, 0);
         this.root.add(directionalLight);
 
-        // RGB accent lights with increased intensity and range
-        // Create and add light helpers
-        // const createLightWithHelper = (color: string, intensity: number, distance: number, position: THREE.Vector3) => {
-        //     const light = new THREE.PointLight(new THREE.Color(color), intensity, distance);
-        //     light.position.copy(position);
-        //     this.root.add(light);
-
-        //     // const helper = new THREE.PointLightHelper(light);
-        //     // this.root.add(helper);
-
-        //     return light;
-        // };
-
-        // Adjusted positions closer to the desk
-        // createLightWithHelper('#0066ff', 2, 30, new THREE.Vector3(3, 1, 8));
-        // createLightWithHelper('#ff0066', 2, 30, new THREE.Vector3(3, 1, 6));
-        // createLightWithHelper('#9933ff', 1.5, 25, new THREE.Vector3(3, 1, 4));
-        // createLightWithHelper('#00ffff', 1, 20, new THREE.Vector3(3, 1, 2));
-        // createLightWithHelper('#ff00ff', 1, 20, new THREE.Vector3(3, 1, 0));
-        // createLightWithHelper("#ffffff", 2, 30, new THREE.Vector3(3, 2, -2));
-
-
-        const bedroom = new LoadedObject('/portfolio/meshes/desk/desk.glb', () => {
-            const monitorObj = <THREE.Mesh>bedroom.getObjectByName("monitor")?.children[0];
+        const desk = new LoadedObject('/portfolio/meshes/desk/desk.glb', () => {
+            const monitorObj = <THREE.Mesh>desk.getObjectByName("monitor")?.children[0];
             console.log(monitorObj);
             this.computerPosition = monitorObj.getWorldPosition(new THREE.Vector3());
 
@@ -82,14 +59,12 @@ export class MainWorld extends World {
                 });
             }
         });
-        bedroom.translateY(-3.6);
-        bedroom.translateZ(4);
-        bedroom.translateX(8);
-        bedroom.rotateY(Math.PI / 2)
-        bedroom.scale.multiplyScalar(2.5);
-        this.root.add(bedroom);
-
-
+        desk.translateY(-3.6);
+        desk.translateZ(4);
+        desk.translateX(8);
+        desk.rotateY(Math.PI / 2)
+        desk.scale.multiplyScalar(2.5);
+        this.root.add(desk);
     }
 
     public override animate() {

@@ -4,6 +4,7 @@ import { App } from './classes/App.ts';
 import { TypeWriter } from './classes/TypeWriter.ts';
 import { LoadingManager } from 'three';
 
+// Loading manager
 const manager = new LoadingManager();
 manager.onStart = function (url, itemsLoaded, itemsTotal) {
     console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
@@ -23,8 +24,9 @@ manager.onProgress = function (url, itemsLoaded, itemsTotal) {
 manager.onError = function (url) {
     console.log('There was an error loading ' + url);
 };
-App.instance.loadingManager = manager;
 
+// App instance
+App.instance.loadingManager = manager;
 
 const mainWorld = new MainWorld(true, window.innerWidth / window.innerHeight);
 App.instance.mainWorld = mainWorld;
@@ -41,10 +43,6 @@ App.instance.loop();
 document.addEventListener('wheel', function (ev) {
     App.instance.wheelDelta = ev.wheelDelta;
 });
-
-document.addEventListener('mousemove', App.instance.onMouseMove.bind(App.instance), false);
-
-document.addEventListener('click', App.instance.onMouseClick.bind(App.instance), false);
 
 export function switchProjectView(id) {
     App.instance.secondWorld.switchView(id);

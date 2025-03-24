@@ -164,25 +164,10 @@ export class App {
     private constructor() {
         // Main renderer of the app
         this.renderer = new THREE.WebGLRenderer({ canvas: <HTMLCanvasElement>document.getElementById('three-canvas'), antialias: true, alpha: true });
-        // Setting the renderer to the window size
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        // Setting the pixel ratio
-        this.renderer.setPixelRatio(window.innerWidth / window.innerHeight);
-        // Activate shadows
-        this.renderer.shadowMap.enabled = true;
-        this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
-        // Make render size accesible to app depencies 
-        this.renderSize = new THREE.Vector2(window.innerWidth, window.innerHeight);
-        this.renderer.setClearColor(0x000000, 0);
-        // Render target used to render different scene
-        this.renderTarget = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight);
+        this.resize();
 
         // The main composer, useful to render effects passes.
         this.composer = new EffectComposer(this.renderer, this.renderTarget);
-
-        this.cssRenderer = new CSS3DRenderer();
-        this.cssRenderer.setSize(this.renderSize.x, this.renderSize.y);
-        document.body.appendChild(this.cssRenderer.domElement);
 
         // The world the main renderer is currently rendering
         this.activeWorld = 0;
@@ -200,6 +185,11 @@ export class App {
         this.wheelDelta = 0;
         // Wheel delta from the previous frame
         this.previousWheelDelta = 0;
+
+        // Window resize event
+        window.addEventListener('resize', () => {
+            this.resize();
+        });
     }
 
     /** Main loop of the app */
@@ -232,13 +222,10 @@ export class App {
 
     private render() {
         if (this.activeWorld == 1) {
-
-            // In case we are in the secondary world
             this.renderer.render(this.secondWorld.scene, this.secondWorld.camera);
         } else {
             this.renderer.render(this.mainWorld.scene, this.mainWorld.camera);
         }
-        // this.cssRenderer.render(this.secondWorld.cssScene, this.secondWorld.camera);
     }
 
     private switchWorld() {
@@ -257,13 +244,13 @@ export class App {
         }
     }
 
-    public onMouseMove(event: MouseEvent) {
-        this.pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-        this.pointer.y = - (event.clientY / window.innerHeight) * 2 + 1;
-    }
-    public onMouseClick() {
-        if (this.secondWorld) {
-            // this.secondWorld.onMouseClick();
-        }
+    private resize() {
+        this.renderSize = new THREE.Vector2(window.innerWidth, window.innerHeight);
+        this.renderer.setSize(this.renderSize.x, this.renderSize.y);
+        this.renderer.setPixelRatio(this.renderSize.x / this.renderSize.y);
+
+        this.mainWorld?.resize();
+        this.secondWorld?.resize();
+
     }
 }
