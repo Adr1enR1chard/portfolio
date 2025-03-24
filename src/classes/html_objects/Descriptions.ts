@@ -27,12 +27,13 @@ export const Descriptions = [
 <p>Le gameplay repose sur l'exploration, la résolution d'énigmes et la gestion des ressources, avec des moments de tension et de surprise qui maintiennent le joueur en alerte. L'objectif est de créer une expérience captivante et mémorable, où chaque découverte et chaque progrès sont récompensés par une meilleure compréhension de l'intrigue et des mécanismes du jeu.</p>
                 `,
         [
-            'images/paranoia.webp'
+            'images/paranoia.gif',
+            'images/paranoia.webp',
         ],
         `
         <p>Voici une courte présentation vidéo du projet : </p>
         <video controls>
-            <source src="/portfolio/videos/paranoia.mp4" type="video/mp4" />
+            <source src="/portfolio/videos/paranoia.webm" type="video/webm" />
             Your browser does not support the video tag.
         </video>
     `),
@@ -61,7 +62,8 @@ export const Descriptions = [
 <p>Les Behaviour Trees ont été utilisés pour développer des comportements d'IA pour les ennemis, leur permettant de réagir de manière réaliste aux actions du joueur. J'ai implémenté des arbres de décision qui permettent aux ennemis de choisir entre différentes actions en fonction de la situation, comme attaquer ou se déplacer pour se mettre en position avantageuse.</p>
             `,
         [
-            'images/uecombat.webp'
+            'images/uecombat.gif',
+            'images/uecombat.webp',
         ],
         `
         <p>Voici une courte présentation vidéo du projet : </p>

@@ -3,11 +3,11 @@ export class Image extends CSS3DObject {
 
     private path: string;
 
-    constructor(path: string, scale: number = 1) {
+    constructor(path: string, scale?: number) {
         const element = document.createElement('img');
         element.src = "/portfolio/images/" + path;
-        element.width = 50 * scale;
-        element.style.height = 'auto';
+        if (scale)
+            element.style.width = 2.6 * scale + "vw";
 
         super(element);
         this.path = path;
