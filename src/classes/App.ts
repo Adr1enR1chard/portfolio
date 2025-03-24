@@ -265,7 +265,7 @@ export class App {
     }
 
     private onTouchMove(event: TouchEvent) {
-        this.wheelDelta = (this.touchOrigin - event.touches[0].clientY) * 5.0;
+        this.wheelDelta = (event.touches[0].clientY - this.touchOrigin) * 5.0;
         this.touchOrigin = event.touches[0].clientY;
     }
 
