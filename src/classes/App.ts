@@ -160,6 +160,8 @@ export class App {
         this._pointer = value;
     }
 
+    private touchOrigin: number;
+
 
     private constructor() {
         // Main renderer of the app
@@ -190,6 +192,10 @@ export class App {
         window.addEventListener('resize', () => {
             this.resize();
         });
+
+        window.addEventListener('touchstart', this.onTouchStart.bind(this));
+        window.addEventListener('touchmove', this.onTouchMove.bind(this));
+        window.addEventListener('touchend', this.onTouchEnd.bind(this));
     }
 
     /** Main loop of the app */
@@ -252,5 +258,18 @@ export class App {
         this.mainWorld?.resize();
         this.secondWorld?.resize();
 
+    }
+
+    private onTouchStart(event: TouchEvent) {
+        this.touchOrigin = event.touches[0].clientY;
+    }
+
+    private onTouchMove(event: TouchEvent) {
+        this.wheelDelta = (this.touchOrigin - event.touches[0].clientY) * 5.0;
+        this.touchOrigin = event.touches[0].clientY;
+    }
+
+    private onTouchEnd() {
+        this.touchOrigin = 0;
     }
 }

@@ -73,6 +73,7 @@ export class SecondWorld extends World {
         // this.orbitControls.update(App.instance.clock.getDelta());
 
         (this.backgroundCube.material as THREE.ShaderMaterial).uniforms.time.value = App.instance.clock.getElapsedTime();
+        (this.backgroundCube.material as THREE.ShaderMaterial).uniforms.renderSize.value = App.instance.renderSize;
 
         super.animate();
     }

@@ -17,6 +17,6 @@
   "scripts": {
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint **/*.ts && stylelint **/*.css && htmlhint **/*.html"
+    "lint": "eslint **/*.ts && stylelint **/*.css --fix && htmlhint **/*.html"
   }
 }
