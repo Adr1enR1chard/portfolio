@@ -6,7 +6,7 @@ import { LoadingManager } from 'three';
 
 // Loading manager
 const manager = new LoadingManager();
-manager.onStart = function (url, itemsLoaded, itemsTotal) {
+manager.onStart = function () {
     TypeWriter.instance.startTyping();
     TypeWriter.instance.onLoad();
 };
