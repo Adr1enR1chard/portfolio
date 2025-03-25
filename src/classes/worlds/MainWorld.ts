@@ -4,7 +4,6 @@ import { App } from '../App.ts';
 import { LoadedObject } from '../abstracts/LoadedObject.ts';
 import { lerp } from 'three/src/math/MathUtils.js';
 import { BackgroundShader } from '../../shaders/BackgroundShader.ts';
-import { CyberLinesShader } from '../../shaders/CyberLinesShader.ts';
 // import GUI from 'three/examples/jsm/libs/lil-gui.module.min.js';
 
 export class MainWorld extends World {
@@ -37,17 +36,6 @@ export class MainWorld extends World {
 
         // this.passes = [ssrPass, antialiasPass, new OutputPass()];
         // App.instance.composer.passes = this.passes;
-
-
-        this.backgroundCube = new THREE.Mesh(
-            new THREE.SphereGeometry(1000, 1000, 1000),
-            new THREE.ShaderMaterial({
-                uniforms: CyberLinesShader.uniforms,
-                vertexShader: CyberLinesShader.vertexShader,
-                fragmentShader: CyberLinesShader.fragmentShader,
-                side: THREE.BackSide
-            }));
-        // this.scene.add(this.backgroundCube);
 
         // Ambient base light
         const ambientLight = new THREE.AmbientLight(new THREE.Color('white'), 0.5);
