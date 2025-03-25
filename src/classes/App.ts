@@ -251,14 +251,14 @@ export class App {
         if (this.animationTime >= 0.85 && this.activeWorld != 1) {
             this.activeWorld = 1;
             // Write a message telling we enter the computer
-            TypeWriter.instance.pushNewMessage(new TypeMessage("Entering the computer...", 100, 20));
+            TypeWriter.instance.pushNewMessage(new TypeMessage("Computer entry...", 100, 20));
             TypeWriter.instance.pushNewMessage(new TypeMessage("Please select a project", 100, 20));
 
             this.secondWorld.currentView = 0;
             this.secondWorld.showPanels();
         } else if (this.animationTime < 0.85 && this.activeWorld != 0) {
             this.activeWorld = 0;
-            TypeWriter.instance.pushNewMessage(new TypeMessage("Going back to the real world...", 1000, 20));
+            TypeWriter.instance.pushNewMessage(new TypeMessage("Back to the real world...", 1000, 20));
             this.secondWorld.hidePanels();
             this.secondWorld.hideDescription();
         }
