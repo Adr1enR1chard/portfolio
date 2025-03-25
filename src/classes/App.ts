@@ -162,14 +162,23 @@ export class App {
 
     private touchOrigin: number;
 
+    private _mainElement: HTMLElement;
+    public get mainElement(): HTMLElement {
+        return this._mainElement;
+    }
+    public set mainElement(value: HTMLElement) {
+        this._mainElement = value;
+    }
+
 
     private constructor() {
         // Main renderer of the app
-        this.renderer = new THREE.WebGLRenderer({ canvas: <HTMLCanvasElement>document.getElementById('three-canvas'), antialias: true, alpha: true });
+        this.renderer = new THREE.WebGLRenderer({ canvas: <HTMLElement>document.getElementById('three-canvas'), antialias: true, alpha: true });
+        this.renderer.shadowMap.enabled = true;
+        this.renderer.shadowMap.type = THREE.PCFShadowMap;
         this.resize();
-
         // The main composer, useful to render effects passes.
-        this.composer = new EffectComposer(this.renderer, this.renderTarget);
+        this.composer = new EffectComposer(this.renderer);
 
         // The world the main renderer is currently rendering
         this.activeWorld = 0;
@@ -187,6 +196,8 @@ export class App {
         this.wheelDelta = 0;
         // Wheel delta from the previous frame
         this.previousWheelDelta = 0;
+
+        this.mainElement = document.querySelector('.main-body') as HTMLElement;
 
         // Window resize event
         window.addEventListener('resize', () => {
@@ -231,6 +242,7 @@ export class App {
             this.renderer.render(this.secondWorld.scene, this.secondWorld.camera);
         } else {
             this.renderer.render(this.mainWorld.scene, this.mainWorld.camera);
+            // this.composer.render();
         }
     }
 
@@ -240,13 +252,15 @@ export class App {
             this.activeWorld = 1;
             // Write a message telling we enter the computer
             TypeWriter.instance.pushNewMessage(new TypeMessage("Entering the computer...", 100, 20));
-            if (this.secondWorld.currentView == 0) {
-                TypeWriter.instance.pushNewMessage(new TypeMessage("Please select a project", 100, 20));
-            }
+            TypeWriter.instance.pushNewMessage(new TypeMessage("Please select a project", 100, 20));
+
+            this.secondWorld.currentView = 0;
+            this.secondWorld.showPanels();
         } else if (this.animationTime < 0.85 && this.activeWorld != 0) {
             this.activeWorld = 0;
             TypeWriter.instance.pushNewMessage(new TypeMessage("Going back to the real world...", 1000, 20));
-
+            this.secondWorld.hidePanels();
+            this.secondWorld.hideDescription();
         }
     }
 

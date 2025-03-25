@@ -91,7 +91,7 @@ main {
     text-decoration: none;
     border-bottom: 1px dashed rgb(5 224 5);
     padding-bottom: 2px;
-    transition: all 0.2s ease;
+    transition: all 0.2s ease, visibility 0s;
 }
 
 
@@ -101,7 +101,7 @@ main {
     border: 1px solid rgb(5 224 5);
     border-radius: 3px;
     padding: 0.5vh 0.5vw;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, visibility 0s;
 }
 
 .description a:hover {
@@ -230,7 +230,7 @@ canvas {
     border: 2px solid rgb(5 224 5);
     margin: 1vh 1vw;
     border-radius: 5px;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, visibility 0s;
     cursor: pointer;
     box-shadow: 0 0 10px rgb(5 224 5 / 10%);
     padding-left: 3vw;
@@ -273,7 +273,7 @@ canvas {
     min-height: 100%;
     height: 100%;
     width: 100%;
-    transition: all 0.5s ease;
+    transition: all 0.5s ease, visibility 0s;
     border: 1px solid rgb(5 224 5 / 50%);
     box-shadow: inset 0 0 10px rgb(5 224 5 / 20%);
 
@@ -287,6 +287,9 @@ canvas {
     align-items: center;
     margin-right: 15vw;
     margin-left: 10vw;
+
+    /* animation: visibilty 0.3s ease-in-out; */
+    transition: opacity 0.3s ease-in-out, visibility 0.3s;
 }
 
 .panel-category {
@@ -297,7 +300,7 @@ canvas {
     border: 2px solid rgb(5 224 5);
     background: rgb(0 20 0 / 20%);
     border-radius: 5px;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, visibility 0s;
     box-shadow: 0 0 10px rgb(5 224 5 / 10%);
     width: 30vw;
     margin: 0 1vw;
@@ -333,7 +336,15 @@ canvas {
     scrollbar-color: rgb(5 224 5) rgb(0 20 0 / 20%);
     scroll-behavior: smooth;
     font-size: 1.7vh;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s;
 }
+
+/* Quand une description est visibility:hidden */
+.description.hidden {
+    display: none;
+    background-color: aliceblue;
+}
+
 
 .description-left {
     flex: 1;
@@ -369,7 +380,7 @@ canvas {
     border: 1px solid rgb(5 224 5);
     border-radius: 4px;
     margin: 1vh 0;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, visibility 0s;
 }
 
 .description img:hover {
@@ -396,7 +407,7 @@ canvas {
     border: 2px solid rgb(5 224 5);
     border-radius: 5px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, visibility 0s;
     font-family: "M PLUS Code Latin", monospace;
     vertical-align: middle;
     font-size: 0.7vw;
@@ -473,7 +484,7 @@ canvas {
     justify-content: center;
     align-items: center;
     font-size: 1.8vh;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, visibility 0s;
 }
 
 .carousel-nav:hover {
@@ -504,7 +515,7 @@ canvas {
     z-index: -1;
     top: 0;
     left: 0;
-    transition: all 0.4s ease;
+    transition: all 0.4s ease, visibility 0s;
     overflow: hidden;
     filter: grayscale(1) blur(2px);
 }

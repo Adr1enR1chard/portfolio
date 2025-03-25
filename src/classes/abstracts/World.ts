@@ -13,7 +13,7 @@ export abstract class World {
     constructor(active: boolean, aspect: number | undefined) {
         this.scene = new THREE.Scene();
         this.cssScene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(70, aspect);
+        this.camera = new THREE.PerspectiveCamera(70, aspect, 0.1, 2000);
         this.root = new THREE.Object3D();
         this.passes = new Array<Pass>();
 

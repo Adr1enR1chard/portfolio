@@ -46,7 +46,7 @@ export const BackgroundShader = {
         }
         
         void main() {
-            vec2 uv = (gl_FragCoord.xy*vec2(0.5)) / renderSize.xy;
+            vec2 uv = (gl_FragCoord.xy*vec2(0.5)-0.5) / renderSize.xy;
 
             float t = float(total_phases);
             float effective_wave_amp = min(wave_amp, 0.5 / t);
@@ -61,6 +61,8 @@ export const BackgroundShader = {
             
             vec3 color = mix(top_color, bottom_color, i / (t - 1.0));
             gl_FragColor = vec4(color, 1.0);
+            #include <tonemapping_fragment>
+            #include <color_fragment>
         }
     `
 };

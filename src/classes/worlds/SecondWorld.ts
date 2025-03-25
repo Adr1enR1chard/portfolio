@@ -47,30 +47,14 @@ export class SecondWorld extends World {
 
         this.panelArray = new PanelArray(Panels);
         main?.appendChild(this.panelArray.element);
+        this.hidePanels();
 
 
         this.description = Descriptions[0];
-        main?.appendChild(this.description.element);
     }
 
     public override animate() {
-
         App.instance.animationTime = Math.min(App.instance.animationTime, 1);
-
-        const scale = Math.max(0, (App.instance.animationTime - 0.85) / 0.15) * 100
-        if (this.currentView == 0) {
-            this.panelArray.element.style.scale = scale.toString() + "%";
-            this.description.element.style.scale = "0";
-
-        } else {
-            this.panelArray.element.style.scale = "0";
-            this.description.element.style.scale = scale.toString() + "%";
-        }
-
-        // this.orbitControls.target.set(0, 0, 0);
-        this.camera.position.lerp(new THREE.Vector3(0, 0, 800), 0.01);
-
-        // this.orbitControls.update(App.instance.clock.getDelta());
 
         (this.backgroundCube.material as THREE.ShaderMaterial).uniforms.time.value = App.instance.clock.getElapsedTime();
         (this.backgroundCube.material as THREE.ShaderMaterial).uniforms.renderSize.value = App.instance.renderSize;
@@ -81,14 +65,17 @@ export class SecondWorld extends World {
     public switchView(id: number) {
         this.currentView = (this.currentView + 1) % 2;
         if (this.currentView == 0) {
+            this.showPanels();
+            this.hideDescription(true);
             TypeWriter.instance.pushNewMessage(new TypeMessage("Please select a project", 100, 20));
         } else {
-            const main = document.querySelector('.main-body');
-            this.description.element.style.scale = "0";
-            main?.removeChild(this.description.element);
+            this.hidePanels();
+
             this.description = Descriptions[id];
-            main?.appendChild(this.description.element);
+            this.showDescription();
+
             TypeWriter.instance.pushNewMessage(new TypeMessage("Opening " + this.description.title + "...", 100, 20));
+
         }
     }
 
@@ -98,5 +85,28 @@ export class SecondWorld extends World {
 
     public prevSlide() {
         this.description.prevSlide();
+    }
+
+    public showPanels() {
+        this.panelArray.element.style.visibility = "visible";
+        this.panelArray.element.style.opacity = "1";
+    }
+
+    public hidePanels() {
+        this.panelArray.element.style.visibility = "hidden";
+        this.panelArray.element.style.opacity = "0";
+    }
+
+    public showDescription() {
+        this.description.element.style.visibility = "visible";
+        this.description.element.style.opacity = "1";
+        App.instance.mainElement.appendChild(this.description.element);
+    }
+
+    public hideDescription(remove: boolean = false) {
+        this.description.element.style.visibility = "hidden";
+        this.description.element.style.opacity = "0";
+        if (remove && App.instance.mainElement.contains(this.description.element))
+            App.instance.mainElement.removeChild(this.description.element);
     }
 }

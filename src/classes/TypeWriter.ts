@@ -27,7 +27,6 @@ export class TypeWriter {
     }
 
     public async startTyping() {
-        console.log(this.isTyping);
         if (this.isTyping) {
             return;
         }

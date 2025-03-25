@@ -50,7 +50,7 @@ export class LoadedObject extends THREE.Object3D {
         // Adding the laptop as child
         this.add(gltf.scene);
 
-        // this.enableShadows(this);
+        this.enableShadows(this);
 
         // Animation loading
         this.animations = gltf.animations;
@@ -75,6 +75,9 @@ export class LoadedObject extends THREE.Object3D {
         object.castShadow = true;
         object.receiveShadow = true;
         object.children.forEach(object => {
+            if (object.children.length > 0) {
+                this.enableShadows(object);
+            };
             this.enableShadows(object);
         });
     }
