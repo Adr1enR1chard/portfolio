@@ -13,8 +13,11 @@ export const BackgroundShader = {
         total_phases: { value: 10 }
     },
     vertexShader: `
+        varying vec2 vUv;
+
         void main() {
             gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            vUv = uv;
         }
     `,
     fragmentShader: `

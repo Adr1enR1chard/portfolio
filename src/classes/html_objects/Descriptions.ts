@@ -108,4 +108,15 @@ export const Descriptions = [
             'images/footprint.webp'
         ],
         `<p>Vous pourrez retrouver le projet sur <a href="https://github.com/Adr1enR1chard/footprint-trail" target="_blank">mon GitHub</a></p>`),
+    new Description(
+        "MyGreenGrenoble",
+        "Green itinerary in Grenoble",
+        `
+            <p>MyGreenGrenoble est une application web qui permet de trouver le meilleur itinéraire pour se déplacer à Grenoble en utilisant les transports en commun, la marche ou le vélo. L'application utilise l'API de la ville de Grenoble pour récupérer les données sur les transports en commun et les itinéraires piétons et cyclistes.</p>
+            <p>Ce projet m'a permis de mettre en pratique mes compétences en développement web et de travailler sur un projet concret qui a un impact positif sur l'environnement et la mobilité urbaine.</p>
+        `,
+        [
+            'images/mygreengrenoble.png',
+        ],
+        `Le lien vers l'application <a href="https://ed-dc.github.io/Hackathon/" target="_blank">My Green Grenoble</a>`),
 ]

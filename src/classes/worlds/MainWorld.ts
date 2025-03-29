@@ -54,7 +54,7 @@ export class MainWorld extends World {
         // const gui = new GUI();
 
         const pointLight = new THREE.PointLight(new THREE.Color('green'), 1);
-        pointLight.position.set(5.8, -2.1, 8.7);
+        pointLight.position.set(6.6, -2.1, 8.1);
         this.scene.add(pointLight);
 
         const headphonePointLight = new THREE.PointLight(new THREE.Color('green'), 1);

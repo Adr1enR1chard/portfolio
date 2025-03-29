@@ -1,26 +1,23 @@
 import * as THREE from 'three';
 import { World } from '../abstracts/World.ts'
-import { OrbitControls, OutlinePass, OutputPass, RenderPass } from 'three/examples/jsm/Addons.js';
-import { Panel } from '../html_objects/Panel.ts';
+import { OrbitControls, OutputPass, RenderPass } from 'three/examples/jsm/Addons.js';
 import { App } from '../App.ts';
 import { PanelArray } from '../html_objects/PanelArray.ts';
 import { Description } from '../html_objects/Description.ts';
 import { TypeWriter } from '../TypeWriter.ts';
 import { TypeMessage } from '../TypeMessage.ts';
-import { Panels } from '../html_objects/Panels.ts';
+import { GameDevPanels } from '../html_objects/GameDevPanels.ts';
 import { Descriptions } from '../html_objects/Descriptions.ts';
 import { BackgroundShader } from '../../shaders/BackgroundShader.ts';
+import { ITPanels } from '../html_objects/ITPanels.ts';
 
 export class SecondWorld extends World {
-    private circleRadius = 5;
-    private raycaster = new THREE.Raycaster();
-    private outlinePass: OutlinePass;
-
     private panelArray: PanelArray;
-    private panel: Panel;
+    private panelArrays: Array<PanelArray>;
     orbitControls: OrbitControls;
     description: Description;
     public currentView = 0;
+    private currentPanelArray = 0;
 
     private backgroundCube: THREE.Mesh;
 
@@ -45,9 +42,19 @@ export class SecondWorld extends World {
 
         const main = document.querySelector('.main-body');
 
-        this.panelArray = new PanelArray(Panels);
-        main?.appendChild(this.panelArray.element);
+        const itPanels = new PanelArray(ITPanels, "Computer science");
+        main?.appendChild(itPanels.element);
+        this.panelArray = itPanels;
         this.hidePanels();
+
+        const gameDevPanels = new PanelArray(GameDevPanels, "Game development");
+        main?.appendChild(gameDevPanels.element);
+        this.panelArray = gameDevPanels;
+        this.hidePanels();
+
+        this.panelArrays = new Array<PanelArray>();
+        this.panelArrays.push(gameDevPanels);
+        this.panelArrays.push(itPanels);
 
 
         this.description = Descriptions[0];
@@ -109,4 +116,22 @@ export class SecondWorld extends World {
         if (remove && App.instance.mainElement.contains(this.description.element))
             App.instance.mainElement.removeChild(this.description.element);
     }
+
+    public nextPanelArray() {
+        this.hidePanels();
+        this.currentPanelArray = (this.currentPanelArray + 1) % this.panelArrays.length;
+
+        this.panelArray = this.panelArrays[this.currentPanelArray];
+        this.showPanels();
+    }
+
+    public prevPanelArray() {
+
+        this.hidePanels();
+        this.currentPanelArray = (this.panelArrays.length + this.currentPanelArray - 1) % this.panelArrays.length;
+
+        this.panelArray = this.panelArrays[this.currentPanelArray];
+        this.showPanels();
+    }
+
 }
