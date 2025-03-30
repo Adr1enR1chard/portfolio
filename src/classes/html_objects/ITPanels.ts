@@ -6,7 +6,7 @@ export const ITPanels = [
     new Panel(
         GameDevPanels.length,
         "MyGreenGrenoble",
-        "Green itinerary in Grenoble",
+        "Green itinerary in Grenoble - 2025",
         [
             new Image("html.png", 1.1),
             new Image("css.png", 1),

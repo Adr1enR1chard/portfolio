@@ -5,7 +5,7 @@ export const GameDevPanels = [
     new Panel(
         0,
         "Slade",
-        "Android arcade game",
+        "Android arcade game - 2020",
         [
             new Image("unity.webp", 1),
             new Image("csharp.webp", 1.2),
@@ -15,7 +15,7 @@ export const GameDevPanels = [
     new Panel(
         1,
         "Project: Paranoïa",
-        "Horror game concept",
+        "Horror game concept - 2024",
         [
             new Image("ue5.webp", 1),
             new Image("fab.webp", 1),
@@ -26,7 +26,7 @@ export const GameDevPanels = [
     new Panel(
         2,
         "Light and Darkness",
-        "2D Platformer",
+        "2D Platformer - 2021",
         [
             new Image("unity.webp", 1),
             new Image("csharp.webp", 1.2),
@@ -35,7 +35,7 @@ export const GameDevPanels = [
     new Panel(
         3,
         "UE5 Combat System",
-        "Unreal Engine 5 combat system",
+        "Unreal Engine 5 combat system - 2025",
         [
             new Image("ue5.webp", 1),
             new Image("fab.webp", 1),
@@ -44,7 +44,7 @@ export const GameDevPanels = [
     new Panel(
         4,
         "Footprint Trail",
-        "Godot Plugin",
+        "Godot Plugin - 2023",
         [
             new Image("godot.webp", 1)
         ],
