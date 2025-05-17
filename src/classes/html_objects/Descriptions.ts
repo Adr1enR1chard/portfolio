@@ -2,6 +2,18 @@ import { Description } from "./Description";
 
 export const Descriptions = [
     new Description(
+        "Mutiny",
+        "Rogue-lite card game",
+        `
+            <p>Mutiny est un jeu en cours de développement qui mélange des éléments de rogue-lite et de jeux de cartes. Les joueurs devront construire leur deck et faire face à des ennemis de plus en plus puissants.</p>
+        `,
+        [
+            'images/mutiny1.png',
+            'images/mutiny2.png',
+            'images/mutiny3.png'
+        ],
+    ),
+    new Description(
         "Slade",
         "Android arcade game",
         `

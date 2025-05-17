@@ -4,6 +4,15 @@ import { Image } from "./Image";
 export const GameDevPanels = [
     new Panel(
         0,
+        "Mutiny",
+        "Rogue-lite card game - In Progress",
+        [
+            new Image("godot.webp", 1),
+            new Image("csharp.webp", 1.2),
+        ],
+        new Image("mutiny1.png")),
+    new Panel(
+        1,
         "Slade",
         "Android arcade game - 2020",
         [
@@ -13,7 +22,7 @@ export const GameDevPanels = [
         ],
         new Image("slade.webp")),
     new Panel(
-        1,
+        2,
         "Project: Paranoïa",
         "Horror game concept - 2024",
         [
@@ -24,7 +33,7 @@ export const GameDevPanels = [
         new Image("paranoia.gif")
     ),
     new Panel(
-        2,
+        3,
         "Light and Darkness",
         "2D Platformer - 2021",
         [
@@ -33,7 +42,7 @@ export const GameDevPanels = [
         ],
         new Image("light.gif")),
     new Panel(
-        3,
+        4,
         "UE5 Combat System",
         "Unreal Engine 5 combat system - 2025",
         [
@@ -42,13 +51,11 @@ export const GameDevPanels = [
         ],
         new Image("uecombat.gif")),
     new Panel(
-        4,
+        5,
         "Footprint Trail",
         "Godot Plugin - 2023",
         [
             new Image("godot.webp", 1)
         ],
         new Image("footprint.webp")),
-
-
 ]
