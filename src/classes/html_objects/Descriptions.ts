@@ -8,6 +8,7 @@ export const Descriptions = [
             <p>Mutiny est un jeu en cours de développement qui mélange des éléments de rogue-lite et de jeux de cartes. Les joueurs devront construire leur deck et faire face à des ennemis de plus en plus puissants.</p>
             <p>Vous trouverez une démo jouable de Mutiny sur itch.io</p>
             <iframe frameborder="0" src="https://itch.io/embed/3608344?bg_color=d5ba8b&amp;fg_color=4a2c00&amp;link_color=885100&amp;border_color=735529" width="552" height="167"><a href="https://adr1enr1chard.itch.io/mutiny">Mutiny - DEMO by Adrien Richard</a></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/7gPfb61GgcE?si=F0kA4Peu4Fj4tRXk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         `,
         [
             'images/mutiny1.png',

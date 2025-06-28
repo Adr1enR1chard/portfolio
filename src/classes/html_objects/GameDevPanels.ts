@@ -10,7 +10,7 @@ export const GameDevPanels = [
             new Image("godot.webp", 1),
             new Image("csharp.webp", 1.2),
         ],
-        new Image("mutiny1.png")),
+        new Image("mutiny.gif")),
     new Panel(
         1,
         "Slade",

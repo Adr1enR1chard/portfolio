@@ -2,9 +2,9 @@ body {
     margin: 0;
     overflow: hidden;
     font-family: "M PLUS Code Latin", monospace;
-    color: rgb(5 224 5);
-    background: rgb(0 0 0);
-    background: linear-gradient(90deg, rgb(0 0 0 / 100%) 0%, rgb(10 10 10 / 100%) 35%, rgb(30 30 30 / 100%) 100%);
+    color: #f5f5f5;
+    background: #0a0a0a;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 35%, #2a2a2a 100%);
 }
 
 .warning {
@@ -16,9 +16,9 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgb(0 0 0 / 90%);
+    background-color: rgba(10, 10, 10, 0.95);
     z-index: 1000;
-    color: rgb(5 224 5);
+    color: #ffffff;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -87,27 +87,27 @@ main {
 
 /* Link styles */
 .description a {
-    color: rgb(5 224 5);
+    color: #ffffff;
     text-decoration: none;
-    border-bottom: 1px dashed rgb(5 224 5);
+    border-bottom: 1px dashed #cccccc;
     padding-bottom: 2px;
     transition: all 0.2s ease, visibility 0s;
 }
 
 
 .about-links a {
-    color: rgb(5 224 5);
+    color: #ffffff;
     text-decoration: none;
-    border: 1px solid rgb(5 224 5);
+    border: 1px solid #cccccc;
     border-radius: 3px;
     padding: 0.5vh 0.5vw;
     transition: all 0.3s ease, visibility 0s;
 }
 
 .description a:hover {
-    color: rgb(100 255 100);
-    border-bottom: 1px solid rgb(100 255 100);
-    text-shadow: 0 0 5px rgb(5 224 5 / 50%);
+    color: #cccccc;
+    border-bottom: 1px solid #cccccc;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
 /* About section styling */
@@ -119,17 +119,17 @@ main {
     transform: translateY(-50%);
 
     /* Center vertically */
-    background: rgb(0 20 0 / 20%);
+    background: rgba(42, 42, 42, 0.8);
     padding: 1vw;
-    border: 2px solid rgb(5 224 5);
+    border: 2px solid #cccccc;
     border-radius: 5px;
     z-index: 10;
     font-size: 0.8vw;
-    box-shadow: 0 0 10px rgb(5 224 5 / 10%);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .about-content h3 {
-    color: rgb(5 224 5);
+    color: #ffffff;
     margin-top: 0;
     margin-bottom: 1vh;
     font-size: 1vw;
@@ -142,8 +142,8 @@ main {
 }
 
 .about-links a:hover {
-    background: rgb(5 224 5 / 20%);
-    box-shadow: 0 0 8px rgb(5 224 5 / 30%);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
 }
 
@@ -210,7 +210,7 @@ li::marker {
 }
 
 #console h3 {
-    color: green;
+    color: #ffffff;
 }
 
 canvas {
@@ -227,31 +227,33 @@ canvas {
     align-items: center;
 
     /* padding: 2vh 2vw 2vh 2vw; */
-    border: 2px solid rgb(5 224 5);
+    border: 2px solid #cccccc;
     margin: 1vh 1vw;
-    border-radius: 5px;
+    border-radius: 8px;
     transition: all 0.3s ease, visibility 0s;
     cursor: pointer;
-    box-shadow: 0 0 10px rgb(5 224 5 / 10%);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     padding-left: 3vw;
     height: 23vh;
-    text-shadow: 0 0 10px rgb(0 0 0 / 100%), 0 0 20px rgb(0 0 0 / 100%);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.6);
+    background: rgba(42, 42, 42, 0.5);
 }
 
 .panel:hover {
-    box-shadow: 0 0 20px rgb(5 224 5 / 20%);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
     transform: translateY(-2vh);
+    background: rgba(42, 42, 42, 0.7);
 }
 
 .panel h2 {
-    color: rgb(5 224 5);
+    color: #cccccc;
     font-family: "M PLUS Code Latin", monospace;
     font-size: 1vw;
     margin-bottom: 2vh;
 }
 
 .panel h1 {
-    color: rgb(5 224 5);
+    color: #ffffff;
     font-size: 1.5vw;
     margin-bottom: 1vh;
 }
@@ -274,8 +276,8 @@ canvas {
     height: 100%;
     width: 100%;
     transition: all 0.5s ease, visibility 0s;
-    border: 1px solid rgb(5 224 5 / 50%);
-    box-shadow: inset 0 0 10px rgb(5 224 5 / 20%);
+    border: 1px solid rgba(204, 204, 204, 0.3);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
 
 }
 
@@ -297,11 +299,11 @@ canvas {
     flex-direction: column;
     align-items: center;
     padding: 2vh 2vw;
-    border: 2px solid rgb(5 224 5);
-    background: rgb(0 20 0 / 20%);
-    border-radius: 5px;
+    border: 2px solid #cccccc;
+    background: rgba(42, 42, 42, 0.6);
+    border-radius: 8px;
     transition: all 0.3s ease, visibility 0s;
-    box-shadow: 0 0 10px rgb(5 224 5 / 10%);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     width: 30vw;
     margin: 0 1vw;
     font-size: 1.5vw;
@@ -334,13 +336,13 @@ canvas {
     display: flex;
     height: 80vh;
     padding: 3vh 3vw;
-    background: rgb(0 20 0 / 20%);
-    border: 2px solid rgb(5 224 5);
-    border-radius: 5px;
+    background: rgba(42, 42, 42, 0.8);
+    border: 2px solid #cccccc;
+    border-radius: 8px;
     text-align: justify;
     overflow-y: scroll;
     scrollbar-width: thin;
-    scrollbar-color: rgb(5 224 5) rgb(0 20 0 / 20%);
+    scrollbar-color: #cccccc rgba(42, 42, 42, 0.8);
     scroll-behavior: smooth;
     font-size: 1.7vh;
     transition: opacity 0.3s ease-in-out, visibility 0.3s;
@@ -356,18 +358,18 @@ canvas {
 .description-left {
     flex: 1;
     padding-right: 3vw;
-    border-right: 1px solid rgb(5 224 5 / 30%);
+    border-right: 1px solid rgba(204, 204, 204, 0.3);
 }
 
 .description-left h1 {
     font-size: 2.5vh;
-    color: rgb(5 224 5);
+    color: #ffffff;
     margin-bottom: 2vh;
 }
 
 .description-left h2 {
     font-size: 1.6vh;
-    color: rgb(5 224 5);
+    color: #cccccc;
     margin-bottom: 1.5vh;
 }
 
@@ -384,14 +386,14 @@ canvas {
 /* Image styles */
 .description img {
     max-width: 100%;
-    border: 1px solid rgb(5 224 5);
-    border-radius: 4px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
     margin: 1vh 0;
     transition: all 0.3s ease, visibility 0s;
 }
 
 .description img:hover {
-    box-shadow: 0 0 15px rgb(5 224 5 / 30%);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
 }
 
 .description-header {
@@ -409,10 +411,10 @@ canvas {
     margin-right: auto;
     width: fit-content;
     height: fit-content;
-    background: rgb(0 20 0 / 20%);
-    color: rgb(5 224 5);
-    border: 2px solid rgb(5 224 5);
-    border-radius: 5px;
+    background: rgba(42, 42, 42, 0.8);
+    color: #ffffff;
+    border: 2px solid #cccccc;
+    border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s ease, visibility 0s;
     font-family: "M PLUS Code Latin", monospace;
@@ -421,26 +423,27 @@ canvas {
 }
 
 .back-button:hover {
-    background: rgb(0 40 0 / 30%);
-    box-shadow: 0 0 20px rgb(5 224 5 / 20%);
+    background: rgba(42, 42, 42, 1);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
     transform: translateY(-2px);
 }
 
 .typing::after {
     content: '';
-    border-right: 2px solid rgb(5 224 5);
+    border-right: 2px solid #ffffff;
     animation: blink 0.75s step-end infinite;
     margin-left: 2px;
 }
 
 @keyframes blink {
+
     0%,
     100% {
         border-color: transparent
     }
 
     50% {
-        border-color: rgb(5 224 5)
+        border-color: #ffffff
     }
 }
 
@@ -478,9 +481,9 @@ canvas {
 .panels-nav {
     width: 2vw;
     height: 2vw;
-    background: rgb(0 20 0 / 60%);
-    color: rgb(5 224 5);
-    border: 1px solid rgb(5 224 5);
+    background: rgba(42, 42, 42, 0.8);
+    color: #ffffff;
+    border: 1px solid #cccccc;
     border-radius: 50%;
     cursor: pointer;
     z-index: 2;
@@ -497,9 +500,9 @@ canvas {
     transform: translateY(-50%);
     width: 2vw;
     height: 2vw;
-    background: rgb(0 20 0 / 60%);
-    color: rgb(5 224 5);
-    border: 1px solid rgb(5 224 5);
+    background: rgba(42, 42, 42, 0.8);
+    color: #ffffff;
+    border: 1px solid #cccccc;
     border-radius: 50%;
     cursor: pointer;
     z-index: 2;
@@ -512,8 +515,8 @@ canvas {
 
 .carousel-nav:hover,
 .panels-nav:hover {
-    background: rgb(5 224 5 / 20%);
-    box-shadow: 0 0 10px rgb(5 224 5 / 30%);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
 
 .carousel-nav.prev {
@@ -534,16 +537,16 @@ canvas {
     /* height: 100%; */
     height: 100%;
     width: 100%;
-    background-color: aliceblue;
+    background-color: #1a1a1a;
     position: absolute;
     z-index: -1;
     top: 0;
     left: 0;
     transition: all 0.4s ease, visibility 0s;
     overflow: hidden;
-    filter: grayscale(1) blur(2px);
+    filter: grayscale(0.8) blur(1px) brightness(0.5);
 }
 
 .panel:hover>.image-container {
-    filter: grayscale(0);
+    filter: grayscale(0.2) brightness(1);
 }
