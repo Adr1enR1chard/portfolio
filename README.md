@@ -1,6 +1,6 @@
 # Portfolio d'Adrien Richard
 
-Bienvenue sur le dépôt de mon portfolio personnel, actuellement en cours de développement. Ce projet vise à présenter mes compétences et réalisations à travers une expérience interactive en 3D.
+Bienvenue sur le dépôt de mon portfolio personnel, disponible en ligne : https://adr1enr1chard.github.io/portfolio. Ce projet vise à présenter mes compétences et réalisations à travers une expérience interactive en 3D.
 
 ## Table des matières
 
