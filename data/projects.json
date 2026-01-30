@@ -57,7 +57,7 @@
             "media": [
                 {
                     "type": "video",
-                    "url": "../assets/projects/project-paranoia/demo.webm",
+                    "url": "assets/projects/project-paranoia/demo.webm",
                     "caption": "Gameplay demo showing escape room mechanics and atmosphere"
                 }
             ],
