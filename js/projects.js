@@ -19,7 +19,7 @@ async function loadProjectDetail() {
     }
 
     try {
-        const response = await fetch('../data/projects.json');
+        const response = await fetch('data/projects.json');
         const data = await response.json();
         const project = data.projects.find(p => p.id === projectId);
 
