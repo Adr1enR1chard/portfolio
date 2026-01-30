@@ -1,15 +1,15 @@
-# Game Developer Portfolio
+# Portfolio - Game Developer & 3D Specialist
 
-A modern, responsive portfolio website designed for game developers and 3D specialists. Built with HTML, CSS, and JavaScript, optimized for GitHub Pages deployment.
+A modern, responsive portfolio website showcasing game development and 3D graphics work. Built with HTML, CSS, and JavaScript, optimized for GitHub Pages deployment.
 
 ## 🚀 Features
 
 - **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
 - **Data-Driven Architecture**: Easy content management through JSON files
-- **Project Showcase**: Dedicated pages for each project with images, videos, and detailed descriptions
-- **Professional Timeline**: Display your work experience and academic background
+- **Project Timeline**: Chronological project showcase with images, videos, and detailed descriptions
+- **Professional Timeline**: Display work experience and academic background
 - **Skills Section**: Organized skill categories with visual tags
-- **GitHub Pages Ready**: No build process required, deploy directly to GitHub Pages
+- **GitHub Pages Ready**: No build process required
 
 ## 📁 Project Structure
 
@@ -34,18 +34,18 @@ Portfolio/
 └── README.md
 ```
 
-## 🛠️ Setup Instructions
+## 🛠️ Managing Content
 
-### 1. Personal Information
+### Personal Information
 
-Edit `index.html` to customize:
-- Line 9: Update page title
-- Line 18: Replace "Your Name" with your name
-- Line 48: Update hero title and subtitle
-- Line 60-63: Update about section text
-- Lines 111-128: Update contact links (email, GitHub, LinkedIn)
+Edit `index.html` to update:
+- Line 9: Page title
+- Line 18: Your name in navigation
+- Line 48: Hero title and subtitle
+- Line 60-63: About section text
+- Lines 111-128: Contact links (email, GitHub, LinkedIn)
 
-### 2. Adding Professional Experience
+### Adding Professional Experience
 
 Edit `data/experiences.json` in the `"professional"` array:
 
@@ -59,7 +59,7 @@ Edit `data/experiences.json` in the `"professional"` array:
 }
 ```
 
-### 3. Adding Academic Background
+### Adding Academic Background
 
 Edit `data/experiences.json` in the `"academic"` array:
 
@@ -73,7 +73,7 @@ Edit `data/experiences.json` in the `"academic"` array:
 }
 ```
 
-### 4. Adding Skills
+### Adding Skills
 
 Edit `data/skills.json` to add or modify skill categories:
 
@@ -87,7 +87,7 @@ Edit `data/skills.json` to add or modify skill categories:
 
 Available icons: 🎮 🎨 💻 🔧 🕹️ ⚙️ or any emoji
 
-### 5. Adding Projects
+### Adding Projects
 
 #### Step 1: Add Project Data
 
@@ -153,7 +153,7 @@ Edit `data/projects.json`:
 - **Videos**: Local MP4 videos with controls
 - **YouTube**: Embedded YouTube videos (just provide the video ID)
 
-### 6. Customizing Colors
+### Customizing Colors
 
 Edit CSS variables in `css/style.css` (lines 1-9):
 
@@ -166,15 +166,15 @@ Edit CSS variables in `css/style.css` (lines 1-9):
 }
 ```
 
-## 🌐 Deploying to GitHub Pages
+## 🌐 Deployment to GitHub Pages
 
 ### Option 1: From GitHub Website
 
-1. Push your portfolio to a GitHub repository
+1. Push the portfolio to a GitHub repository
 2. Go to repository Settings → Pages
 3. Under "Source", select the main branch
 4. Click Save
-5. Your site will be available at `https://yourusername.github.io/repository-name`
+5. The site will be available at `https://yourusername.github.io/repository-name`
 
 ### Option 2: Using Git Commands
 
@@ -186,7 +186,7 @@ git init
 git add .
 
 # Commit changes
-git commit -m "Initial portfolio commit"
+git commit -m "Update portfolio"
 
 # Add remote repository
 git remote add origin https://github.com/yourusername/your-repo-name.git
@@ -197,16 +197,15 @@ git push -u origin main
 
 Then enable GitHub Pages in repository settings.
 
-## 📝 Quick Customization Checklist
+## 📝 Content Management Checklist
 
 - [ ] Update personal name in `index.html`
 - [ ] Update hero section text
 - [ ] Update about section
-- [ ] Add your professional experiences
-- [ ] Add your academic background
+- [ ] Add professional experiences
+- [ ] Add academic background
 - [ ] Customize skills categories
-- [ ] Add at least one project
-- [ ] Add project images/videos
+- [ ] Add projects with images/videos
 - [ ] Update contact links (email, GitHub, LinkedIn)
 - [ ] Customize colors (optional)
 - [ ] Add favicon (optional)
@@ -255,20 +254,22 @@ Then open: `http://localhost:8080`
 - **Ruby**: `ruby -run -e httpd . -p 8000`
 
 ## 🎨 Adding More Styling
+Styling
 
 The portfolio uses:
 - **Font**: Poppins from Google Fonts
 - **Icons**: Inline SVG icons for contacts
 - **Animations**: Fade-in effects on scroll
 - **Responsive**: Mobile-first design with hamburger menu
-
-## 💡 Tips
+- **Timeline**: Chronological project display grouped by year
+## 💡 Best Practices
 
 1. **Image Optimization**: Compress images before uploading to improve loading times
 2. **Video Hosting**: For large videos, consider using YouTube instead of hosting locally
-3. **Regular Updates**: Keep your projects and experience up to date
+3. **Regular Updates**: Keep projects and experience up to date
 4. **SEO**: Update meta tags in HTML for better search engine visibility
-5. **Testing**: Test your portfolio on multiple devices before deployment
+5. **Testing**: Test the portfolio on multiple devices before deployment
+6. **Project Grouping**: Projects are automatically grouped and sorted by year (newest first)
 
 ## 🐛 Troubleshooting
 
@@ -285,16 +286,9 @@ The portfolio uses:
 **Projects not showing?**
 - Open browser console (F12) to check for errors
 - Verify `data/projects.json` is properly formatted
-- Check that project IDs are unique
+- Ensure the local server is running
 
 ## 📄 License
 
-Feel free to use this template for your personal portfolio. No attribution required.
-
-## 🤝 Contributing
-
-This is a personal portfolio template. Feel free to fork and customize for your own use!
-
----
-
+MIT License - Free to use and modify.
 **Happy coding! 🎮**
