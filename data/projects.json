@@ -1,0 +1,79 @@
+{
+    "projects": [
+        {
+            "id": "mutiny",
+            "title": "Mutiny",
+            "shortDescription": "Card game demo with modular gameplay mechanics.",
+            "fullDescription": "Independently designed and developed 'Mutiny', a card game demo available online. Handled game design, art, and coding. Features dozens of cards and gameplay mechanics built on a modular architecture, allowing easy expansion and customization.",
+            "thumbnail": "assets/projects/mutiny/thumbnail.png",
+            "tags": [
+                "Godot",
+                "C#",
+                "Game Design",
+                "Card Game"
+            ],
+            "year": "2025",
+            "platform": "PC",
+            "role": "Independent Developer",
+            "media": [
+                {
+                    "type": "youtube",
+                    "videoId": "3fMHpR1lFfo",
+                    "caption": "Gameplay demo showing card mechanics"
+                }
+            ],
+            "features": [
+                "Dozens of unique cards with modular mechanics",
+                "Flexible architecture for game expansion",
+                "Independent handling of art, design, and code"
+            ],
+            "technologies": [
+                "Godot",
+                "C#"
+            ],
+            "challenges": "Managing all aspects of game development independently while ensuring a modular and maintainable architecture for future expansion.",
+            "links": [
+                {
+                    "type": "website",
+                    "url": "https://store.steampowered.com/app/4113590/Mutiny/",
+                    "label": "Steam Page"
+                }
+            ]
+        },
+        {
+            "id": "custom-game-engine",
+            "title": "Custom ECS Game Engine",
+            "shortDescription": "A lightweight 3D ECS game engine built from scratch in C++.",
+            "fullDescription": "Developed a lightweight 3D ECS game engine from the ground up using C++. The engine features a modular design, supporting rendering, input handling, and scene management. It serves as a foundation for learning and experimenting with game development concepts.",
+            "thumbnail": "assets/projects/custom-game-engine/thumbnail.png",
+            "tags": [
+                "C++",
+                "Game Engine",
+                "3D Graphics"
+            ],
+            "year": "2026",
+            "platform": "PC",
+            "role": "Engine Developer",
+            "media": [],
+            "features": [
+                "Modular architecture for easy extension",
+                "Basic rendering pipeline with OpenGL",
+                "Input handling and scene management",
+                "Entity-Component-System (ECS) design pattern"
+            ],
+            "technologies": [
+                "C++",
+                "OpenGL",
+                "CMake"
+            ],
+            "challenges": "Designing a flexible ECS architecture while ensuring performance and maintainability in C++.",
+            "links": [
+                {
+                    "type": "github",
+                    "url": "https://github.com/Adr1enR1chard/game-engine",
+                    "label": "GitHub Repository"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+# .gitignore for Portfolio
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+
+# Optional: Large media files (uncomment if you want to exclude them)
+# assets/**/*.mp4
+# assets/**/*.mov

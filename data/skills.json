@@ -1,0 +1,57 @@
+{
+    "categories": [
+        {
+            "name": "Game Engines",
+            "icon": "🎮",
+            "skills": [
+                "Unreal Engine 5",
+                "Unity",
+                "Godot",
+                "Custom Engine Development"
+            ]
+        },
+        {
+            "name": "Programming Languages",
+            "icon": "💻",
+            "skills": [
+                "C++",
+                "C",
+                "C#",
+                "Python",
+                "HLSL/GLSL",
+                "Blueprints",
+                "Rust"
+            ]
+        },
+        {
+            "name": "3D Graphics & Rendering",
+            "icon": "🎨",
+            "skills": [
+                "OpenGL",
+                "PBR Rendering",
+                "Shader Programming",
+                "Ray Tracing"
+            ]
+        },
+        {
+            "name": "Game Development",
+            "icon": "🕹️",
+            "skills": [
+                "Gameplay Programming",
+                "Physics Simulation",
+                "Performance Optimization",
+                "Rendering Techniques"
+            ]
+        },
+        {
+            "name": "Tools & Technologies",
+            "icon": "⚙️",
+            "skills": [
+                "Git",
+                "Visual Studio",
+                "Profiling Tools",
+                "CI/CD"
+            ]
+        }
+    ]
+}
