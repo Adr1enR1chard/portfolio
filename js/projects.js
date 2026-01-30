@@ -33,9 +33,6 @@ async function loadProjectDetail() {
             return;
         }
 
-        // Update page title
-        document.getElementById('project-title').textContent = `${project.title} - Portfolio`;
-
         // Build project detail HTML
         let mediaHtml = '';
         if (project.media && project.media.length > 0) {
