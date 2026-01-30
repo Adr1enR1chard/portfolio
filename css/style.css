@@ -223,6 +223,9 @@ section {
     position: relative;
     margin-bottom: 2rem;
     padding-left: 2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
 }
 
 .timeline-item::before {
@@ -236,6 +239,22 @@ section {
     background-color: var(--primary-color);
     border: 3px solid white;
     box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+.timeline-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 8px;
+    background-color: white;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.timeline-content {
+    flex: 1;
+    min-width: 0;
 }
 
 .timeline-header {

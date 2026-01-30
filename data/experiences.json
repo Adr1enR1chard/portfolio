@@ -3,6 +3,7 @@
         {
             "title": "Video Game Developer",
             "company": "Freelance",
+            "logo": "assets/logos/fiverr.png",
             "startDate": "September 2025",
             "endDate": "Present",
             "description": "Designed and developed 'Mutiny', a card game demo available on Steam using Godot and C#. Provided freelance gameplay programming services for small game development teams."
@@ -10,13 +11,15 @@
         {
             "title": "3D Software Engineering Intern",
             "company": "Enlaps",
+            "logo": "assets/logos/enlaps.webp",
             "startDate": "May 2025",
             "endDate": "August 2025",
             "description": "Developed a 3D simulator in Three.js/GLSL for over 30 clients. Implemented more than 20 features including heightmaps, terrain painting, and asset library management, while handling deployment and production."
         },
         {
             "title": "Research Engineering Intern",
-            "company": "Laboratoire d’Informatique de Grenoble",
+            "company": "Laboratoire d'Informatique de Grenoble",
+            "logo": "assets/logos/lig.png",
             "startDate": "May 2024",
             "endDate": "August 2024",
             "description": "Designed and implemented an allocation algorithm for persistent memory (NVRAM) on highly parallel computing systems."
@@ -26,6 +29,7 @@
         {
             "degree": "Master of Informatics (Exchange Program)",
             "institution": "Technical University of Munich",
+            "logo": "assets/logos/tum.gif",
             "startDate": "October 2025",
             "endDate": "March 2026",
             "description": "Focused on video game physics, real-time rendering and global illumination, and advanced software engineering."
@@ -33,6 +37,7 @@
         {
             "degree": "Engineering Degree in Computer Science and Applied Mathematics",
             "institution": "Grenoble INP - Ensimag",
+            "logo": "assets/logos/ensimag.png",
             "startDate": "2023",
             "endDate": "2026",
             "description": "Specialized in Information Systems Engineering. Courses included 3D graphics and rendering pipelines, object-oriented software design, and advanced algorithms. Ranked 7th out of 250 students."
@@ -40,6 +45,7 @@
         {
             "degree": "Preparatory Class MP*",
             "institution": "Lycée Malherbe - Caen",
+            "logo": "assets/logos/cpge.png",
             "startDate": "2021",
             "endDate": "2023",
             "description": "Intensive mathematics and physics program preparing for entrance to top engineering schools."

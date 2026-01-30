@@ -43,12 +43,15 @@ async function loadProfessionalExperience() {
         if (data.professional && data.professional.length > 0) {
             container.innerHTML = data.professional.map(exp => `
                 <div class="timeline-item">
-                    <div class="timeline-header">
-                        <h3 class="timeline-title">${exp.title}</h3>
-                        <span class="timeline-date">${exp.startDate} - ${exp.endDate}</span>
+                    ${exp.logo ? `<img src="${exp.logo}" alt="${exp.company} logo" class="timeline-logo" onerror="this.style.display='none'">` : ''}
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3 class="timeline-title">${exp.title}</h3>
+                            <span class="timeline-date">${exp.startDate} - ${exp.endDate}</span>
+                        </div>
+                        <p class="timeline-company">${exp.company}</p>
+                        <p class="timeline-description">${exp.description}</p>
                     </div>
-                    <p class="timeline-company">${exp.company}</p>
-                    <p class="timeline-description">${exp.description}</p>
                 </div>
             `).join('');
         } else {
@@ -71,12 +74,15 @@ async function loadAcademicExperience() {
         if (data.academic && data.academic.length > 0) {
             container.innerHTML = data.academic.map(exp => `
                 <div class="timeline-item">
-                    <div class="timeline-header">
-                        <h3 class="timeline-title">${exp.degree}</h3>
-                        <span class="timeline-date">${exp.startDate} - ${exp.endDate}</span>
+                    ${exp.logo ? `<img src="${exp.logo}" alt="${exp.institution} logo" class="timeline-logo" onerror="this.style.display='none'">` : ''}
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3 class="timeline-title">${exp.degree}</h3>
+                            <span class="timeline-date">${exp.startDate} - ${exp.endDate}</span>
+                        </div>
+                        <p class="timeline-company">${exp.institution}</p>
+                        <p class="timeline-description">${exp.description}</p>
                     </div>
-                    <p class="timeline-company">${exp.institution}</p>
-                    <p class="timeline-description">${exp.description}</p>
                 </div>
             `).join('');
         } else {
