@@ -41,6 +41,38 @@
             ]
         },
         {
+            "id": "project-paranoia",
+            "title": "Project Paranoia",
+            "shortDescription": "Horror game demo featuring escape room mechanics and atmospheric environments.",
+            "fullDescription": "Developed 'Project Paranoia', a horror game demo that combines escape room mechanics with immersive atmospheric environments. The project involved level design, scripting, and implementing sound design to enhance the horror experience.",
+            "thumbnail": "assets/projects/project-paranoia/thumbnail.gif",
+            "tags": [
+                "Unreal Engine 5",
+                "Blueprints",
+                "Horror Game"
+            ],
+            "year": "2025",
+            "platform": "PC",
+            "role": "Independent Developer",
+            "media": [
+                {
+                    "type": "video",
+                    "url": "../assets/projects/project-paranoia/demo.webm",
+                    "caption": "Gameplay demo showing escape room mechanics and atmosphere"
+                }
+            ],
+            "features": [
+                "Escape room style puzzles and mechanics",
+                "Immersive atmospheric environments",
+                "Integrated sound design for enhanced horror experience"
+            ],
+            "technologies": [
+                "Unreal Engine 5",
+                "Blueprints"
+            ],
+            "challenges": "Creating a tense and immersive horror atmosphere while designing engaging escape room mechanics using Unreal Engine 5's Blueprint system."
+        },
+        {
             "id": "custom-game-engine",
             "title": "Custom ECS Game Engine",
             "shortDescription": "A lightweight 3D ECS game engine built from scratch in C++.",
