@@ -204,36 +204,6 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Cursor glow effect for artistic touch
-let cursorGlow = null;
-
-function createCursorGlow() {
-    if (window.innerWidth > 768) { // Only on desktop
-        if (!cursorGlow) {
-            cursorGlow = document.createElement('div');
-            cursorGlow.style.cssText = `
-                position: fixed;
-                width: 300px;
-                height: 300px;
-                border-radius: 50%;
-                background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
-                pointer-events: none;
-                z-index: 9999;
-                transition: transform 0.15s ease;
-                transform: translate(-50%, -50%);
-            `;
-            document.body.appendChild(cursorGlow);
-        }
-
-        document.addEventListener('mousemove', (e) => {
-            if (cursorGlow) {
-                cursorGlow.style.left = e.clientX + 'px';
-                cursorGlow.style.top = e.clientY + 'px';
-            }
-        });
-    }
-}
-
 // Intersection Observer for fade-in animations
 const observerOptions = {
     threshold: 0.1,
@@ -251,9 +221,6 @@ const observer = new IntersectionObserver((entries) => {
 
 // Observe sections for animations
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize cursor glow
-    createCursorGlow();
-
     // Animate sections on scroll
     const sections = document.querySelectorAll('section:not(.hero)');
     sections.forEach(section => {

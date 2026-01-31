@@ -1,11 +1,19 @@
 {
     "professional": [
         {
+            "title": "XR Software Engineering Intern",
+            "company": "Innerspace VR",
+            "logo": "assets/logos/innerspace.jpg",
+            "startDate": "March 2026",
+            "endDate": "August 2026",
+            "description": "To be determined..."
+        },
+        {
             "title": "Video Game Developer",
             "company": "Freelance",
             "logo": "assets/logos/fiverr.png",
             "startDate": "September 2025",
-            "endDate": "Present",
+            "endDate": "March 2026",
             "description": "Designed and developed 'Mutiny', a card game demo available on Steam using Godot and C#. Provided freelance gameplay programming services for small game development teams."
         },
         {
