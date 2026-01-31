@@ -90,7 +90,7 @@
                 {
                     "type": "image",
                     "url": "assets/projects/custom-game-engine/thumbnail.png",
-                    "caption": "Engine rendering a sample scene"
+                    "caption": "Engine rendering a sample scene with a custom shader as skybox"
                 }
             ],
             "features": [
