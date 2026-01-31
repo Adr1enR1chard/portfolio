@@ -87,13 +87,17 @@ async function loadProjectDetail() {
 
         contentContainer.innerHTML = `
             <div class="project-detail-header">
-                <h1 class="project-detail-title">${project.title}</h1>
-                <div class="project-detail-meta">
-                    ${project.year ? `<span>📅 ${project.year}</span>` : ''}
-                    ${project.platform ? `<span>💻 ${project.platform}</span>` : ''}
-                    ${project.role ? `<span>👤 ${project.role}</span>` : ''}
+                <div class="project-header-content">
+                    <div class="project-header-left">
+                        <h1 class="project-detail-title">${project.title}</h1>
+                        <div class="project-detail-meta">
+                            ${project.year ? `<span>📅 ${project.year}</span>` : ''}
+                            ${project.platform ? `<span>💻 ${project.platform}</span>` : ''}
+                            ${project.role ? `<span>👤 ${project.role}</span>` : ''}
+                        </div>
+                    </div>
+                    ${linksHtml}
                 </div>
-                ${linksHtml}
                 <div class="project-tags">
                     ${project.tags.map(tag => `
                         <span class="project-tag">${tag}</span>
