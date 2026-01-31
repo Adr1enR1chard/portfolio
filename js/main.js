@@ -190,40 +190,116 @@ async function loadProjects() {
     }
 }
 
-// Navbar scroll effect
+// Navbar scroll effect with artistic touch
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
+    const scrollProgress = Math.min(window.scrollY / 100, 1);
+
     if (window.scrollY > 50) {
-        navbar.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+        navbar.style.boxShadow = `0 4px 12px rgba(99, 102, 241, ${0.15 * scrollProgress})`;
+        navbar.style.backdropFilter = 'blur(15px)';
     } else {
         navbar.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';
+        navbar.style.backdropFilter = 'blur(10px)';
     }
 });
 
-// Intersection Observer for fade-in animations
+// Cursor glow effect for artistic touch
+let cursorGlow = null;
+
+function createCursorGlow() {
+    if (window.innerWidth > 768) { // Only on desktop
+        if (!cursorGlow) {
+            cursorGlow = document.createElement('div');
+            cursorGlow.style.cssText = `
+                position: fixed;
+                width: 300px;
+                height: 300px;
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+                pointer-events: none;
+                z-index: 9999;
+                transition: transform 0.15s ease;
+                transform: translate(-50%, -50%);
+            `;
+            document.body.appendChild(cursorGlow);
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            if (cursorGlow) {
+                cursorGlow.style.left = e.clientX + 'px';
+                cursorGlow.style.top = e.clientY + 'px';
+            }
+        });
+    }
+}
+
+// Intersection Observer for fade-in animations with stagger
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            setTimeout(() => {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }, index * 50); // Stagger animation
+            observer.unobserve(entry.target); // Only animate once
         }
     });
 }, observerOptions);
 
+// Add subtle parallax effect to sections
+function addParallaxEffect() {
+    const sections = document.querySelectorAll('section:not(.hero)');
+
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+
+        sections.forEach((section, index) => {
+            const speed = (index % 2 === 0) ? 0.03 : -0.03;
+            const yPos = scrolled * speed;
+            section.style.transform = `translateY(${yPos}px)`;
+        });
+    });
+}
+
 // Observe sections for animations
 document.addEventListener('DOMContentLoaded', () => {
-    const sections = document.querySelectorAll('section');
+    // Initialize cursor glow
+    createCursorGlow();
+
+    // Add subtle parallax (minimal for clarity)
+    if (window.innerWidth > 768) {
+        addParallaxEffect();
+    }
+
+    // Animate sections on scroll
+    const sections = document.querySelectorAll('section:not(.hero)');
     sections.forEach(section => {
         section.style.opacity = '0';
         section.style.transform = 'translateY(20px)';
-        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        section.style.transition = 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
         observer.observe(section);
     });
+
+    // Add hover effect to project cards for artistic reveal
+    setTimeout(() => {
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+    }, 500);
 
     // Load all dynamic content
     loadProfessionalExperience();
