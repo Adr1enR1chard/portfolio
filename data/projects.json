@@ -86,7 +86,13 @@
             "year": "2026",
             "platform": "PC",
             "role": "Engine Developer",
-            "media": [],
+            "media": [
+                {
+                    "type": "image",
+                    "url": "assets/projects/custom-game-engine/thumbnail.png",
+                    "caption": "Engine rendering a sample scene"
+                }
+            ],
             "features": [
                 "Modular architecture for easy extension",
                 "Basic rendering pipeline with OpenGL",
