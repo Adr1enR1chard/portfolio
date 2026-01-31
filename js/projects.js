@@ -93,6 +93,7 @@ async function loadProjectDetail() {
                     ${project.platform ? `<span>💻 ${project.platform}</span>` : ''}
                     ${project.role ? `<span>👤 ${project.role}</span>` : ''}
                 </div>
+                ${linksHtml}
                 <div class="project-tags">
                     ${project.tags.map(tag => `
                         <span class="project-tag">${tag}</span>
@@ -132,8 +133,6 @@ async function loadProjectDetail() {
                     <p>${project.challenges}</p>
                 </div>
             ` : ''}
-
-            ${linksHtml}
         `;
 
     } catch (error) {

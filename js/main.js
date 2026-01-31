@@ -234,55 +234,30 @@ function createCursorGlow() {
     }
 }
 
-// Intersection Observer for fade-in animations with stagger
+// Intersection Observer for fade-in animations
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
+    entries.forEach((entry) => {
         if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }, index * 50); // Stagger animation
-            observer.unobserve(entry.target); // Only animate once
+            entry.target.classList.add('fade-in-visible');
+            observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
-
-// Add subtle parallax effect to sections
-function addParallaxEffect() {
-    const sections = document.querySelectorAll('section:not(.hero)');
-
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-
-        sections.forEach((section, index) => {
-            const speed = (index % 2 === 0) ? 0.03 : -0.03;
-            const yPos = scrolled * speed;
-            section.style.transform = `translateY(${yPos}px)`;
-        });
-    });
-}
 
 // Observe sections for animations
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize cursor glow
     createCursorGlow();
 
-    // Add subtle parallax (minimal for clarity)
-    if (window.innerWidth > 768) {
-        addParallaxEffect();
-    }
-
     // Animate sections on scroll
     const sections = document.querySelectorAll('section:not(.hero)');
     sections.forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(20px)';
-        section.style.transition = 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+        section.classList.add('fade-in-element');
         observer.observe(section);
     });
 
