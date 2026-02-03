@@ -95,8 +95,9 @@
             ],
             "features": [
                 "Modular architecture for easy extension",
-                "Basic rendering pipeline with OpenGL",
-                "Input handling and scene management",
+                "Rendering pipeline with OpenGL",
+                "Shadow mapping",
+                "Physically Based Rendering (PBR)",
                 "Entity-Component-System (ECS) design pattern"
             ],
             "technologies": [
