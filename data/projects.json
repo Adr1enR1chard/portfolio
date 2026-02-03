@@ -98,7 +98,8 @@
                 "Rendering pipeline with OpenGL",
                 "Shadow mapping",
                 "Physically Based Rendering (PBR)",
-                "Entity-Component-System (ECS) design pattern"
+                "Entity-Component-System (ECS) design pattern",
+                "Assets compilation for optimized loading times"
             ],
             "technologies": [
                 "C++",
