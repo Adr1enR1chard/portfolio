@@ -96,19 +96,6 @@ function initHero3D() {
     wireframeMesh = new THREE.Mesh(wireframeGeometry, wireframeMaterial);
     scene.add(wireframeMesh);
 
-    // Add second smaller wireframe for depth
-    const wireframeGeometry2 = new THREE.OctahedronGeometry(100, 1);
-    const wireframeMaterial2 = new THREE.MeshBasicMaterial({
-        color: 0xa78bfa,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.25
-    });
-    const wireframeMesh2 = new THREE.Mesh(wireframeGeometry2, wireframeMaterial2);
-    scene.add(wireframeMesh2);
-
-    scene.add(wireframeMesh2);
-
     // Mouse move event with smooth artistic response
     document.addEventListener('mousemove', (event) => {
         mouseX = (event.clientX - window.innerWidth / 2) * 0.0008;
@@ -148,11 +135,6 @@ function animate() {
     if (scene.children[1]) {
         scene.children[1].rotation.x += 0.002;
         scene.children[1].rotation.y += 0.003;
-    }
-
-    if (scene.children[2]) {
-        scene.children[2].rotation.x -= 0.0015;
-        scene.children[2].rotation.y -= 0.002;
     }
 
     // Artistic particle animation - subtle wave motion
