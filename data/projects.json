@@ -16,6 +16,7 @@
             "year": "2025",
             "platform": "PC",
             "role": "Independent Developer",
+            "teamSize": "Solo",
             "media": [
                 {
                     "type": "youtube",
@@ -58,6 +59,7 @@
             "year": "2025",
             "platform": "PC",
             "role": "Independent Developer",
+            "teamSize": "Solo",
             "media": [
                 {
                     "type": "video",
@@ -92,6 +94,7 @@
             "year": "2026",
             "platform": "PC",
             "role": "Engine Developer",
+            "teamSize": "Solo",
             "media": [
                 {
                     "type": "image",
@@ -136,6 +139,7 @@
             "year": "2020",
             "platform": "Android",
             "role": "Independent Developer",
+            "teamSize": "Solo",
             "media": [
                 {
                     "type": "image",
@@ -185,6 +189,7 @@
             "year": "2021",
             "platform": "PC",
             "role": "Gameplay Programmer",
+            "teamSize": "2 (with Artist)",
             "media": [
                 {
                     "type": "image",

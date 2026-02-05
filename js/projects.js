@@ -108,6 +108,7 @@ async function loadProjectDetail() {
                             ${project.year ? `<span>📅 ${project.year}</span>` : ''}
                             ${project.platform ? `<span>💻 ${project.platform}</span>` : ''}
                             ${project.role ? `<span>👤 ${project.role}</span>` : ''}
+                            ${project.teamSize ? `<span>👥 ${project.teamSize}</span>` : ''}
                         </div>
                     </div>
                     ${linksHtml}
