@@ -3,13 +3,14 @@
         {
             "id": "mutiny",
             "title": "Mutiny",
-            "shortDescription": "Card game demo with modular gameplay mechanics.",
-            "fullDescription": "Independently designed and developed 'Mutiny', a card game demo available online. Handled game design, art, and coding. Features dozens of cards and gameplay mechanics built on a modular architecture, allowing easy expansion and customization.",
+            "shortDescription": "Rogue-lite card game mixing deck-building and strategic combat.",
+            "fullDescription": "Mutiny is a game in development that combines rogue-lite elements with card game mechanics. Players build their deck and face increasingly powerful enemies. Independently handled game design, art, and coding with dozens of cards and gameplay mechanics built on a modular architecture.",
             "thumbnail": "assets/projects/mutiny/thumbnail.png",
             "tags": [
                 "Godot",
                 "C#",
                 "Game Design",
+                "Rogue-lite",
                 "Card Game"
             ],
             "year": "2025",
@@ -19,13 +20,15 @@
                 {
                     "type": "youtube",
                     "videoId": "3fMHpR1lFfo",
-                    "caption": "Gameplay demo showing card mechanics"
+                    "caption": "Gameplay demo showing card mechanics and combat"
                 }
             ],
             "features": [
+                "Rogue-lite progression system",
+                "Deck-building mechanics",
                 "Dozens of unique cards with modular mechanics",
                 "Flexible architecture for game expansion",
-                "Independent handling of art, design, and code"
+                "Escalating enemy difficulty"
             ],
             "technologies": [
                 "Godot",
@@ -35,21 +38,22 @@
             "links": [
                 {
                     "type": "website",
-                    "url": "https://store.steampowered.com/app/4113590/Mutiny/",
+                    "url": "https://store.steampowered.com/app/4113590",
                     "label": "Steam Page"
                 }
             ]
         },
         {
             "id": "project-paranoia",
-            "title": "Project Paranoia",
-            "shortDescription": "Horror game demo featuring escape room mechanics and atmospheric environments.",
-            "fullDescription": "Developed 'Project Paranoia', a horror game demo that combines escape room mechanics with immersive atmospheric environments. The project involved level design, scripting, and implementing sound design to enhance the horror experience.",
+            "title": "Project: Paranoïa",
+            "shortDescription": "Horror game proof of concept set in a psychiatric hospital with escape room mechanics.",
+            "fullDescription": "Project: Paranoïa is a proof of concept for a horror game developed in Unreal Engine 5. The player takes on the role of an amnesiac patient in a psychiatric hospital and must solve escape room-inspired puzzles to uncover their past. The project emphasizes an oppressive atmosphere through graphics rendering, lighting, and sound design. Gameplay is based on exploration, puzzle-solving, and environmental storytelling.",
             "thumbnail": "assets/projects/project-paranoia/thumbnail.gif",
             "tags": [
                 "Unreal Engine 5",
                 "Blueprints",
-                "Horror Game"
+                "Horror Game",
+                "Puzzle"
             ],
             "year": "2025",
             "platform": "PC",
@@ -58,19 +62,21 @@
                 {
                     "type": "video",
                     "url": "assets/projects/project-paranoia/demo.webm",
-                    "caption": "Gameplay demo showing escape room mechanics and atmosphere"
+                    "caption": "Gameplay demo showing escape room mechanics and oppressive atmosphere"
                 }
             ],
             "features": [
                 "Escape room style puzzles and mechanics",
-                "Immersive atmospheric environments",
-                "Integrated sound design for enhanced horror experience"
+                "Amnesiac protagonist discovering their past",
+                "Oppressive atmosphere through graphics and lighting",
+                "Integrated sound design for enhanced horror experience",
+                "Environmental storytelling"
             ],
             "technologies": [
                 "Unreal Engine 5",
                 "Blueprints"
             ],
-            "challenges": "Creating a tense and immersive horror atmosphere while designing engaging escape room mechanics using Unreal Engine 5's Blueprint system."
+            "challenges": "Creating a tense and immersive horror atmosphere while designing engaging escape room mechanics using Unreal Engine 5's Blueprint system and maintaining narrative coherence through environmental storytelling."
         },
         {
             "id": "custom-game-engine",
@@ -114,6 +120,100 @@
                     "label": "GitHub Repository"
                 }
             ]
+        },
+        {
+            "id": "slade",
+            "title": "Slade",
+            "shortDescription": "Android arcade game testing concentration and reflexes.",
+            "fullDescription": "Slade is an arcade game that tests concentration and reflexes. Players must avoid projectiles and enemies to achieve the best score, unlock skins, and manage energy to slow down time. Developed with Unity (C#), it was my first game published on the Google Play Store in 2020. Due to lack of time, the project was abandoned and removed from the store.",
+            "thumbnail": "assets/projects/slade/thumbnail.webp",
+            "tags": [
+                "Unity",
+                "C#",
+                "Android",
+                "Arcade"
+            ],
+            "year": "2020",
+            "platform": "Android",
+            "role": "Independent Developer",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "assets/projects/slade/thumbnail.webp"
+                },
+                {
+                    "type": "image",
+                    "url": "assets/projects/slade/slade2.webp"
+                },
+                {
+                    "type": "image",
+                    "url": "assets/projects/slade/slade3.webp"
+                }
+            ],
+            "features": [
+                "Reflex-based arcade gameplay",
+                "Time slowdown energy mechanic",
+                "Unlockable skins",
+                "Score system"
+            ],
+            "technologies": [
+                "Unity",
+                "C#",
+                "Android SDK"
+            ],
+            "challenges": "Creating engaging arcade gameplay while managing energy mechanics and optimizing for mobile devices. First published game on Google Play Store.",
+            "links": [
+                {
+                    "type": "website",
+                    "url": "https://apkpure.com/fr/slade/com.AjGames.Slade",
+                    "label": "APK Download"
+                }
+            ]
+        },
+        {
+            "id": "light-and-darkness",
+            "title": "Light and Darkness",
+            "shortDescription": "2D platformer based on light/darkness duality mechanics.",
+            "fullDescription": "Light and Darkness is a 2D platformer based on the duality of light and darkness. The player can reveal hidden platforms and paths by spreading light in a world plunged into darkness. The project was created in collaboration with a 2D graphic artist. I handled all gameplay and mechanics implementation.",
+            "thumbnail": "assets/projects/light-and-darkness/thumbnail.gif",
+            "tags": [
+                "2D Platformer",
+                "Unity",
+                "C#",
+                "Game Design"
+            ],
+            "year": "2021",
+            "platform": "PC",
+            "role": "Gameplay Programmer",
+            "media": [
+                {
+                    "type": "image",
+                    "url": "assets/projects/light-and-darkness/thumbnail.gif"
+                },
+                {
+                    "type": "image",
+                    "url": "assets/projects/light-and-darkness/light.webp"
+                },
+                {
+                    "type": "image",
+                    "url": "assets/projects/light-and-darkness/light2.png"
+                },
+                {
+                    "type": "image",
+                    "url": "assets/projects/light-and-darkness/light3.png"
+                }
+            ],
+            "features": [
+                "Light/darkness duality mechanics",
+                "Dynamic platform revelation",
+                "Atmospheric 2D environments",
+                "Puzzle-platformer gameplay"
+            ],
+            "technologies": [
+                "Unity",
+                "C#"
+            ],
+            "challenges": "Implementing the light mechanics to reveal hidden elements while maintaining smooth gameplay and collaborating with an artist to integrate visual assets."
         }
     ]
 }
