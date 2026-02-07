@@ -1,0 +1,57 @@
+<h2>Architecture of Mutiny</h2>
+<p>Mutiny is built on <strong>Godot 4.4</strong> using <strong>C#</strong> and features a modular architecture that
+    enables easy expansion of game mechanics and content. The core gameplay revolves around a <strong>deck-building
+        system</strong> where players acquire and upgrade cards to face increasingly challenging enemies.</p>
+
+<h3>Data-Driven Card System</h3>
+<div style="display: flex; gap: 2rem; align-items: flex-start;">
+    <div style="flex: 1;">
+        <p>Cards are designed as <strong>data-driven entities</strong>, with their behavior implemented through
+            scriptable objects (<code>Resource</code> in Godot) and a flexible event system. This approach enables rapid
+            iteration on game design while maintaining a clean and maintainable codebase : new cards and mechanics can
+            be
+            added without major code changes.</p>
+
+        <p><strong>Example: The Blunderbuss Card</strong></p>
+        <p>The data-driven architecture allows complex card behaviors to be defined declaratively. When the
+            <em>Blunderbuss</em> card is activated:
+        </p>
+        <ul>
+            <li>Deals <strong>10 damage</strong> (<code>DamageEffect</code>)</li>
+            <li>Applies effects to the next cards in deck (<code>AffectOtherCardsEffect</code>):
+                <ul>
+                    <li>Sets them inactive (<code>InactiveEffect</code>)</li>
+                </ul>
+            </li>
+        </ul>
+        <p>Card descriptions are <strong>automatically generated</strong> from their defined effects, ensuring
+            consistency across the entire card pool while enabling rapid creation of unique card combinations and
+            strategic interactions.</p>
+    </div>
+    <img src="assets/projects/mutiny/card-data.png" alt="Card data structure in Mutiny" class="project-image"
+        style="flex: 0 0 auto; max-width: 400px; width: auto; height: auto; object-fit: contain;">
+</div>
+
+<h3>Rogue-lite Progression</h3>
+<div style="display: flex; gap: 2rem; align-items: flex-start;">
+    <div style="flex: 1;">
+        <p>Mutiny features a rogue-lite progression system where players begin each run with a basic deck and build
+            their arsenal through strategic choices. Each run presents encounters with escalating difficulty, requiring
+            careful deck composition and tactical decision-making.</p>
+
+        <h4>Card Pool and Rarity System</h4>
+        <p>Cards are organized into <strong>five rarity tiers</strong> (1 to 5) that determine their power level and
+            availability. As players progress, they unlock access to higher rarity cards offering greater strategic
+            depth and powerful synergies. Card selection is governed by <strong>weighted randomness</strong> based on
+            rarity distribution, creating unpredictable scenarios that enhance replayability and encourage adaptive
+            strategies.</p>
+
+        <h4>Statistics and the Bribe Mechanic</h4>
+        <p>Players acquire permanent statistics that fundamentally alter their playstyle. The <em>Bribe</em> mechanic
+            allows spending in-game currency to boost these stats, adding economic strategy to the gameplay loop. Each
+            of the <strong>four main stats</strong> influences card drops and reward probabilities, creating
+            personalized runs tailored to different playstyles and deck archetypes.</p>
+    </div>
+    <img src="assets/projects/mutiny/progression.png" alt="Rogue-lite progression system in Mutiny"
+        style="flex: 0 0 auto; max-width: 400px; width: auto; height: auto; object-fit: contain;">
+</div>

@@ -120,7 +120,6 @@
                 "OpenGL",
                 "CMake"
             ],
-            "detailedDiscussion": "<h2>Architecture Overview</h2><p>The engine uses an <strong>Entity-Component-System</strong> architecture for maximum flexibility. The entire runtime context is spread into three differents abstractions : <ul><li><code>World</code> : Stores all entities and their components.</li><li><code>System</code> : Fetch queries onto the engine World to encode behaviours.</li><li><code>Service</code> : Single instance, kind of a manager, for global propreties (<em>e.g. Input, Window, ...</em>).</li></ul></p>\n<p> Here is an example of a simple scene using the engine.\n",
             "links": [
                 {
                     "type": "github",
@@ -170,7 +169,6 @@
                 "C#",
                 "Android SDK"
             ],
-            "detailedDiscussion": "",
             "links": [
                 {
                     "type": "website",
@@ -222,8 +220,7 @@
             "technologies": [
                 "Unity",
                 "C#"
-            ],
-            "detailedDiscussion": ""
+            ]
         }
     ]
 }

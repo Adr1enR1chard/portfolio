@@ -684,15 +684,14 @@ section::before {
     font-weight: 600;
     margin-bottom: 2.5rem;
     padding: 0.75rem 1.5rem;
-    border-radius: 12px;
-    background: rgba(0, 0, 0, 0.03);
+    background: var(--bg-color);
     transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     border: 2px solid var(--border-color);
 }
 
 .back-link:hover {
     transform: translateX(-10px) scale(1.05);
-    background: rgba(0, 0, 0, 0.08);
+    background: var(--bg-secondary);
     border-color: var(--text-color);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
