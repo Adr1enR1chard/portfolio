@@ -100,31 +100,35 @@ async function loadProjectDetail() {
         }
 
         contentContainer.innerHTML = `
-            <div class="project-detail-header">
-                <div class="project-header-content">
+            <div class="project-section">
+                <div class="project-header-container">
                     <div class="project-header-left">
                         <h1 class="project-detail-title">${project.title}</h1>
                         <div class="project-detail-meta">
-                            ${project.year ? `<span>📅 ${project.year}</span>` : ''}
-                            ${project.platform ? `<span>💻 ${project.platform}</span>` : ''}
-                            ${project.role ? `<span>👤 ${project.role}</span>` : ''}
-                            ${project.teamSize ? `<span>👥 ${project.teamSize}</span>` : ''}
+                            ${project.year ? `<span> ${project.year}</span>` : ''}
+                            ${project.platform ? `<span> ${project.platform}</span>` : ''}
+                            ${project.role ? `<span> ${project.role}</span>` : ''}
+                            ${project.teamSize ? `<span> ${project.teamSize}</span>` : ''}
+                        </div>
+                        <h4>Technologies Used</h4>
+                        <div class="skill-list">
+                                ${project.technologies.map(tech => `
+                                    <span class="skill-tag">${tech}</span>
+                                `).join('')}
                         </div>
                     </div>
                     ${linksHtml}
                 </div>
-                <div class="project-tags">
-                    ${project.tags.map(tag => `
-                        <span class="project-tag">${tag}</span>
-                    `).join('')}
-                </div>
             </div>
+
 
             <div class="project-detail-description">
                 <p>${project.fullDescription || project.shortDescription}</p>
             </div>
 
             ${mediaHtml}
+
+            <div id="detailed-discussion-container"></div>
 
             ${project.features ? `
                 <div class="project-section">
@@ -135,24 +139,10 @@ async function loadProjectDetail() {
                 </div>
             ` : ''}
 
-            ${project.technologies ? `
-                <div class="project-section">
-                    <h3>Technologies Used</h3>
-                    <div class="skill-list">
-                        ${project.technologies.map(tech => `
-                            <span class="skill-tag">${tech}</span>
-                        `).join('')}
-                    </div>
-                </div>
-            ` : ''}
-
-            ${project.challenges ? `
-                <div class="project-section">
-                    <h3>Challenges & Solutions</h3>
-                    <p>${project.challenges}</p>
-                </div>
-            ` : ''}
         `;
+
+        // Load detailed discussion from external HTML file
+        loadDetailedDiscussion(project.id);
 
     } catch (error) {
         console.error('Error loading project:', error);
@@ -162,6 +152,37 @@ async function loadProjectDetail() {
                 <p>There was an error loading the project details. Please try again later.</p>
             </div>
         `;
+    }
+}
+
+// Load detailed discussion from external HTML file
+async function loadDetailedDiscussion(projectId) {
+    try {
+        const response = await fetch(`data/discussions/${projectId}.html`);
+        if (response.ok) {
+            const discussionHtml = await response.text();
+            const container = document.getElementById('detailed-discussion-container');
+            if (container && discussionHtml.trim()) {
+                container.innerHTML = `
+                    <div class="project-section">
+                        <div class="detailed-discussion">
+                            ${discussionHtml}
+                        </div>
+                    </div>
+                `;
+
+                // Apply syntax highlighting to code blocks in the loaded content
+                if (typeof Prism !== 'undefined') {
+                    // Highlight only the newly loaded content
+                    container.querySelectorAll('pre code').forEach((block) => {
+                        Prism.highlightElement(block);
+                    });
+                }
+            }
+        }
+    } catch (error) {
+        // Silently fail if discussion file doesn't exist
+        console.log(`No detailed discussion found for ${projectId}`);
     }
 }
 

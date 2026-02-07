@@ -1,0 +1,146 @@
+<h2>Architecture Overview</h2>
+<p>The engine uses an <strong>Entity-Component-System</strong> architecture for maximum flexibility. The entire runtime
+    context is organized into four core abstractions:</p>
+<ul>
+    <li><code>World</code>: Central registry storing all entities and their attached components.</li>
+    <li><code>System</code>: Queries the World to implement game logic and behaviors.</li>
+    <li><code>Service</code>: Singleton managers providing global functionality (Input, Window, Renderer, etc.).</li>
+    <li><code>Bundle</code>: Packaged collection of systems, services, and resources for modular engine features.
+    </li>
+</ul>
+
+<p>Here's how you initialize the engine and compose a game using these abstractions:</p>
+
+<pre><code class="language-cpp">// main.cpp
+#include &lt;DefaultBundle.hpp&gt;
+#include &lt;engine/Engine.hpp&gt;
+
+#include &lt;systems/Camera.hpp&gt;
+#include &lt;systems/Environment.hpp&gt;
+#include &lt;systems/Spaceship.hpp&gt;
+
+using namespace engine;
+using namespace default_bundle;
+
+int main()
+{
+    Engine::InitiliazeStandalone()
+        .addBundle&lt;DefaultBundle&gt;()  // Provides core components (CTransform, CModelRenderer, etc.) and services (Input, Window, etc.)
+        .addSystems&lt;OrbitCameraSystem, SpaceEnvironmentSystem, SpaceshipControlSystem&gt;()
+        .run(1920, 1080, "Space Game", true);
+
+    return 0;
+}
+</code></pre>
+
+<p>The <code>DefaultBundle</code> provides all the fundamental components and services used throughout the codebase—from
+    basic transforms and rendering to input handling and window management. Custom game systems then leverage these
+    building blocks to implement specific gameplay features.</p>
+
+<h3>System Example: Spaceship Controls</h3>
+<p>Systems encapsulate game logic by querying entity components and responding to player input. The following system
+    demonstrates how to create an entity with components from the DefaultBundle, handle user input, and apply
+    physics-based movement:</p>
+
+<pre><code class="language-cpp">// SpaceshipControlSystem.hpp
+#pragma once
+
+#include &lt;DefaultBundle.hpp&gt;
+#include &lt;components/Spaceship.hpp&gt;
+#include &lt;components/OrbitCamera.hpp&gt;
+
+#include &lt;glm/glm.hpp&gt;
+#include &lt;glm/gtc/quaternion.hpp&gt;
+
+using namespace engine;
+using namespace default_bundle;
+
+class SpaceshipControlSystem : public System
+{
+public:
+    void start() override
+    {
+        // Create spaceship entity with rendering and transform components
+        m_spaceshipEntity = world().createEntity(
+            CModelRenderer{
+                .model = services().get&lt;ModelFactory&gt;()->LoadModel("assets/models/spaceship/spaceship.gltf"),
+            },
+            CTransform{
+                .rotation = glm::angleAxis(glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f)),
+            },
+            CSpaceship{});
+        m_targetRotation =
+            glm::angleAxis(glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    }
+
+    void update(float deltaTime) override
+    {
+        // Query camera and spaceship components
+        auto [_, cam, cameraTransform, orbitCamera] = world().fetchAt&lt;CCamera, CTransform, COrbitCamera>(0);
+        auto [entity, transform] = world().fetchFrom&lt;CTransform>(m_spaceshipEntity);
+        if (transform == nullptr || cameraTransform == nullptr)
+            return;
+
+        // Apply camera-relative rotation from player input
+        glm::quat delta = orbitCamera->yawRot * orbitCamera->pitchRot;
+        m_targetRotation = delta * m_targetRotation;
+        glm::quat lerpedRotation = glm::slerp(transform->rotation, m_targetRotation, m_rotationSpeed * deltaTime);
+        transform->setRotation(lerpedRotation);
+
+        // Acceleration/deceleration based on input
+        if (services().get&lt;Input&gt;()->isKeyDown(Key::LShift))
+        {
+            m_velocity += -transform->forward() * m_acceleration * deltaTime;
+            if (glm::length(m_velocity) > m_maxSpeed)
+                m_velocity = glm::normalize(m_velocity) * m_maxSpeed;
+        }
+        else if (services().get&lt;Input&gt;()->isKeyDown(Key::LCtrl))
+        {
+            m_velocity += transform->forward() * m_acceleration * deltaTime;
+            if (glm::length(m_velocity) > m_maxSpeed)
+                m_velocity = glm::normalize(m_velocity) * m_maxSpeed;
+        }
+        else
+        {
+            // Natural deceleration when no input
+            if (glm::length(m_velocity) > 0.0f)
+                m_velocity -= m_deceleration * deltaTime * glm::normalize(m_velocity);
+        }
+
+        transform->position += m_velocity * deltaTime;
+    }
+
+private:
+    Entity m_spaceshipEntity;
+
+    glm::vec3 m_velocity = glm::vec3(0.0f);
+    float m_maxSpeed = 50.0f;
+    float m_acceleration = 20.0f;
+    float m_deceleration = 13.0f;
+    float m_rotationSpeed = 1.0f;
+    glm::quat m_targetRotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+};
+</code></pre>
+
+<h3>Assets Pipeline</h3>
+<p>The engine features a custom asset compilation system for optimized loading performance. CMake monitors the project
+    directory for file changes, automatically triggering the asset compiler when modifications are detected. The
+    compiler processes raw assets (models, textures, shaders) into an optimized binary format stored in the
+    <code>bin/</code> directory.</p>
+
+<p>At runtime, all engine <code>Load</code> functions exclusively read these pre-compiled assets. This approach provides
+    several advantages:</p>
+<ul>
+    <li><strong>Fast loading times</strong> — Binary format eliminates parsing overhead</li>
+    <li><strong>Automatic compression</strong> — Reduces memory footprint and disk usage</li>
+    <li><strong>Type safety</strong> — Compile-time validation of asset references</li>
+    <li><strong>Hot-reloading support</strong> — CMake watch system enables seamless asset iteration</li>
+</ul>
+
+<p>This pipeline ensures that artists and developers can work with standard formats during development while benefiting
+    from optimized loading in the final build.</p>
+
+<h3>Rendering Pipeline</h3>
+<p>The rendering system leverages OpenGL for hardware-accelerated graphics with support for modern techniques including
+    shadow mapping and Physically Based Rendering (PBR). The modular architecture allows rendering features to be
+    extended through custom systems and shaders.</p>
