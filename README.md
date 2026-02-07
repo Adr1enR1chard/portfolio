@@ -4,7 +4,10 @@ A modern, responsive portfolio website showcasing game development and 3D graphi
 
 ## 🚀 Features
 
-- **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
+- **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices with optimized layouts
+- **Image Lightbox**: Click any image to view it in full size with carousel navigation
+- **Mobile-Optimized Code**: Code snippets with responsive font sizing and smooth horizontal scrolling
+- **Touch Support**: Swipe gestures for carousels and lightbox on mobile devices
 - **Data-Driven Architecture**: Easy content management through JSON files
 - **Project Timeline**: Chronological project showcase with images, videos, and detailed descriptions
 - **Professional Timeline**: Display work experience and academic background
@@ -166,6 +169,15 @@ Edit CSS variables in `css/style.css` (lines 1-9):
 }
 ```
 
+### Responsive Breakpoints
+
+The portfolio adapts to different screen sizes:
+- **Desktop**: 1025px and above (full desktop experience)
+- **Tablet**: 769px - 1024px (optimized tablet layout)
+- **Mobile Landscape/Portrait Tablet**: 481px - 768px (stacked layouts, hamburger menu)
+- **Mobile Portrait**: 361px - 480px (compact mobile design)
+- **Small Mobile**: 360px and below (minimal spacing for small devices)
+
 ## 🌐 Deployment to GitHub Pages
 
 ### Option 1: From GitHub Website
@@ -253,15 +265,45 @@ Then open: `http://localhost:8080`
 - **PHP**: `php -S localhost:8000`
 - **Ruby**: `ruby -run -e httpd . -p 8000`
 
-## 🎨 Adding More Styling
-Styling
+## 🎨 Styling
 
 The portfolio uses:
 - **Font**: Poppins from Google Fonts
 - **Icons**: Inline SVG icons for contacts
-- **Animations**: Fade-in effects on scroll
+- **Animations**: Fade-in effects on scroll, smooth transitions
 - **Responsive**: Mobile-first design with hamburger menu
 - **Timeline**: Chronological project display grouped by year
+- **Lightbox**: Full-screen image viewer with keyboard and touch controls
+
+### Interactive Features
+
+**Image Lightbox**:
+- Click on any project image to view it in full size
+- Navigate between images using arrow buttons, keyboard arrows, or swipe gestures
+- Press `Escape` or click outside to close
+- Displays image counter and captions
+- Fully responsive on all devices
+
+**Mobile Navigation**:
+- Hamburger menu on tablets and mobile devices
+- Smooth slide-in animation
+- Touch-optimized tap targets (minimum 44px)
+
+**Code Snippets**:
+- Syntax highlighting with Prism.js
+- Responsive font sizes (smaller on mobile for better readability)
+- Horizontal scroll with smooth touch scrolling
+- Preserved formatting on all screen sizes
+
+### Keyboard Shortcuts
+
+**Project Carousel**:
+- `←` / `→`: Navigate between slides
+
+**Image Lightbox**:
+- `←` / `→`: Navigate between images
+- `Escape`: Close lightbox
+
 ## 💡 Best Practices
 
 1. **Image Optimization**: Compress images before uploading to improve loading times
@@ -287,6 +329,17 @@ The portfolio uses:
 - Open browser console (F12) to check for errors
 - Verify `data/projects.json` is properly formatted
 - Ensure the local server is running
+
+**Lightbox not working?**
+- Make sure JavaScript is enabled in your browser
+- Check that images have loaded completely
+- Very small images (under 100x100px) are excluded from lightbox
+- Open browser console to check for JavaScript errors
+
+**Code snippets not displaying correctly?**
+- Ensure Prism.js is loading properly (check Network tab in browser dev tools)
+- Verify code blocks are wrapped in `<pre><code>` tags
+- For syntax highlighting, add `class="language-xxx"` to `<code>` tag (e.g., `language-javascript`)
 
 ## 📄 License
 

@@ -274,10 +274,210 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// Lightbox functionality for full-size image viewing
+let lightboxImages = [];
+let currentLightboxIndex = 0;
+
+function createLightbox() {
+    // Create lightbox HTML if it doesn't exist
+    if (document.querySelector('.lightbox')) return;
+
+    const lightboxHTML = `
+        <div class="lightbox" id="lightbox">
+            <div class="lightbox-content">
+                <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+                <button class="lightbox-prev" onclick="changeLightboxImage(-1)">&#10094;</button>
+                <button class="lightbox-next" onclick="changeLightboxImage(1)">&#10095;</button>
+                <img class="lightbox-image" id="lightbox-image" alt="Full size image">
+                <div class="lightbox-caption" id="lightbox-caption" style="display: none;"></div>
+                <div class="lightbox-counter" id="lightbox-counter"></div>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', lightboxHTML);
+}
+
+function initLightbox() {
+    createLightbox();
+
+    // Collect all clickable images from the project detail page
+    const imageSelectors = [
+        '.project-media img',
+        '.carousel-slide img',
+        '.detailed-discussion img',
+        '.project-section img'
+    ];
+
+    lightboxImages = [];
+    const allImages = document.querySelectorAll(imageSelectors.join(', '));
+
+    allImages.forEach((img, index) => {
+        // Skip very small images (likely icons)
+        if (img.naturalWidth < 100 || img.naturalHeight < 100) return;
+
+        lightboxImages.push({
+            src: img.src,
+            alt: img.alt,
+            caption: img.title || img.alt || ''
+        });
+
+        img.addEventListener('click', () => {
+            openLightbox(lightboxImages.length - 1); // Use the correct index
+        });
+
+        // Update the index after pushing
+        img.dataset.lightboxIndex = lightboxImages.length - 1;
+    });
+
+    // Re-attach click handlers with correct indices
+    allImages.forEach((img) => {
+        if (img.dataset.lightboxIndex !== undefined) {
+            img.onclick = null; // Remove previous handler
+            img.addEventListener('click', () => {
+                openLightbox(parseInt(img.dataset.lightboxIndex));
+            });
+        }
+    });
+
+    // Keyboard navigation for lightbox
+    document.addEventListener('keydown', (e) => {
+        const lightbox = document.getElementById('lightbox');
+        if (lightbox && lightbox.classList.contains('active')) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            } else if (e.key === 'ArrowLeft') {
+                changeLightboxImage(-1);
+            } else if (e.key === 'ArrowRight') {
+                changeLightboxImage(1);
+            }
+        }
+    });
+
+    // Close lightbox when clicking outside the image
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+    }
+
+    // Touch support for lightbox
+    initLightboxTouchSupport();
+}
+
+function openLightbox(index) {
+    if (lightboxImages.length === 0) return;
+
+    currentLightboxIndex = index;
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+
+    lightboxImage.src = lightboxImages[currentLightboxIndex].src;
+    lightboxImage.alt = lightboxImages[currentLightboxIndex].alt;
+
+    // Show caption if available
+    if (lightboxImages[currentLightboxIndex].caption) {
+        lightboxCaption.textContent = lightboxImages[currentLightboxIndex].caption;
+        lightboxCaption.style.display = 'block';
+    } else {
+        lightboxCaption.style.display = 'none';
+    }
+
+    // Update counter
+    lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${lightboxImages.length}`;
+
+    // Show/hide navigation buttons
+    const prevBtn = document.querySelector('.lightbox-prev');
+    const nextBtn = document.querySelector('.lightbox-next');
+
+    if (lightboxImages.length <= 1) {
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+    } else {
+        prevBtn.style.display = 'flex';
+        nextBtn.style.display = 'flex';
+    }
+
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scrolling
+}
+
+function changeLightboxImage(direction) {
+    if (lightboxImages.length === 0) return;
+
+    currentLightboxIndex = (currentLightboxIndex + direction + lightboxImages.length) % lightboxImages.length;
+
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+
+    // Fade out
+    lightboxImage.style.opacity = '0';
+
+    setTimeout(() => {
+        lightboxImage.src = lightboxImages[currentLightboxIndex].src;
+        lightboxImage.alt = lightboxImages[currentLightboxIndex].alt;
+
+        if (lightboxImages[currentLightboxIndex].caption) {
+            lightboxCaption.textContent = lightboxImages[currentLightboxIndex].caption;
+            lightboxCaption.style.display = 'block';
+        } else {
+            lightboxCaption.style.display = 'none';
+        }
+
+        lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${lightboxImages.length}`;
+
+        // Fade in
+        lightboxImage.style.opacity = '1';
+    }, 150);
+}
+
+function initLightboxTouchSupport() {
+    const lightbox = document.getElementById('lightbox');
+    if (!lightbox) return;
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    lightbox.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleLightboxSwipe();
+    }, { passive: true });
+
+    function handleLightboxSwipe() {
+        const swipeThreshold = 50;
+        if (touchEndX < touchStartX - swipeThreshold) {
+            changeLightboxImage(1); // Swipe left - next image
+        }
+        if (touchEndX > touchStartX + swipeThreshold) {
+            changeLightboxImage(-1); // Swipe right - previous image
+        }
+    }
+}
+
 // Load project when page loads
 document.addEventListener('DOMContentLoaded', () => {
     loadProjectDetail().then(() => {
         currentSlide = 0; // Reset carousel position
         initCarouselTouchSupport(); // Initialize touch support
+
+        // Initialize lightbox after content is loaded
+        setTimeout(() => {
+            initLightbox();
+        }, 500); // Give time for images to load
     });
 });
