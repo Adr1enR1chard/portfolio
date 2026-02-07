@@ -106,7 +106,6 @@ async function loadSkills() {
             container.innerHTML = data.categories.map(category => `
                 <div class="skill-category">
                     <h3 class="skill-category-title">
-                        ${category.icon ? category.icon : '🔧'}
                         ${category.name}
                     </h3>
                     <div class="skill-list">
