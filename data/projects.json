@@ -96,6 +96,11 @@
             "teamSize": "Solo",
             "media": [
                 {
+                    "type": "video",
+                    "url": "assets/projects/custom-game-engine/demo.webm",
+                    "caption": "Demo showcasing the engine's rendering and gameplay capabilities"
+                },
+                {
                     "type": "image",
                     "url": "assets/projects/custom-game-engine/thumbnail.png",
                     "caption": "Engine rendering a sample scene with a custom shader as skybox"
