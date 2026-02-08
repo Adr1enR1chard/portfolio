@@ -62,7 +62,7 @@
             "media": [
                 {
                     "type": "video",
-                    "url": "assets/projects/project-paranoia/demo.webm",
+                    "url": "assets/projects/project-paranoia/demo.mp4",
                     "caption": "Gameplay demo showing escape room mechanics and oppressive atmosphere"
                 }
             ],
@@ -97,7 +97,7 @@
             "media": [
                 {
                     "type": "video",
-                    "url": "assets/projects/custom-game-engine/demo.webm",
+                    "url": "assets/projects/custom-game-engine/demo.mp4",
                     "caption": "Demo showcasing the engine's rendering and gameplay capabilities"
                 },
                 {
