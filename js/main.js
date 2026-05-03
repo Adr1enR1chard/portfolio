@@ -125,6 +125,70 @@ async function loadSkills() {
     }
 }
 
+// Load Professional Contributions
+async function loadProfessionalContributions() {
+    try {
+        const response = await fetch('data/professional-contributions.json');
+        const data = await response.json();
+        const container = document.getElementById('professional-contributions-container');
+
+        if (data.contributions && data.contributions.length > 0) {
+            // Sort contributions by year (newest first)
+            const sortedContributions = data.contributions.sort((a, b) => {
+                const yearA = parseInt(a.year) || 0;
+                const yearB = parseInt(b.year) || 0;
+                return yearB - yearA;
+            });
+
+            // Group contributions by year
+            const contributionsByYear = sortedContributions.reduce((acc, contribution) => {
+                const year = contribution.year || 'N/A';
+                if (!acc[year]) {
+                    acc[year] = [];
+                }
+                acc[year].push(contribution);
+                return acc;
+            }, {});
+
+            // Generate HTML for each year group (sorted newest to oldest)
+            const sortedYears = Object.entries(contributionsByYear).sort(([yearA], [yearB]) => {
+                const numYearA = parseInt(yearA) || 0;
+                const numYearB = parseInt(yearB) || 0;
+                return numYearB - numYearA;
+            });
+
+            container.innerHTML = sortedYears.map(([year, contributions]) => `
+                <div class="project-timeline-item">
+                    <div class="project-year">${year}</div>
+                    <div class="project-year-group">
+                        ${contributions.map(contribution => `
+                            <a href="project.html?id=${contribution.id}" class="project-card">
+                                <img src="${contribution.thumbnail}" alt="${contribution.title}" class="project-image" 
+                                     onerror="this.style.display='none'">
+                                <div class="project-content">
+                                    <h3 class="project-title">${contribution.title}</h3>
+                                    <p class="project-description">${contribution.shortDescription}</p>
+                                    <div class="project-tags">
+                                        ${contribution.tags.map(tag => `
+                                            <span class="project-tag">${tag}</span>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </a>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        } else {
+            container.innerHTML = '<p>No professional contributions added yet.</p>';
+        }
+    } catch (error) {
+        console.error('Error loading professional contributions:', error);
+        document.getElementById('professional-contributions-container').innerHTML =
+            '<p>Error loading professional contributions.</p>';
+    }
+}
+
 // Load Projects
 async function loadProjects() {
     try {
@@ -246,5 +310,6 @@ document.addEventListener('DOMContentLoaded', () => {
     loadProfessionalExperience();
     loadAcademicExperience();
     loadSkills();
+    loadProfessionalContributions();
     loadProjects();
 });
