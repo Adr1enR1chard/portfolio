@@ -19,9 +19,20 @@ async function loadProjectDetail() {
     }
 
     try {
-        const response = await fetch('data/projects.json');
-        const data = await response.json();
-        const project = data.projects.find(p => p.id === projectId);
+        // Try to find project in personal projects first
+        let project = null;
+
+        const projectsResponse = await fetch('data/projects.json');
+        const projectsData = await projectsResponse.json();
+        project = projectsData.projects.find(p => p.id === projectId);
+
+        // If not found, try professional contributions
+        if (!project) {
+            const contributionsResponse = await fetch('data/professional-contributions.json');
+            const contributionsData = await contributionsResponse.json();
+            project = contributionsData.contributions.find(p => p.id === projectId);
+            console.log(contributionsData.contributions);
+        }
 
         if (!project) {
             contentContainer.innerHTML = `

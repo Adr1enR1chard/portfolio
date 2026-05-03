@@ -3,17 +3,38 @@
         {
             "id": "spymaster",
             "title": "Spymaster",
-            "shortDescription": "Innerspace VR",
+            "shortDescription": "Innerspace VR's last VR espionage game, where I contributed to gameplay features and engine systems development using Unreal Engine 5.",
+            "longDescription": "Contributed to the development of Spymaster, a VR espionage game by Innerspace VR, by implementing gameplay features and engine systems using Unreal Engine 5. Focused on integrating and optimizing multi-headset VR/MR support, improving stability and performance across various immersive platforms.",
             "thumbnail": "assets/projects/spymaster/thumbnail.jpg",
             "tags": [
                 "Unreal Engine 5",
                 "C++/Blueprints",
                 "VR"
             ],
+            "technologies": [
+                "Unreal Engine 5",
+                "C++/Blueprints"
+            ],
             "year": "2026",
-            "platform": "VR Headset",
+            "platform": "Meta Quest/PC VR",
             "role": "VR & XR Programmer",
-            "teamSize": "Team"
+            "teamSize": "Team",
+            "media": [
+                {
+                    "type": "youtube",
+                    "videoId": "vUoWBDUFJVY"
+                }
+            ],
+            "links": [
+                {
+                    "label": "Innerspace VR",
+                    "url": "https://www.innerspacevr.com/"
+                },
+                {
+                    "label": "Steam Page",
+                    "url": "https://store.steampowered.com/app/4391420/Spymaster/"
+                }
+            ]
         }
     ]
 }
